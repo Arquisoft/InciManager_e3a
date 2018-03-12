@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: inciManager_e3a
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: saul
+Built-By: ameli
 Implementation-Vendor-Id: uo.asw
-Build-Jdk: 1.8.0_131
+Build-Jdk: 1.8.0_161
 Implementation-URL: http://projects.spring.io/spring-boot/inciManager_
  e3a/
 Created-By: Maven Integration for Eclipse
