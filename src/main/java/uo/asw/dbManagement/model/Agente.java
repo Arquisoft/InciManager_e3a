@@ -1,10 +1,13 @@
 package uo.asw.dbManagement.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -26,11 +29,13 @@ public class Agente {
 	@Column(name = "permiso_envio")
 	private String permisoEnvio; //'si' o 'no'
 	
+	@OneToMany(mappedBy = "idAgente")
+	private Set<Incidencia> incidencias;
+	
 	public Agente() {}
 
-	public Agente(String nombre, String contrasena, String kindCode, 
-			String identificador, String latitud,
-			String longitud, String email, String permisoEnvio) {
+	public Agente(String nombre, String contrasena, String kindCode, String identificador, String latitud,
+			String longitud, String email, String permisoEnvio, Set<Incidencia> incidencias) {
 		super();
 		this.nombre = nombre;
 		this.contrasena = contrasena;
@@ -40,18 +45,22 @@ public class Agente {
 		this.longitud = longitud;
 		this.email = email;
 		this.permisoEnvio = permisoEnvio;
+		this.incidencias = incidencias;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	private void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -59,7 +68,7 @@ public class Agente {
 		return contrasena;
 	}
 
-	private void setContrasena(String contrasena) {
+	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
 
@@ -67,7 +76,7 @@ public class Agente {
 		return kindCode;
 	}
 
-	private void setKindCode(String kindCode) {
+	public void setKindCode(String kindCode) {
 		this.kindCode = kindCode;
 	}
 
@@ -75,7 +84,7 @@ public class Agente {
 		return identificador;
 	}
 
-	private void setIdentificador(String identificador) {
+	public void setIdentificador(String identificador) {
 		this.identificador = identificador;
 	}
 
@@ -83,7 +92,7 @@ public class Agente {
 		return latitud;
 	}
 
-	private void setLatitud(String latitud) {
+	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
 
@@ -91,7 +100,7 @@ public class Agente {
 		return longitud;
 	}
 
-	private void setLongitud(String longitud) {
+	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
 
@@ -99,7 +108,7 @@ public class Agente {
 		return email;
 	}
 
-	private void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -107,8 +116,16 @@ public class Agente {
 		return permisoEnvio;
 	}
 
-	private void setPermisoEnvio(String permisoEnvio) {
+	public void setPermisoEnvio(String permisoEnvio) {
 		this.permisoEnvio = permisoEnvio;
+	}
+
+	public Set<Incidencia> getIncidencias() {
+		return incidencias;
+	}
+
+	public void setIncidencias(Set<Incidencia> incidencias) {
+		this.incidencias = incidencias;
 	}
 
 	@Override
@@ -144,13 +161,14 @@ public class Agente {
 
 	@Override
 	public String toString() {
-		return "Agente [id=" + id + ", nombreUsuario=" + nombre 
-				+ ", contrasena=" + contrasena + ", kindCode="
-				+ kindCode + ", identificador=" + identificador 
-				+ ", latitud=" + latitud + ", longitud=" + longitud
-				+ ", email=" + email + ", permisoEnvio=" + permisoEnvio + "]";
+		return "Agente [id=" + id + ", nombre=" + nombre + ", contrasena=" 
+	+ contrasena + ", kindCode=" + kindCode
+				+ ", identificador=" + identificador + ", latitud=" 
+	+ latitud + ", longitud=" + longitud + ", email="
+				+ email + ", permisoEnvio=" + permisoEnvio + ", incidencias=" 
+	+ incidencias + "]";
 	}
-	
+
 	
 	
 

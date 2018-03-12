@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table (name = "TAGENTES")
+@Table (name = "TUSUARIOS")
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,12 +42,15 @@ public class Usuario {
 		return id;
 	}
 
-
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
 
-	private void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -55,7 +58,7 @@ public class Usuario {
 		return apellidos;
 	}
 
-	private void setApellidos(String apellidos) {
+	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
@@ -63,7 +66,7 @@ public class Usuario {
 		return email;
 	}
 
-	private void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -71,7 +74,7 @@ public class Usuario {
 		return identificador;
 	}
 
-	private void setIdentificador(String identificador) {
+	public void setIdentificador(String identificador) {
 		this.identificador = identificador;
 	}
 
@@ -79,7 +82,7 @@ public class Usuario {
 		return contrasena;
 	}
 
-	private void setContrasena(String contrasena) {
+	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
 
@@ -87,7 +90,7 @@ public class Usuario {
 		return perfil;
 	}
 
-	private void setPerfil(String perfil) {
+	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
 
