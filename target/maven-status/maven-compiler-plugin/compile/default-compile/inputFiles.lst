@@ -1,8 +1,11 @@
-<<<<<<< HEAD
-C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\Incidencia.java
+C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\dbManagement\model\Categoria.java
 C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\RecibirIncidenciaController.java
 C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\InciManagerE3aApplication.java
-=======
-C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\InciManagerE3aApplication.java
 C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\dbManagement\model\Agente.java
->>>>>>> master
+C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\dbManagement\model\Propiedad.java
+C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\dbManagement\tipos\PerfilTipos.java
+C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\dbManagement\model\Incidencia.java
+C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\dbManagement\tipos\PropiedadTipos.java
+C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\dbManagement\tipos\EstadoTipos.java
+C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\dbManagement\model\Usuario.java
+C:\Users\ameli\AM_ASW_InciM\InciManager_e3a\src\main\java\uo\asw\dbManagement\tipos\CategoriaTipos.java

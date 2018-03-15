@@ -35,6 +35,13 @@ public class Propiedad {
 		this.idIncidencia = idIncidencia;
 		this.valor = valor;
 	}
+	
+	public Propiedad(String propiedad, Long idIncidencia, Double valor) {
+		super();
+		this.propiedad = obtenerPropiedad(propiedad);
+		this.idIncidencia = idIncidencia;
+		this.valor = valor;
+	}
 
 	public Long getId() {
 		return id;
@@ -109,6 +116,24 @@ public class Propiedad {
 				+ valor + "]";
 	}
 	
-	
+	/**
+	 * Devuelve un tipo de propiedad según la propiedad pasada como 
+	 * parámetro
+	 * @param propiedad
+	 * @return PropiedadTipos
+	 */
+	private PropiedadTipos obtenerPropiedad(String propiedad) {
+		if (propiedad.toUpperCase().equals("TEMPERATURA"))
+			return PropiedadTipos.TEMPERATURA;
+		if (propiedad.toUpperCase().equals("PRESION"))
+			return PropiedadTipos.PRESION;
+		if (propiedad.toUpperCase().equals("HUMEDAD"))
+			return PropiedadTipos.HUMEDAD;
+		if (propiedad.toUpperCase().equals("VELOCIDAD_VIENTO"))
+			return PropiedadTipos.VELOCIDAD_VIENTO;
+		if (propiedad.toUpperCase().equals("VELOCIDAD_CIRCULACION"))
+			return PropiedadTipos.VELOCIDAD_CIRCULACION;
+		return PropiedadTipos.VALOR_NO_ASIGNADO;
+	}
 
 }

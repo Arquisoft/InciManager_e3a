@@ -1,10 +1,13 @@
 package uo.asw.dbManagement.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +16,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import uo.asw.dbManagement.tipos.CategoriaTipos;
+import uo.asw.dbManagement.tipos.EstadoTipos;
+import uo.asw.dbManagement.tipos.PropiedadTipos;
 
 @Entity
 @Table (name = "TINCIDENCIAS")
@@ -20,12 +28,15 @@ public class Incidencia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@NotNull
 	@Column(name = "nombre_incidencia")
 	private String nombreIncidencia;
 	private String descripcion;
 	private String latitud;
 	private String longitud;
-	private String estado;
+	@Enumerated(EnumType.STRING)
+	private EstadoTipos estado;
 	@Column(name = "fecha_entrada")
 	@Temporal(TemporalType.DATE)
 	private Date fechaEntrada;
@@ -38,15 +49,30 @@ public class Incidencia {
 	private Long idAgente;
 	
 	@OneToMany(mappedBy = "idIncidencia")
-	private Set<Propiedad> propiedades;
+	private Set<Propiedad> propiedades = new HashSet<Propiedad>();
 	
 	@OneToMany(mappedBy = "idIncidenciaC")
-	private Set<Categoria> categorias;
+	private Set<Categoria> categorias = new HashSet<Categoria>();
 	
 	public Incidencia() {}
+	
+	
+	public Incidencia(String nombreIncidencia, String descripcion, 
+			String latitud, String longitud, EstadoTipos estado,
+			Date fechaEntrada, Date fechaCaducidad, Long idAgente) {
+		this.nombreIncidencia = nombreIncidencia;
+		this.descripcion = descripcion;
+		this.latitud = latitud;
+		this.longitud = longitud;
+		this.estado = estado;
+		this.fechaEntrada = fechaEntrada;
+		this.fechaCaducidad = fechaCaducidad;
+		this.idAgente = idAgente;
+		
+	}
 
 	public Incidencia(String nombreIncidencia, String descripcion, 
-			String latitud, String longitud, String estado,
+			String latitud, String longitud, EstadoTipos estado,
 			Date fechaEntrada, Date fechaCaducidad, Long idAgente, 
 			Set<Propiedad> propiedades,
 			Set<Categoria> categorias) {
@@ -103,11 +129,11 @@ public class Incidencia {
 		this.longitud = longitud;
 	}
 
-	public String getEstado() {
+	public EstadoTipos getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(EstadoTipos estado) {
 		this.estado = estado;
 	}
 
@@ -206,6 +232,52 @@ public class Incidencia {
 	}
 
 	
+	/**
+	 * Añade una categoria al conjunto de categorias de
+	 * la Incidencia
+	 * @param categoria
+	 */
+	public void addCategoria(Categoria categoria) {
+		this.categorias.add(categoria);
+	}
+
+
+	/**
+	 * Añade una propiedad al conjunto de propiedades
+	 * de la Incidencia
+	 * @param propiedad
+	 */
+	public void addPropiedad(Propiedad propiedad) {
+		this.propiedades.add(propiedad);
+		
+	}
 	
+	/**
+	 * Recibe un string de categorias separadas por comas
+	 * y las añade al conjunto de categorias de la incidencia
+	 * 
+	 * @param String lista
+	 */
+	public void addListaCategorias(String lista) {
+		String[] categorias = lista.split(",");
+		for (int i = 0; i < categorias.length; i++) {
+			this.addCategoria(new Categoria(categorias[i], 
+					this.getId()));
+		}
+	}
+	
+	/**
+	 * REcibe un string de propiedades separadas por comas
+	 * y las añade al conjunto de propiedades de la incidencia
+	 * @param String lista
+	 */
+	public void addListaPropiedades(String lista) {
+		String[] propiedades = lista.split(",");
+		for (int i = 0; i < propiedades.length; i++) {
+			String[] propiedad = propiedades[i].split("/");
+			this.addPropiedad(new Propiedad(propiedad[0], 
+					this.getId(), Double.parseDouble(propiedad[1])));
+		}
+	}
 
 }

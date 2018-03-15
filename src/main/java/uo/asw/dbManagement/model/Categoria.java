@@ -32,6 +32,12 @@ public class Categoria {
 		this.categoria = categoria;
 		this.idIncidenciaC = idIncidenciaC;
 	}
+	
+	public Categoria(String categoria, Long idIncidenciaC) {
+		super();
+		this.categoria = this.obtenerCategoria(categoria);
+		this.idIncidenciaC = idIncidenciaC;
+	}
 
 	public Long getId() {
 		return id;
@@ -97,8 +103,24 @@ public class Categoria {
 				+ ", idIncidenciaC=" + idIncidenciaC + "]";
 	}
 
-	
-	
-	
+	/**
+	 * Devuelve un tipo de categoria según la categoria pasada como 
+	 * parámetro
+	 * @param String categoria
+	 * @return CategoriaTipos
+	 */
+	private CategoriaTipos obtenerCategoria(String categoria) {  
+		if (categoria.toUpperCase().equals("ACCIDENTE_CARRETERA"))
+			return CategoriaTipos.ACCIDENTE_CARRETERA;
+		if (categoria.toUpperCase().equals("INUNDACION"))
+			return CategoriaTipos.INUNDACION;
+		if (categoria.toUpperCase().equals("FUEGO"))
+			return CategoriaTipos.FUEGO;
+		if (categoria.toUpperCase().equals("ACCIDENTE_AEREO"))
+			return CategoriaTipos.ACCIDENTE_AEREO;
+		if (categoria.toUpperCase().equals("METEOROLOGICA"))
+			return CategoriaTipos.METEOROLOGICA;
+		return CategoriaTipos.VALOR_NO_ASIGNADO;
+	}
 
 }
