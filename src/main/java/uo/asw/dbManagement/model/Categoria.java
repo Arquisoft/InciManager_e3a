@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -21,22 +22,22 @@ public class Categoria {
 	
 	@Enumerated(EnumType.STRING) private CategoriaTipos categoria;
 	
-	@Column(name = "id_incidencia")
 	@ManyToOne
-	private Long idIncidenciaC;
+	@JoinColumn(name = "id_incidencia")
+	private Incidencia incidenciaC;
 	
 	public Categoria() {}
 
-	public Categoria(CategoriaTipos categoria, Long idIncidenciaC) {
+	public Categoria(CategoriaTipos categoria, Incidencia idIncidenciaC) {
 		super();
 		this.categoria = categoria;
-		this.idIncidenciaC = idIncidenciaC;
+		this.incidenciaC = idIncidenciaC;
 	}
 	
-	public Categoria(String categoria, Long idIncidenciaC) {
+	public Categoria(String categoria, Incidencia idIncidenciaC) {
 		super();
 		this.categoria = this.obtenerCategoria(categoria);
-		this.idIncidenciaC = idIncidenciaC;
+		this.incidenciaC = idIncidenciaC;
 	}
 
 	public Long getId() {
@@ -55,12 +56,20 @@ public class Categoria {
 		this.categoria = categoria;
 	}
 
-	public Long getIdIncidenciaC() {
-		return idIncidenciaC;
+	public Incidencia getIdIncidenciaC() {
+		return incidenciaC;
 	}
 
-	public void setIdIncidenciaC(Long idIncidenciaC) {
-		this.idIncidenciaC = idIncidenciaC;
+	public void setIdIncidenciaC(Incidencia idIncidenciaC) {
+		this.incidenciaC = idIncidenciaC;
+	}
+
+	
+
+	@Override
+	public String toString() {
+		return "Categoria [id=" + id + ", categoria=" + categoria 
+				+ ", incidenciaC=" + incidenciaC + "]";
 	}
 
 	@Override
@@ -69,7 +78,6 @@ public class Categoria {
 		int result = 1;
 		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((idIncidenciaC == null) ? 0 : idIncidenciaC.hashCode());
 		return result;
 	}
 
@@ -89,18 +97,7 @@ public class Categoria {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (idIncidenciaC == null) {
-			if (other.idIncidenciaC != null)
-				return false;
-		} else if (!idIncidenciaC.equals(other.idIncidenciaC))
-			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Categoria [id=" + id + ", categoria=" + categoria 
-				+ ", idIncidenciaC=" + idIncidenciaC + "]";
 	}
 
 	/**

@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -21,25 +22,29 @@ public class Propiedad {
 	
 	@Enumerated(EnumType.STRING) private PropiedadTipos propiedad;
 	
-	@Column(name = "id_incidencia")
+	//@Column(name = "id_incidencia")
 	@ManyToOne
-	private Long idIncidencia;
+	@JoinColumn(name = "id_incidencia")
+	//private Long idIncidencia;
+	private Incidencia incidencia;
 	
 	private Double valor;
 	
 	public Propiedad() {}
 
-	public Propiedad(PropiedadTipos propiedad, Long idIncidencia, Double valor) {
+	public Propiedad(PropiedadTipos propiedad, Incidencia idIncidencia, Double valor) {
 		super();
 		this.propiedad = propiedad;
-		this.idIncidencia = idIncidencia;
+		//this.idIncidencia = idIncidencia;
+		this.incidencia = incidencia;
 		this.valor = valor;
 	}
 	
-	public Propiedad(String propiedad, Long idIncidencia, Double valor) {
+	public Propiedad(String propiedad, Incidencia idIncidencia, Double valor) {
 		super();
 		this.propiedad = obtenerPropiedad(propiedad);
-		this.idIncidencia = idIncidencia;
+		//this.idIncidencia = idIncidencia;
+		this.incidencia = incidencia;
 		this.valor = valor;
 	}
 
@@ -59,12 +64,12 @@ public class Propiedad {
 		this.propiedad = propiedad;
 	}
 
-	public Long getIdIncidencia() {
-		return idIncidencia;
+	public Incidencia getIdIncidencia() {
+		return incidencia;
 	}
 
-	public void setIdIncidencia(Long idIncidencia) {
-		this.idIncidencia = idIncidencia;
+	public void setIdIncidencia(Incidencia idIncidencia) {
+		this.incidencia = idIncidencia;
 	}
 
 	public Double getValor() {
@@ -74,8 +79,10 @@ public class Propiedad {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
+	
+	
 
-	@Override
+	/*@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -114,8 +121,49 @@ public class Propiedad {
 		return "Propiedad [id=" + id + ", propiedad=" 
 				+ propiedad + ", idIncidencia=" + idIncidencia + ", valor="
 				+ valor + "]";
+	}*/
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((propiedad == null) ? 0 : propiedad.hashCode());
+		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Propiedad other = (Propiedad) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (propiedad != other.propiedad)
+			return false;
+		if (valor == null) {
+			if (other.valor != null)
+				return false;
+		} else if (!valor.equals(other.valor))
+			return false;
+		return true;
 	}
 	
+
+	@Override
+	public String toString() {
+		return "Propiedad [id=" + id + ", propiedad=" + propiedad + ", incidencia=" + incidencia + ", valor=" + valor
+				+ "]";
+	}
+
 	/**
 	 * Devuelve un tipo de propiedad según la propiedad pasada como 
 	 * parámetro

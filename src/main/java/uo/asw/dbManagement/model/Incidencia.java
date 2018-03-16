@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import uo.asw.dbManagement.tipos.CategoriaTipos;
@@ -45,13 +46,13 @@ public class Incidencia {
 	private Date fechaCaducidad;
 	
 	@Column(name = "id_agente")
-	@ManyToOne
+	//@ManyToOne
 	private Long idAgente;
 	
-	@OneToMany(mappedBy = "idIncidencia")
+	@OneToMany(mappedBy = "incidencia")
 	private Set<Propiedad> propiedades = new HashSet<Propiedad>();
 	
-	@OneToMany(mappedBy = "idIncidenciaC")
+	@OneToMany(mappedBy = "incidenciaC")
 	private Set<Categoria> categorias = new HashSet<Categoria>();
 	
 	public Incidencia() {}
@@ -261,8 +262,7 @@ public class Incidencia {
 	public void addListaCategorias(String lista) {
 		String[] categorias = lista.split(",");
 		for (int i = 0; i < categorias.length; i++) {
-			this.addCategoria(new Categoria(categorias[i], 
-					this.getId()));
+			this.addCategoria(new Categoria(categorias[i], this));
 		}
 	}
 	
@@ -275,8 +275,10 @@ public class Incidencia {
 		String[] propiedades = lista.split(",");
 		for (int i = 0; i < propiedades.length; i++) {
 			String[] propiedad = propiedades[i].split("/");
+			//this.addPropiedad(new Propiedad(propiedad[0], 
+			//		this.getId(), Double.parseDouble(propiedad[1])));
 			this.addPropiedad(new Propiedad(propiedad[0], 
-					this.getId(), Double.parseDouble(propiedad[1])));
+							this, Double.parseDouble(propiedad[1])));
 		}
 	}
 
