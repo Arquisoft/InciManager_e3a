@@ -14,19 +14,21 @@ import javax.persistence.Table;
 import uo.asw.dbManagement.tipos.PropiedadTipos;
 
 @Entity
-@Table (name = "TPROPIEDADES")
+//@Table (name = "TPROPIEDADES")
 public class Propiedad {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue /*(strategy = GenerationType.AUTO)*/
 	private Long id;
 	
 	@Enumerated(EnumType.STRING) private PropiedadTipos propiedad;
 	
 	//@Column(name = "id_incidencia")
+	
 	@ManyToOne
-	@JoinColumn(name = "id_incidencia")
-	//private Long idIncidencia;
+//	@JoinColumn(name = "id_incidencia")
 	private Incidencia incidencia;
+	
+	//private Long idIncidencia;
 	
 	private Double valor;
 	

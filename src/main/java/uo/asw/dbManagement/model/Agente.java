@@ -2,6 +2,7 @@ package uo.asw.dbManagement.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,24 +13,26 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table (name = "TAGENTES")
+//@Table (name = "TAGENTES")
 public class Agente {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue /*(strategy = GenerationType.AUTO)*/
 	private Long id;
 	private String nombre;
 	private String contrasena;
 	private String kindCode;
+	
 	@NotNull
 	@Column(unique = true)
 	private String identificador;
 	private String latitud;
 	private String longitud;
 	private String email;
+	
 	@Column(name = "permiso_envio")
 	private String permisoEnvio; //'si' o 'no'
 	
-	@OneToMany(mappedBy = "idAgente")
+	@OneToMany(mappedBy = "agente", cascade = CascadeType.ALL)
 	private Set<Incidencia> incidencias;
 	
 	public Agente() {}

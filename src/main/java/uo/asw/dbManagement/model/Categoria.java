@@ -14,16 +14,16 @@ import javax.persistence.Table;
 import uo.asw.dbManagement.tipos.CategoriaTipos;
 
 @Entity
-@Table (name = "TCATEGORIAS")
+//@Table (name = "TCATEGORIAS")
 public class Categoria {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue /*(strategy = GenerationType.AUTO)*/
 	private Long id;
 	
 	@Enumerated(EnumType.STRING) private CategoriaTipos categoria;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_incidencia")
+//	@JoinColumn(name = "id_incidencia")
 	private Incidencia incidenciaC;
 	
 	public Categoria() {}

@@ -34,6 +34,7 @@ public class RecibirIncidenciaController {
 		Incidencia incidencia = null;
 		if ((String)datosInci.get("nombreIncidencia") != null 
 				&& !((String)datosInci.get("nombreIncidencia")).equals("")) {
+			/*
 			incidencia = new Incidencia((String)datosInci.get("nombreIncidencia"),
 					(String)datosInci.get("descripcion"), 
 					(String)datosInci.get("latitud"),
@@ -44,7 +45,7 @@ public class RecibirIncidenciaController {
 					idAgente,
 					(String)datosInci.get("propiedades"),
 					(String)datosInci.get("categorias")
-					);	
+					);	*/
 					
 			
 			respuesta = HttpStatus.OK;

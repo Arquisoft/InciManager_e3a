@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,16 +20,18 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.aspectj.weaver.loadtime.Agent;
+
 import uo.asw.dbManagement.tipos.CategoriaTipos;
 import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.dbManagement.tipos.PropiedadTipos;
 import uo.asw.inciManager.util.DateUtil;
 
 @Entity
-@Table (name = "TINCIDENCIAS")
+//@Table (name = "TINCIDENCIAS")
 public class Incidencia {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue /*(strategy = GenerationType.AUTO)*/
 	private Long id;
 	
 	@NotNull
@@ -37,23 +40,26 @@ public class Incidencia {
 	private String descripcion;
 	private String latitud;
 	private String longitud;
+	
 	@Enumerated(EnumType.STRING)
 	private EstadoTipos estado;
+	
 	@Column(name = "fecha_entrada")
 	@Temporal(TemporalType.DATE)
 	private Date fechaEntrada;
+	
 	@Column(name = "fecha_caducidad")
 	@Temporal(TemporalType.DATE)
 	private Date fechaCaducidad;
 	
-	@Column(name = "id_agente")
-	//@ManyToOne
-	private Long idAgente;
+//	@Column(name = "id_agente")
+	@ManyToOne
+	private Agente agente;
 	
-	@OneToMany(mappedBy = "incidencia")
+	@OneToMany(mappedBy = "incidencia" , cascade = CascadeType.ALL)
 	private Set<Propiedad> propiedades = new HashSet<Propiedad>();
 	
-	@OneToMany(mappedBy = "incidenciaC")
+	@OneToMany(mappedBy = "incidenciaC", cascade = CascadeType.ALL)
 	private Set<Categoria> categorias = new HashSet<Categoria>();
 	
 	public Incidencia() {}
@@ -73,7 +79,7 @@ public class Incidencia {
 	 */
 	public Incidencia(String nombreIncidencia, String descripcion, 
 			String latitud, String longitud, EstadoTipos estado,
-			Date fechaEntrada, Date fechaCaducidad, Long idAgente, 
+			Date fechaEntrada, Date fechaCaducidad, /*Long idAgente*/ Agente agente, 
 			String propiedades, String categorias) {
 		this.nombreIncidencia = nombreIncidencia;
 		this.descripcion = descripcion;
@@ -82,14 +88,15 @@ public class Incidencia {
 		this.estado = estado;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaCaducidad = fechaCaducidad;
-		this.idAgente = idAgente;
+		this.agente=agente;
+//		this.idAgente = idAgente;
 		this.addListaPropiedades(propiedades);
 		this.addListaCategorias(categorias);
 	}
 
 	public Incidencia(String nombreIncidencia, String descripcion, 
 			String latitud, String longitud, EstadoTipos estado,
-			Date fechaEntrada, Date fechaCaducidad, Long idAgente, 
+			Date fechaEntrada, Date fechaCaducidad, /*Long idAgente*/ Agente agente, 
 			Set<Propiedad> propiedades,
 			Set<Categoria> categorias) {
 		super();
@@ -100,7 +107,8 @@ public class Incidencia {
 		this.estado = estado;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaCaducidad = fechaCaducidad;
-		this.idAgente = idAgente;
+//		this.idAgente = idAgente;
+		this.agente = agente;
 		this.propiedades = propiedades;
 		this.categorias = categorias;
 	}
@@ -169,13 +177,13 @@ public class Incidencia {
 		this.fechaCaducidad = fechaCaducidad;
 	}
 
-	public Long getIdAgente() {
+	/*public Long getIdAgente() {
 		return idAgente;
 	}
 
 	public void setIdAgente(Long idAgente) {
 		this.idAgente = idAgente;
-	}
+	}*/
 
 	public Set<Propiedad> getPropiedades() {
 		return propiedades;
@@ -199,7 +207,7 @@ public class Incidencia {
 		int result = 1;
 		result = prime * result + ((fechaEntrada == null) ? 0 : fechaEntrada.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((idAgente == null) ? 0 : idAgente.hashCode());
+		result = prime * result + ((agente == null) ? 0 : agente.hashCode());
 		result = prime * result + ((nombreIncidencia == null) ? 0 : nombreIncidencia.hashCode());
 		return result;
 	}
@@ -223,10 +231,10 @@ public class Incidencia {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (idAgente == null) {
-			if (other.idAgente != null)
+		if (agente == null) {
+			if (other.agente != null)
 				return false;
-		} else if (!idAgente.equals(other.idAgente))
+		} else if (!agente.equals(other.agente))
 			return false;
 		if (nombreIncidencia == null) {
 			if (other.nombreIncidencia != null)
@@ -243,7 +251,7 @@ public class Incidencia {
 				+ ", latitud=" + latitud + ", longitud=" + longitud 
 				+ ", estado=" + estado + ", fechaEntrada="
 				+ fechaEntrada + ", fechaCaducidad=" + fechaCaducidad 
-				+ ", idAgente=" + idAgente + ", propiedades="
+				+ ", idAgente=" + agente + ", propiedades="
 				+ propiedades + ", categorias=" + categorias + "]";
 	}
 
