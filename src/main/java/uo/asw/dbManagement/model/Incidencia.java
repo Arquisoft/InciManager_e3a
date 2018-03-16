@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,8 +19,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.aspectj.weaver.loadtime.Agent;
-
 import uo.asw.dbManagement.tipos.CategoriaTipos;
 import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.dbManagement.tipos.PropiedadTipos;
@@ -31,7 +28,7 @@ import uo.asw.inciManager.util.DateUtil;
 //@Table (name = "TINCIDENCIAS")
 public class Incidencia {
 	@Id
-	@GeneratedValue /*(strategy = GenerationType.AUTO)*/
+	@GeneratedValue/*(strategy = GenerationType.AUTO)*/
 	private Long id;
 	
 	@NotNull
@@ -40,14 +37,11 @@ public class Incidencia {
 	private String descripcion;
 	private String latitud;
 	private String longitud;
-	
 	@Enumerated(EnumType.STRING)
 	private EstadoTipos estado;
-	
 	@Column(name = "fecha_entrada")
 	@Temporal(TemporalType.DATE)
 	private Date fechaEntrada;
-	
 	@Column(name = "fecha_caducidad")
 	@Temporal(TemporalType.DATE)
 	private Date fechaCaducidad;
@@ -56,10 +50,10 @@ public class Incidencia {
 	@ManyToOne
 	private Agente agente;
 	
-	@OneToMany(mappedBy = "incidencia" , cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "incidencia")
 	private Set<Propiedad> propiedades = new HashSet<Propiedad>();
 	
-	@OneToMany(mappedBy = "incidenciaC", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "incidenciaC")
 	private Set<Categoria> categorias = new HashSet<Categoria>();
 	
 	public Incidencia() {}
@@ -73,13 +67,13 @@ public class Incidencia {
 	 * @param estado
 	 * @param fechaEntrada
 	 * @param fechaCaducidad
-	 * @param idAgente
+	 * @param agente
 	 * @param propiedades
 	 * @param categorias
 	 */
 	public Incidencia(String nombreIncidencia, String descripcion, 
 			String latitud, String longitud, EstadoTipos estado,
-			Date fechaEntrada, Date fechaCaducidad, /*Long idAgente*/ Agente agente, 
+			Date fechaEntrada, Date fechaCaducidad, Agente agente, 
 			String propiedades, String categorias) {
 		this.nombreIncidencia = nombreIncidencia;
 		this.descripcion = descripcion;
@@ -88,15 +82,14 @@ public class Incidencia {
 		this.estado = estado;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaCaducidad = fechaCaducidad;
-		this.agente=agente;
-//		this.idAgente = idAgente;
+		this.agente = agente;
 		this.addListaPropiedades(propiedades);
 		this.addListaCategorias(categorias);
 	}
 
 	public Incidencia(String nombreIncidencia, String descripcion, 
 			String latitud, String longitud, EstadoTipos estado,
-			Date fechaEntrada, Date fechaCaducidad, /*Long idAgente*/ Agente agente, 
+			Date fechaEntrada, Date fechaCaducidad, Agente agente, 
 			Set<Propiedad> propiedades,
 			Set<Categoria> categorias) {
 		super();
@@ -107,7 +100,6 @@ public class Incidencia {
 		this.estado = estado;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaCaducidad = fechaCaducidad;
-//		this.idAgente = idAgente;
 		this.agente = agente;
 		this.propiedades = propiedades;
 		this.categorias = categorias;
@@ -184,9 +176,19 @@ public class Incidencia {
 	public void setIdAgente(Long idAgente) {
 		this.idAgente = idAgente;
 	}*/
+	
+	
 
 	public Set<Propiedad> getPropiedades() {
 		return propiedades;
+	}
+
+	public Agente getAgente() {
+		return agente;
+	}
+
+	public void setAgente(Agente agente) {
+		this.agente = agente;
 	}
 
 	public void setPropiedades(Set<Propiedad> propiedades) {
@@ -251,7 +253,7 @@ public class Incidencia {
 				+ ", latitud=" + latitud + ", longitud=" + longitud 
 				+ ", estado=" + estado + ", fechaEntrada="
 				+ fechaEntrada + ", fechaCaducidad=" + fechaCaducidad 
-				+ ", idAgente=" + agente + ", propiedades="
+				+ ", agente=" + agente + ", propiedades="
 				+ propiedades + ", categorias=" + categorias + "]";
 	}
 
