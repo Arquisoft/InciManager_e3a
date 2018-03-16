@@ -17,13 +17,14 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * Configuración de la base de datos
+ * Configuración de la base de datos. Crea una BD en memoria
+ * para pruebas
+ * 
+ * @version marzo 2018
  */
 @Configuration
 @EnableTransactionManagement
 public class ConfiguracionBD {
-
-
 
 	@Autowired
 	private Environment env;
@@ -41,12 +42,9 @@ public class ConfiguracionBD {
 	 */
 	@Bean
 	public DataSource dataSource() {
-
-		// no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 		dataSource = builder.setType(EmbeddedDatabaseType.HSQL).addScript("sql/create-db.sql").build();
 		return dataSource;
-
 	}
 
 	/**

@@ -16,19 +16,19 @@ import uo.asw.dbManagement.model.Propiedad;
 import uo.asw.dbManagement.tipos.CategoriaTipos;
 import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.dbManagement.tipos.PropiedadTipos;
+import uo.asw.inciManager.util.DateUtil;
 
 /**
  * Clase que recibe una petición POST en formato
  * en JSON y crea una Incidencia con esos datos
  * 
  * @version marzo 2018
- *
  */
 @RestController
 public class RecibirIncidenciaController {
 	
 	@RequestMapping(value = "/inci", method = RequestMethod.POST)
-	public ResponseEntity<Incidencia> update(@RequestBody Map<String, Object> datosInci) {
+	public ResponseEntity<String> update(@RequestBody Map<String, Object> datosInci) {
 		Long idAgente = 0L; //sacar de BD con el usuario/pass de la inci
 		HttpStatus respuesta;
 		Incidencia incidencia = null;
@@ -39,16 +39,20 @@ public class RecibirIncidenciaController {
 					(String)datosInci.get("latitud"),
 					(String)datosInci.get("longitud"), 
 					EstadoTipos.ABIERTA, 
-					(Date)datosInci.get("fechaEntrada"),
-					(Date)datosInci.get("fechaCaducidad"),
-					idAgente);	
+					DateUtil.stringToDate((String)datosInci.get("fechaEntrada")),
+					DateUtil.stringToDate((String)datosInci.get("fechaCaducidad")),
+					idAgente,
+					(String)datosInci.get("propiedades"),
+					(String)datosInci.get("categorias")
+					);	
+					
 			
 			respuesta = HttpStatus.OK;
 		}
 		else
 			respuesta = HttpStatus.NOT_ACCEPTABLE;
 
-	   return new ResponseEntity<Incidencia>(incidencia, respuesta);
+	   return new ResponseEntity<String>(incidencia.getNombreIncidencia(), respuesta);
 	}
 	
 }

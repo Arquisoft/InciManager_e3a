@@ -22,6 +22,7 @@ import javax.validation.constraints.NotNull;
 import uo.asw.dbManagement.tipos.CategoriaTipos;
 import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.dbManagement.tipos.PropiedadTipos;
+import uo.asw.inciManager.util.DateUtil;
 
 @Entity
 @Table (name = "TINCIDENCIAS")
@@ -57,10 +58,23 @@ public class Incidencia {
 	
 	public Incidencia() {}
 	
-	
+	/**
+	 * Constructor que crea una incidencia desde parámetros String
+	 * @param nombreIncidencia
+	 * @param descripcion
+	 * @param latitud
+	 * @param longitud
+	 * @param estado
+	 * @param fechaEntrada
+	 * @param fechaCaducidad
+	 * @param idAgente
+	 * @param propiedades
+	 * @param categorias
+	 */
 	public Incidencia(String nombreIncidencia, String descripcion, 
 			String latitud, String longitud, EstadoTipos estado,
-			Date fechaEntrada, Date fechaCaducidad, Long idAgente) {
+			Date fechaEntrada, Date fechaCaducidad, Long idAgente, 
+			String propiedades, String categorias) {
 		this.nombreIncidencia = nombreIncidencia;
 		this.descripcion = descripcion;
 		this.latitud = latitud;
@@ -69,7 +83,8 @@ public class Incidencia {
 		this.fechaEntrada = fechaEntrada;
 		this.fechaCaducidad = fechaCaducidad;
 		this.idAgente = idAgente;
-		
+		this.addListaPropiedades(propiedades);
+		this.addListaCategorias(categorias);
 	}
 
 	public Incidencia(String nombreIncidencia, String descripcion, 
