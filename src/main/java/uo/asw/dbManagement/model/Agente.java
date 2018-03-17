@@ -1,5 +1,6 @@
 package uo.asw.dbManagement.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,12 +34,12 @@ public class Agente {
 	private String permisoEnvio; //'si' o 'no'
 	
 	@OneToMany(mappedBy = "agente", cascade = CascadeType.ALL)
-	private Set<Incidencia> incidencias;
+	private Set<Incidencia> incidencias = new HashSet<Incidencia>();
 	
 	public Agente() {}
 
 	public Agente(String nombre, String contrasena, String kindCode, String identificador, String latitud,
-			String longitud, String email, String permisoEnvio, Set<Incidencia> incidencias) {
+			String longitud, String email, String permisoEnvio) {
 		super();
 		this.nombre = nombre;
 		this.contrasena = contrasena;
@@ -48,7 +49,10 @@ public class Agente {
 		this.longitud = longitud;
 		this.email = email;
 		this.permisoEnvio = permisoEnvio;
-		this.incidencias = incidencias;
+	}
+	
+	public void addInci(Incidencia inci) {
+		incidencias.add(inci);
 	}
 
 	public Long getId() {

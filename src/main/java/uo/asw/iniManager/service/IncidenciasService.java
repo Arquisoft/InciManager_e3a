@@ -10,44 +10,71 @@ import org.springframework.stereotype.Service;
 import uo.asw.dbManagement.model.Agente;
 import uo.asw.dbManagement.model.Incidencia;
 import uo.asw.dbManagement.tipos.EstadoTipos;
-import uo.asw.inciManager.repository.IncidenciasRepository;
+import uo.asw.inciManager.repository.IncidenciaRepository;
 import uo.asw.inciManager.util.DateUtil;
 
 @Service
 public class IncidenciasService {
 
 	@Autowired
-	private IncidenciasRepository incidenciasRepository;
+	private IncidenciaRepository incidenciasRepository;
 	
+	@Autowired
+	private AgenteService agenteService;
+	
+	/**
+	 * Carga la indicencia que se recibe en formato JSON
+	 * @param datosInci recibe JSON con los diferentes datos de la incidencia
+	 * @return null y error si no se procesa bien el contenido, en caso contrario
+	 * el nombre de la incidencia y la respuesta correcta
+	 */
 	public ResponseEntity<String> cargarIncidencia(Map<String, Object> datosInci) {
-		Long idAgente = 0L; //sacar de BD con el usuario/pass de la inci
-		Agente agente = new Agente();
-		HttpStatus respuesta;
+		String user = (String)datosInci.get("usuario");
+		String password = (String)datosInci.get("contrasena");
+		String kindCode = (String)datosInci.get("kindCode");
+		Agente agente = agenteService.getAgente(user, password, kindCode);
 		Incidencia incidencia = null;
-		if ((String)datosInci.get("nombreIncidencia") != null 
-				&& !((String)datosInci.get("nombreIncidencia")).equals("")) {
-			
-			incidencia = new Incidencia((String)datosInci.get("nombreIncidencia"),
-					(String)datosInci.get("descripcion"), 
-					(String)datosInci.get("latitud"),
-					(String)datosInci.get("longitud"), 
-					EstadoTipos.ABIERTA, 
-					DateUtil.stringToDate((String)datosInci.get("fechaEntrada")),
-					DateUtil.stringToDate((String)datosInci.get("fechaCaducidad")),
-					agente,
-					(String)datosInci.get("propiedades"),
-					(String)datosInci.get("categorias")
-					);	
-					
-			
-			respuesta = HttpStatus.OK;
+		if (validarIncidencia((String)datosInci.get("nombreIncidencia"), agente)) {
+				if(agente.getPermisoEnvio().equals("si")) {
+					incidencia = crearIncidencia(datosInci, agente);	
+					incidenciasRepository.save(incidencia);
+					return new ResponseEntity<String>(incidencia.getNombreIncidencia(), HttpStatus.OK);
+			}
 		}
-		else
-			respuesta = HttpStatus.NOT_ACCEPTABLE;
-
-	   return new ResponseEntity<String>(incidencia.getNombreIncidencia(), respuesta);
+		return new ResponseEntity<String>("No aceptada", HttpStatus.NOT_ACCEPTABLE);
 	}
 
 
+	/**
+	 * Valida el que el nombre de la incidencia no es nullo, no es un blanco y que el agente
+	 * que la envia existe.
+	 * @param nombreIncidencia que se recibe en el JSON
+	 * @param agente Agente que ha enviado la incidencia que puede ser null
+	 * @return true si la incidencia es valida y si el agente existe
+	 */
+	private boolean validarIncidencia(String nombreIncidencia, Agente agente) {
+		return nombreIncidencia != null 
+				&& !(nombreIncidencia).equals("") && agente != null;
+	}
 	
+
+	/**
+	 * Crea y devuelve el objeto incidencia
+	 * @param datosInci los datos de la incidencia del JSON
+	 * @param agente que envia la indicencia
+	 * @return el objeto incidencia creado
+	 */
+	private Incidencia crearIncidencia(Map<String, Object> datosInci, Agente agente) {
+		return new Incidencia((String)datosInci.get("nombreIncidencia"),
+				(String)datosInci.get("descripcion"), 
+				(String)datosInci.get("latitud"),
+				(String)datosInci.get("longitud"), 
+				EstadoTipos.ABIERTA, 
+				DateUtil.stringToDate((String)datosInci.get("fechaEntrada")),
+				DateUtil.stringToDate((String)datosInci.get("fechaCaducidad")),
+				agente,
+				(String)datosInci.get("propiedades"),
+				(String)datosInci.get("categorias")
+				);
+	}
 }

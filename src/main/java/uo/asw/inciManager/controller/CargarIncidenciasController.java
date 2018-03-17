@@ -20,6 +20,7 @@ import uo.asw.dbManagement.tipos.CategoriaTipos;
 import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.dbManagement.tipos.PropiedadTipos;
 import uo.asw.inciManager.util.DateUtil;
+import uo.asw.iniManager.service.AgenteService;
 import uo.asw.iniManager.service.IncidenciasService;
 
 /**
