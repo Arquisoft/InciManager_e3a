@@ -25,7 +25,7 @@ import uo.asw.dbManagement.tipos.PropiedadTipos;
 import uo.asw.inciManager.util.DateUtil;
 
 @Entity
-//@Table (name = "TINCIDENCIAS")
+@Table (name = "TINCIDENCIAS")
 public class Incidencia {
 	@Id
 	@GeneratedValue/*(strategy = GenerationType.AUTO)*/

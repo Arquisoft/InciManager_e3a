@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-//@Table (name = "TAGENTES")
+@Table (name = "TAGENTES")
 public class Agente {
 	@Id
 	@GeneratedValue /*(strategy = GenerationType.AUTO)*/

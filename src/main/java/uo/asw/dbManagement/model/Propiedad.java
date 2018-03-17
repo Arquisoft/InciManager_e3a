@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import uo.asw.dbManagement.tipos.PropiedadTipos;
 
 @Entity
-//@Table (name = "TPROPIEDADES")
+@Table (name = "TPROPIEDADES")
 public class Propiedad {
 	@Id
 	@GeneratedValue /*(strategy = GenerationType.AUTO)*/
