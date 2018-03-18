@@ -26,6 +26,9 @@ public class InsertSampleDataService {
 	
 	@Autowired
 	private IncidenciasService incidenciaService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@PostConstruct
 	public void init() {
@@ -49,6 +52,10 @@ public class InsertSampleDataService {
 		Usuario op1 = new Usuario("nombre1", "apellido1", "operario1@prueba.es", "Id1", "123456", PerfilTipos.OPERARIO);
 		Usuario op2 = new Usuario("nombre2", "apellido2", "operario2@prueba.es", "Id2", "123456", PerfilTipos.OPERARIO);
 		Usuario op3 = new Usuario("nombre3", "apellido3", "operario3@prueba.es", "Id3", "123456", PerfilTipos.OPERARIO);
+		usuarioService.addUsuario(op1);
+		usuarioService.addUsuario(op2);
+		usuarioService.addUsuario(op3);
+		
 		
 		// Creación de propiedades 
 		Propiedad p1 = new Propiedad(PropiedadTipos.TEMPERATURA, null, 100.0); /* ¿UNIDADES? */

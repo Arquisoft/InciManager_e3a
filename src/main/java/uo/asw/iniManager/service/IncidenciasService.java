@@ -3,12 +3,15 @@ package uo.asw.iniManager.service;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import uo.asw.dbManagement.model.Agente;
 import uo.asw.dbManagement.model.Incidencia;
+import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.inciManager.repository.IncidenciaRepository;
 import uo.asw.inciManager.util.DateUtil;
 
@@ -78,5 +81,11 @@ public class IncidenciasService {
 	
 	public void addIncidencia(Incidencia inci) {
 		incidenciasRepository.save(inci);
+	}
+
+
+	public Page<Incidencia> getIncidencias(Pageable pageable, Long id_agente) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
