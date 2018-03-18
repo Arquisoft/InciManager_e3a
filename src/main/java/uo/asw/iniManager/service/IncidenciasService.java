@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import uo.asw.dbManagement.model.Agente;
 import uo.asw.dbManagement.model.Incidencia;
-import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.inciManager.repository.IncidenciaRepository;
 import uo.asw.inciManager.util.DateUtil;
 
@@ -69,7 +68,6 @@ public class IncidenciasService {
 				(String)datosInci.get("descripcion"), 
 				(String)datosInci.get("latitud"),
 				(String)datosInci.get("longitud"), 
-				EstadoTipos.ABIERTA, 
 				DateUtil.stringToDate((String)datosInci.get("fechaEntrada")),
 				DateUtil.stringToDate((String)datosInci.get("fechaCaducidad")),
 				agente,

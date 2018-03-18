@@ -72,13 +72,13 @@ public class Incidencia {
 	 * @param propiedades
 	 * @param categorias
 	 */
-	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, EstadoTipos estado,
+	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud,
 			Date fechaEntrada, Date fechaCaducidad, Agente agente, String propiedades, String categorias) {
 		this.nombreIncidencia = nombreIncidencia;
 		this.descripcion = descripcion;
 		this.latitud = latitud;
 		this.longitud = longitud;
-		this.estado = estado;
+		this.estado = EstadoTipos.ABIERTA;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaCaducidad = fechaCaducidad;
 		this.agente = agente;
@@ -86,7 +86,7 @@ public class Incidencia {
 		this.addListaCategorias(categorias);
 	}
 
-	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, EstadoTipos estado,
+	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud,
 			Date fechaEntrada, Date fechaCaducidad, Agente agente, Set<Propiedad> propiedades,
 			Set<Categoria> categorias) {
 		super();
@@ -94,7 +94,7 @@ public class Incidencia {
 		this.descripcion = descripcion;
 		this.latitud = latitud;
 		this.longitud = longitud;
-		this.estado = estado;
+		this.estado = EstadoTipos.ABIERTA;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaCaducidad = fechaCaducidad;
 		this.agente = agente;
@@ -146,10 +146,6 @@ public class Incidencia {
 		return estado;
 	}
 
-	public void setEstado(EstadoTipos estado) {
-		this.estado = estado;
-	}
-
 	public Date getFechaEntrada() {
 		return fechaEntrada;
 	}
@@ -194,6 +190,10 @@ public class Incidencia {
 
 	public void setCategorias(Set<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+	public Usuario getOperario() {
+		return operario;
 	}
 
 	@Override
@@ -265,16 +265,6 @@ public class Incidencia {
 		this.propiedades.add(propiedad);
 
 	}
-	
-	
-
-	public Usuario getOperario() {
-		return operario;
-	}
-
-	public void setOperario(Usuario operario) {
-		this.operario = operario;
-	}
 
 	/**
 	 * Recibe un string de categorias separadas por comas y las añade al conjunto de
@@ -319,5 +309,30 @@ public class Incidencia {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Cierra la incidencia si esta se encuentra en proceso y si tiene asignada un operario
+	 * @return true si se pasa a estado cerrada false en caso contrario
+	 */
+	public boolean cerrarIncidencia() {
+		if(estado.equals(EstadoTipos.EN_PROCESO) && operario != null) {
+			this.estado = EstadoTipos.CERRADA;
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Anula la incidencia siempre que esta no este en estado cerrada
+	 * @return true si se ha anulado y false en caso contrario
+	 */
+	public boolean anularIncidencia() {
+		if(!estado.equals(EstadoTipos.CERRADA)){
+			this.estado = EstadoTipos.ANULADA;
+			return true;
+		}
+		return false;
+			
 	}
 }
