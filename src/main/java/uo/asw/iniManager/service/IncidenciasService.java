@@ -3,6 +3,8 @@ package uo.asw.iniManager.service;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -76,5 +78,11 @@ public class IncidenciasService {
 				(String)datosInci.get("propiedades"),
 				(String)datosInci.get("categorias")
 				);
+	}
+
+
+	public Page<Incidencia> getIncidencias(Pageable pageable, Long id_agente) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -21,4 +21,9 @@ public class AgenteService {
 	public void addAgente(Agente agent) {
 		agenteRepository.save(agent);
 	}
+
+
+	public Agente getAgenteById(Long id_agente) {
+		return agenteRepository.findOne(id_agente);
+	}
 }
