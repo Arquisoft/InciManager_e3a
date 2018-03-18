@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import uo.asw.dbManagement.model.Agente;
 import uo.asw.dbManagement.model.Incidencia;
-import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.inciManager.repository.IncidenciaRepository;
 import uo.asw.inciManager.util.DateUtil;
 
@@ -85,7 +84,6 @@ public class IncidenciasService {
 
 
 	public Page<Incidencia> getIncidencias(Pageable pageable, Long id_agente) {
-		// TODO Auto-generated method stub
-		return null;
+		return incidenciasRepository.findIncidenciasByIdAgent(pageable, id_agente);
 	}
 }

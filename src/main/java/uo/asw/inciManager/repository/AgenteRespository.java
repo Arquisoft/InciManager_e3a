@@ -14,4 +14,6 @@ public interface AgenteRespository extends CrudRepository<Agente, Long>{
 	Agente findByIdentificador(String identificador);
 	
 	Agente findByNombre(String nombre);
+
+	Agente findByEmail(String email);
 }
