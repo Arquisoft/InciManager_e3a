@@ -12,4 +12,6 @@ public interface AgenteRespository extends CrudRepository<Agente, Long>{
 
 	@Query("SELECT a FROM Agente a WHERE a.identificador=?1")
 	Agente findByIdentificador(String identificador);
+	
+	Agente findByNombre(String nombre);
 }
