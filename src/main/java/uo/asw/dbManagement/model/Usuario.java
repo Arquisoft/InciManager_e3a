@@ -6,12 +6,16 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import uo.asw.dbManagement.tipos.PerfilTipos;
 
 @Entity
 @Table (name = "TUSUARIOS")
@@ -27,8 +31,8 @@ public class Usuario {
 	private String identificador;
 	@NotNull
 	private String contrasena;
-	@NotNull
-	private String perfil;
+	@Enumerated(EnumType.STRING)
+	private PerfilTipos perfil;
 	
 	@OneToMany(mappedBy = "operario", cascade = CascadeType.ALL)
 	private Set<Incidencia> incidencias = new HashSet<Incidencia>();
@@ -36,7 +40,7 @@ public class Usuario {
 	public Usuario() {}
 
 	public Usuario(String nombre, String apellidos, String email, String identificador, String contrasena,
-			String perfil) {
+			PerfilTipos perfil) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -94,11 +98,11 @@ public class Usuario {
 		this.contrasena = contrasena;
 	}
 
-	public String getPerfil() {
+	public PerfilTipos getPerfil() {
 		return perfil;
 	}
 
-	public void setPerfil(String perfil) {
+	public void setPerfil(PerfilTipos perfil) {
 		this.perfil = perfil;
 	}
 	

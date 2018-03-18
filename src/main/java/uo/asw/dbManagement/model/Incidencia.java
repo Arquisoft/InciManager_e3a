@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import uo.asw.dbManagement.tipos.EstadoTipos;
+import uo.asw.dbManagement.tipos.PerfilTipos;
 
 @Entity
 @Table(name = "TINCIDENCIAS")
@@ -306,4 +307,17 @@ public class Incidencia {
 		}
 	}
 
+	/**
+	 * Recibe un usuario de tipo operario y lo añade
+	 * @param operario de tipo Usuario
+	 * @return true si se ha asignado false en caso contrario
+	 */
+	public boolean asignarOperario(Usuario operario) {
+		if(estado.equals(EstadoTipos.ABIERTA) && operario.getPerfil().equals(PerfilTipos.OPERARIO)) {
+			this.operario = operario;
+			this.estado = EstadoTipos.EN_PROCESO;
+			return true;
+		}
+		return false;
+	}
 }

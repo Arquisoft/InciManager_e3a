@@ -77,4 +77,8 @@ public class IncidenciasService {
 				(String)datosInci.get("categorias")
 				);
 	}
+	
+	public void addIncidencia(Incidencia inci) {
+		incidenciasRepository.save(inci);
+	}
 }
