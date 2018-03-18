@@ -1,10 +1,15 @@
 package uo.asw.dbManagement.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -24,6 +29,9 @@ public class Usuario {
 	private String contrasena;
 	@NotNull
 	private String perfil;
+	
+	@OneToMany(mappedBy = "operario", cascade = CascadeType.ALL)
+	private Set<Incidencia> incidencias = new HashSet<Incidencia>();
 	
 	public Usuario() {}
 
@@ -92,6 +100,16 @@ public class Usuario {
 
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
+	}
+	
+	
+
+	public Set<Incidencia> getIncidencias() {
+		return incidencias;
+	}
+
+	public void setIncidencias(Set<Incidencia> incidencias) {
+		this.incidencias = incidencias;
 	}
 
 	@Override

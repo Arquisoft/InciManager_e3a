@@ -9,28 +9,23 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import uo.asw.dbManagement.tipos.CategoriaTipos;
 import uo.asw.dbManagement.tipos.EstadoTipos;
-import uo.asw.dbManagement.tipos.PropiedadTipos;
-import uo.asw.inciManager.util.DateUtil;
 
 @Entity
-@Table (name = "TINCIDENCIAS")
+@Table(name = "TINCIDENCIAS")
 public class Incidencia {
 	@Id
-	@GeneratedValue/*(strategy = GenerationType.AUTO)*/
+	@GeneratedValue /* (strategy = GenerationType.AUTO) */
 	private Long id;
-	
+
 	@NotNull
 	@Column(name = "nombre_incidencia")
 	private String nombreIncidencia;
@@ -45,21 +40,26 @@ public class Incidencia {
 	@Column(name = "fecha_caducidad")
 	@Temporal(TemporalType.DATE)
 	private Date fechaCaducidad;
-	
-//	@Column(name = "id_agente")
+
+	// @Column(name = "id_agente")
 	@ManyToOne
 	private Agente agente;
 	
+	@ManyToOne
+	private Usuario operario;
+
 	@OneToMany(mappedBy = "incidencia")
 	private Set<Propiedad> propiedades = new HashSet<Propiedad>();
-	
+
 	@OneToMany(mappedBy = "incidenciaC")
 	private Set<Categoria> categorias = new HashSet<Categoria>();
-	
-	public Incidencia() {}
-	
+
+	public Incidencia() {
+	}
+
 	/**
 	 * Constructor que crea una incidencia desde parámetros String
+	 * 
 	 * @param nombreIncidencia
 	 * @param descripcion
 	 * @param latitud
@@ -71,10 +71,8 @@ public class Incidencia {
 	 * @param propiedades
 	 * @param categorias
 	 */
-	public Incidencia(String nombreIncidencia, String descripcion, 
-			String latitud, String longitud, EstadoTipos estado,
-			Date fechaEntrada, Date fechaCaducidad, Agente agente, 
-			String propiedades, String categorias) {
+	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, EstadoTipos estado,
+			Date fechaEntrada, Date fechaCaducidad, Agente agente, String propiedades, String categorias) {
 		this.nombreIncidencia = nombreIncidencia;
 		this.descripcion = descripcion;
 		this.latitud = latitud;
@@ -87,10 +85,8 @@ public class Incidencia {
 		this.addListaCategorias(categorias);
 	}
 
-	public Incidencia(String nombreIncidencia, String descripcion, 
-			String latitud, String longitud, EstadoTipos estado,
-			Date fechaEntrada, Date fechaCaducidad, Agente agente, 
-			Set<Propiedad> propiedades,
+	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, EstadoTipos estado,
+			Date fechaEntrada, Date fechaCaducidad, Agente agente, Set<Propiedad> propiedades,
 			Set<Categoria> categorias) {
 		super();
 		this.nombreIncidencia = nombreIncidencia;
@@ -169,15 +165,11 @@ public class Incidencia {
 		this.fechaCaducidad = fechaCaducidad;
 	}
 
-	/*public Long getIdAgente() {
-		return idAgente;
-	}
-
-	public void setIdAgente(Long idAgente) {
-		this.idAgente = idAgente;
-	}*/
-	
-	
+	/*
+	 * public Long getIdAgente() { return idAgente; }
+	 * 
+	 * public void setIdAgente(Long idAgente) { this.idAgente = idAgente; }
+	 */
 
 	public Set<Propiedad> getPropiedades() {
 		return propiedades;
@@ -248,41 +240,47 @@ public class Incidencia {
 
 	@Override
 	public String toString() {
-		return "Incidencia [id=" + id + ", nombreIncidencia=" 
-	+ nombreIncidencia + ", descripcion=" + descripcion
-				+ ", latitud=" + latitud + ", longitud=" + longitud 
-				+ ", estado=" + estado + ", fechaEntrada="
-				+ fechaEntrada + ", fechaCaducidad=" + fechaCaducidad 
-				+ ", agente=" + agente + ", propiedades="
+		return "Incidencia [id=" + id + ", nombreIncidencia=" + nombreIncidencia + ", descripcion=" + descripcion
+				+ ", latitud=" + latitud + ", longitud=" + longitud + ", estado=" + estado + ", fechaEntrada="
+				+ fechaEntrada + ", fechaCaducidad=" + fechaCaducidad + ", agente=" + agente + ", propiedades="
 				+ propiedades + ", categorias=" + categorias + "]";
 	}
 
-	
 	/**
-	 * Añade una categoria al conjunto de categorias de
-	 * la Incidencia
+	 * Añade una categoria al conjunto de categorias de la Incidencia
+	 * 
 	 * @param categoria
 	 */
 	public void addCategoria(Categoria categoria) {
 		this.categorias.add(categoria);
 	}
 
-
 	/**
-	 * Añade una propiedad al conjunto de propiedades
-	 * de la Incidencia
+	 * Añade una propiedad al conjunto de propiedades de la Incidencia
+	 * 
 	 * @param propiedad
 	 */
 	public void addPropiedad(Propiedad propiedad) {
 		this.propiedades.add(propiedad);
-		
+
 	}
 	
+	
+
+	public Usuario getOperario() {
+		return operario;
+	}
+
+	public void setOperario(Usuario operario) {
+		this.operario = operario;
+	}
+
 	/**
-	 * Recibe un string de categorias separadas por comas
-	 * y las añade al conjunto de categorias de la incidencia
+	 * Recibe un string de categorias separadas por comas y las añade al conjunto de
+	 * categorias de la incidencia
 	 * 
-	 * @param String lista
+	 * @param String
+	 *            lista
 	 */
 	public void addListaCategorias(String lista) {
 		String[] categorias = lista.split(",");
@@ -290,20 +288,21 @@ public class Incidencia {
 			this.addCategoria(new Categoria(categorias[i], this));
 		}
 	}
-	
+
 	/**
-	 * REcibe un string de propiedades separadas por comas
-	 * y las añade al conjunto de propiedades de la incidencia
-	 * @param String lista
+	 * REcibe un string de propiedades separadas por comas y las añade al conjunto
+	 * de propiedades de la incidencia
+	 * 
+	 * @param String
+	 *            lista
 	 */
 	public void addListaPropiedades(String lista) {
 		String[] propiedades = lista.split(",");
 		for (int i = 0; i < propiedades.length; i++) {
 			String[] propiedad = propiedades[i].split("/");
-			//this.addPropiedad(new Propiedad(propiedad[0], 
-			//		this.getId(), Double.parseDouble(propiedad[1])));
-			this.addPropiedad(new Propiedad(propiedad[0], 
-							this, Double.parseDouble(propiedad[1])));
+			// this.addPropiedad(new Propiedad(propiedad[0],
+			// this.getId(), Double.parseDouble(propiedad[1])));
+			this.addPropiedad(new Propiedad(propiedad[0], this, Double.parseDouble(propiedad[1])));
 		}
 	}
 

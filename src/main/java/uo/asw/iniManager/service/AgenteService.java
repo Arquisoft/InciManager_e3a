@@ -12,6 +12,13 @@ public class AgenteService {
 	@Autowired 
 	private AgenteRespository agenteRepository;
 	
+	/**
+	 * Me devuelve el agente buscado con el usuario, contrasenia y kindCode
+	 * @param user 
+	 * @param password 
+	 * @param kindCode
+	 * @return El agente que buscamos
+	 */
 	public Agente getAgente(String user, String password, String kindCode) {
 		return agenteRepository.findeAgentByUserPassKind(user, password, kindCode);
 	}
