@@ -24,8 +24,8 @@ public class IncidenciasService {
 	@Autowired
 	private AgenteService agenteService;
 	
-	//@Autowired //la incidencia va a kafka
-    //private KafkaProducer kafkaProducer;
+	@Autowired
+    private KafkaProducer kafkaProducer;
 	
 	/**
 	 * Carga la indicencia que se recibe en formato JSON
@@ -40,12 +40,12 @@ public class IncidenciasService {
 		Agente agente = agenteService.getAgente(user, password, kindCode);
 		Incidencia incidencia = null;
 		if (validarIncidencia((String)datosInci.get("nombreIncidencia"), agente)) {
-				if(agente.getPermisoEnvio().equals("si")) {
+				//if(agente.getPermisoEnvio().equals("si")) { //no funciona
 					incidencia = crearIncidencia(datosInci, agente);	
 					incidenciasRepository.save(incidencia);
-					//this.kafkaProducer.send("pruebas_am", incidencia.getDescripcion());
+					this.kafkaProducer.send("incidenciasTopic", incidencia.getDescripcion());
 					return new ResponseEntity<String>(incidencia.getNombreIncidencia(), HttpStatus.OK);
-			}
+			//}
 		}
 		return new ResponseEntity<String>("No aceptada", HttpStatus.NOT_ACCEPTABLE);
 	}

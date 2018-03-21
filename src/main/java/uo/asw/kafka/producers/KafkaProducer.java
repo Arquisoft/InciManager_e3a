@@ -1,7 +1,5 @@
 package uo.asw.kafka.producers;
 
-import javax.annotation.ManagedBean;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -9,10 +7,10 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
+import javax.annotation.ManagedBean;
+
 /**
- * originalmente: Created by herminio on 26/12/16.
- * 
- * @version marzo 2018
+ * Created by herminio on 26/12/16.
  */
 @ManagedBean
 public class KafkaProducer {
