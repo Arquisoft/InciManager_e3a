@@ -13,6 +13,7 @@ import uo.asw.dbManagement.model.Agente;
 import uo.asw.dbManagement.model.Incidencia;
 import uo.asw.inciManager.repository.IncidenciaRepository;
 import uo.asw.inciManager.util.DateUtil;
+import uo.asw.kafka.producers.KafkaProducer;
 
 @Service
 public class IncidenciasService {
@@ -22,6 +23,9 @@ public class IncidenciasService {
 	
 	@Autowired
 	private AgenteService agenteService;
+	
+	//@Autowired //la incidencia va a kafka
+    //private KafkaProducer kafkaProducer;
 	
 	/**
 	 * Carga la indicencia que se recibe en formato JSON
@@ -39,6 +43,7 @@ public class IncidenciasService {
 				if(agente.getPermisoEnvio().equals("si")) {
 					incidencia = crearIncidencia(datosInci, agente);	
 					incidenciasRepository.save(incidencia);
+					//this.kafkaProducer.send("pruebas_am", incidencia.getDescripcion());
 					return new ResponseEntity<String>(incidencia.getNombreIncidencia(), HttpStatus.OK);
 			}
 		}
