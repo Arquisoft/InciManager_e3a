@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>inciManager_e3a</name>
-	<description>Gestion de incidencias</description>
+	<description>Gestion de incidencias - ASW</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
