@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="fragments/head"/>
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav"/>
+	<div class="container">
+	<h2>Enviar nueva incidencia</h2>
+	<form class="form-horizontal" method="post" action="/incidencia/create"
+			th:object="${post}"  enctype="multipart/form-data">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="name">Nombre:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="name"
+					placeholder="Nombre de la incidencia" required="true" /> 
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="description">Descripción:</label>
+			<div class="col-xs-6 col-sm-10">
+				<textarea type="text" class="form-control" rows="5" name="description"
+					placeholder="Introduce una descripción" required="true"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for=category>Categoría:</label>
+			<div class="col-xs-6 col-sm-10">
+				<select class="form-control" name="category" id="category">
+       				<option value="ACCIDENTE_CARRETERA">Accidente en Carretera</option>
+       				<option value="ACCIDENTE_AEREO">Accidente Aéreo</option>
+        			<option value="FUEGO">Incendio</option>
+        			<option value="INUNDACION">Inundación</option>
+        			<option value="METEOROLOGICA">Meteorología</option>
+        			<option value="VALOR_NO_ASIGNADO">Otro</option>
+      			</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for=tags>Escribe Etiquetas:</label>
+			<div class="col-xs-6 col-sm-10">
+				<textarea type="text" class="form-control" rows="1" name="tags" id="tags"
+					placeholder="Introduce etiquetas separadas por comas" required="false" disabled></textarea>
+			</div>
+		</div>
+		<script th:inline="javascript">
+		/*<![CDATA[*/
+			$(document).ready(function(){
+				$("#category").change(function(){
+					if ($("#category option:selected").text()==="Otro"){
+						$("#tags").attr('disabled', false).focus();
+					} else {
+						$("#tags").attr('disabled', true);
+					}
+				})
+			});
+			/*]]>*/
+		</script>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="image">Información Adicional:</label>
+			<div class="col-sm-10">
+				<input type="file" class="form-control" name="image"
+						  accept=".png, .jpg"/> 
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Enviar</button>
+			</div>
+		</div>
+		
+	</form>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

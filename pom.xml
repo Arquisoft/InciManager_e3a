@@ -29,7 +29,7 @@
         <groupId>org.springframework.kafka</groupId>
         <artifactId>spring-kafka</artifactId>
     </dependency>
-    
+  
 		<dependency>
 	   	 	<groupId>log4j</groupId>
 	    	<artifactId>log4j</artifactId>
@@ -83,7 +83,6 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
-		
 		
 	</dependencies>
 

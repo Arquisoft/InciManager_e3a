@@ -9,8 +9,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import uo.asw.dbManagement.model.Agente;
 import uo.asw.dbManagement.model.Incidencia;
@@ -40,6 +40,16 @@ public class IncidenciasController {
 		model.addAttribute("nameAgent", "Incidencias de "+agent.getNombre());
 		model.addAttribute("page", incidencias);
 		
+		return "incidencia/list";
+	}
+	
+	@RequestMapping("/incidencia/create")
+	public String create() {
+		return "incidencia/create";
+	}
+	
+	@RequestMapping(value="/incidencia/create", method = RequestMethod.POST)
+	public String createNewIncidence() {
 		return "incidencia/list";
 	}
 

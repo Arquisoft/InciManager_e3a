@@ -30,7 +30,7 @@ public class AgenteService {
 	
 	//Este metodo es solo para añadir a los agentes de prueba que se crear en InsertSampleDataService
 	public void addAgente(Agente agent) {
-		//agent.setContrasena(bCryptPasswordEncoder.encode(agent.getContrasena()));
+		agent.setContrasena(bCryptPasswordEncoder.encode(agent.getContrasena()));
 		agenteRepository.save(agent);
 	}
 
