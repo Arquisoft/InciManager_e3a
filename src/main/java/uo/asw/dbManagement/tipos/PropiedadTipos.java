@@ -1,5 +1,6 @@
 package uo.asw.dbManagement.tipos;
 
+//@Document(collection = "propiedadTipos")
 public enum PropiedadTipos {
 	TEMPERATURA, 
 	PRESION, 

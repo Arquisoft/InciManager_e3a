@@ -1,4 +1,4 @@
-package uo.asw.iniManager.service;
+package uo.asw.inciManager.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

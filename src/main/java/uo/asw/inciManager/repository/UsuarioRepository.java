@@ -1,11 +1,11 @@
 package uo.asw.inciManager.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-import uo.asw.dbManagement.model.Agente;
 import uo.asw.dbManagement.model.Usuario;
 
-public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
+public interface UsuarioRepository extends MongoRepository<Usuario, ObjectId> {
 
 	
 }
