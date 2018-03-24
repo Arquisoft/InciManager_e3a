@@ -38,6 +38,10 @@ public class AgenteService {
 		return agenteRepository.findByNombre(nombre);
 	}
 	
+	public Agente getAgentByIdentificador(String identificador) {
+		return agenteRepository.findByIdentificador(identificador);
+	}
+	
 	public Agente getAgentByEmail(String email) {
 		return agenteRepository.findByEmail(email);
 	}
