@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -19,7 +19,7 @@ import uo.asw.dbManagement.tipos.EstadoTipos;
 @Document(collection = "incidencias")
 public class Incidencia {
 	@Id
-	private ObjectId id;
+	private ObjectId id = new ObjectId();
 
 	@NotNull
 	@Column(name = "nombre_incidencia")

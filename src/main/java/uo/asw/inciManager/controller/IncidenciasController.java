@@ -47,8 +47,8 @@ public class IncidenciasController {
 	}
 	
 	@RequestMapping(value = "/inci", method = RequestMethod.POST)
-	public void update(@RequestBody Map<String, Object> datosInci) {
-	   incidenciasService.cargarIncidencia(datosInci);
+	public ResponseEntity<String> update(@RequestBody Map<String, Object> datosInci) {
+	   return incidenciasService.cargarIncidencia(datosInci);
 	}
 
 }

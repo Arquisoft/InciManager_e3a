@@ -1,5 +1,7 @@
 package uo.asw.inciManager.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +30,9 @@ public class AgentController {
 	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
 	public String loginPost(Model model, @RequestParam String username, @RequestParam String password,
 			@RequestParam String kind) {
-		String idAgente = agentsService.communicationAgents(username, password, kind);
-		if(idAgente != null) {
-			agentsService.setIdConnected(idAgente);
+		Map<String,Object> infoAgente = agentsService.communicationAgents(username, password, kind);
+		if(infoAgente != null) {
+			agentsService.setIdConnected((String)infoAgente.get("id"));
 			return "redirect:/home";
 		}
 		return "/login";

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 import javax.validation.constraints.NotNull;
 
 import org.bson.types.ObjectId;
@@ -16,7 +16,7 @@ import uo.asw.dbManagement.tipos.PerfilTipos;
 @Document(collection = "usuarios")
 public class Usuario {
 	@Id
-	private ObjectId id;
+	private ObjectId id = new ObjectId();
 	
 	private String nombre;
 	private String apellidos;

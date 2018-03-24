@@ -5,6 +5,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import uo.asw.dbManagement.model.Incidencia;
@@ -32,19 +34,19 @@ public class IncidenciasService {
 	 * @return null y error si no se procesa bien el contenido, en caso contrario el
 	 *         nombre de la incidencia y la respuesta correcta
 	 */
-	public void cargarIncidencia(Map<String, Object> datosInci) {
+	public ResponseEntity<String> cargarIncidencia(Map<String, Object> datosInci) {
 		String login = (String) datosInci.get("login");
 		String password = (String) datosInci.get("password");
 		String kind = (String) datosInci.get("kind");
-		String idAgente = agenteService.communicationAgents(login, password, kind);
+		Map<String,Object> mapAgente = agenteService.communicationAgents(login, password, kind);
 		Incidencia incidencia = null;
-		if (validarIncidencia((String) datosInci.get("nombreIncidencia"), idAgente)) {
-			incidencia = crearIncidencia(datosInci, idAgente);
+		if (validarIncidencia((String) datosInci.get("nombreIncidencia"), mapAgente)) {
+			incidencia = crearIncidencia(datosInci, (String)mapAgente.get("id"));
 			incidenciasRepository.save(incidencia);
 			this.kafkaProducer.send("incidenciasTopic", incidencia.getDescripcion());
-//			return new ResponseEntity<String>(incidencia.getNombreIncidencia(), HttpStatus.OK);
+			return new ResponseEntity<String>(incidencia.getNombreIncidencia(), HttpStatus.OK);
 		}
-//		 return new ResponseEntity<String>("No aceptada", HttpStatus.NOT_ACCEPTABLE);
+		 return new ResponseEntity<String>("No aceptada", HttpStatus.NOT_ACCEPTABLE);
 	}
 
 	/**
@@ -57,8 +59,8 @@ public class IncidenciasService {
 	 *            Agente que ha enviado la incidencia que puede ser null
 	 * @return true si la incidencia es valida y si el agente existe
 	 */
-	private boolean validarIncidencia(String nombreIncidencia, String idAgente) {
-		return nombreIncidencia != null && !(nombreIncidencia).equals("") && idAgente != null;
+	private boolean validarIncidencia(String nombreIncidencia, Map<String,Object> mapAgente) {
+		return nombreIncidencia != null && !(nombreIncidencia).equals("") && mapAgente != null;
 	}
 
 	/**

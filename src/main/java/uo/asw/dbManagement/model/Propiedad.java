@@ -1,6 +1,6 @@
 package uo.asw.dbManagement.model;
 
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -11,7 +11,7 @@ import uo.asw.dbManagement.tipos.PropiedadTipos;
 @Document(collection = "propiedades")
 public class Propiedad {
 	@Id
-	private ObjectId id;
+	private ObjectId id = new ObjectId();
 	
 //	@DBRef
 	private PropiedadTipos propiedad;
