@@ -1,4 +1,4 @@
-package uo.asw.iniManager.service;
+package uo.asw.inciManager.service;
 
 import java.util.Calendar;
 import java.util.HashSet;
@@ -9,53 +9,26 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import uo.asw.dbManagement.model.Agente;
 import uo.asw.dbManagement.model.Categoria;
 import uo.asw.dbManagement.model.Incidencia;
 import uo.asw.dbManagement.model.Propiedad;
-import uo.asw.dbManagement.model.Usuario;
 import uo.asw.dbManagement.tipos.CategoriaTipos;
-import uo.asw.dbManagement.tipos.PerfilTipos;
 import uo.asw.dbManagement.tipos.PropiedadTipos;
 
 @Service
 public class InsertSampleDataService {
-
-	@Autowired
-	private AgenteService agenteService;
 	
 	@Autowired
 	private IncidenciasService incidenciaService;
-	
-	@Autowired
-	private UsuarioService usuarioService;
 
 	@PostConstruct
 	public void init() {
-		// Creación de agentes
-		Agente agente1 = new Agente("Agente1", "123456", "1", "Id1", "Lat1", "Lon1", "agente1@prueba.es","si"); 
-		Agente agente2 = new Agente("Agente2", "123456", "2", "Id2", "Lat2", "Lon2", "agente2@prueba.es","si");
-		Agente agente3 = new Agente("Agente3", "123456", "3", "Id3", "Lat3", "Lon3", "agente3@prueba.es","si");
-		Agente agente4 = new Agente("Agente4", "123456", "4", "Id4", "Lat4", "Lon4", "agente4@prueba.es","si");
-		Agente agente5 = new Agente("Agente5", "123456", "5", "Id5", "Lat5", "Lon5", "agente5@prueba.es","si");
-		Agente agente6 = new Agente("Agente6", "123456", "6", "Id6", "Lat6", "Lon6", "agente6@prueba.es","si");
 		
-		// Guardado de agentes
-		agenteService.addAgente(agente1);
-		agenteService.addAgente(agente2);
-		agenteService.addAgente(agente3);
-		agenteService.addAgente(agente4);
-		agenteService.addAgente(agente5);
-		agenteService.addAgente(agente6);
-		
-		// Creación de operarios
-		Usuario op1 = new Usuario("nombre1", "apellido1", "operario1@prueba.es", "Id1", "123456", PerfilTipos.OPERARIO);
-		Usuario op2 = new Usuario("nombre2", "apellido2", "operario2@prueba.es", "Id2", "123456", PerfilTipos.OPERARIO);
-		Usuario op3 = new Usuario("nombre3", "apellido3", "operario3@prueba.es", "Id3", "123456", PerfilTipos.OPERARIO);
-		usuarioService.addUsuario(op1);
-		usuarioService.addUsuario(op2);
-		usuarioService.addUsuario(op3);
-		
+		// ID's agentes
+		Long idAgente1 = 101L;
+		Long idAgente2 = 102L;
+		Long idAgente3 = 103L;
+		Long idAgente4 = 104L;	
 		
 		// Creación de propiedades 
 		Propiedad p1 = new Propiedad(PropiedadTipos.TEMPERATURA, null, 100.0); /* ¿UNIDADES? */
@@ -106,63 +79,57 @@ public class InsertSampleDataService {
 		 * CATEGORIAS = ACCIDENTE_AEREO, ACCIDENTE_CARRETERA
 		 * ESTADO = ABIERTA - SIN OPERARIO */
 		Incidencia inci1 = new Incidencia("Inci1", "descripcion1", "Lat1", "Lon1", Choy.getTime(),
-				CunaSemana.getTime(), agente1, propiedades1 , categorias1);
+				CunaSemana.getTime(), idAgente1, propiedades1 , categorias1);
 		incidenciaService.addIncidencia(inci1);
 		
 		/* PROPIEDADES = PRESION, VELOCIDAD_CIRCULACION
 		 * CATEGORIAS = FUEGO, INUNDACION
 		 * ESTADO = ABIERTA - SIN OPERARIO */
 		Incidencia inci2 = new Incidencia("Inci2", "descripcion2", "Lat2", "Lon2",  Choy.getTime(),
-				CunaSemana.getTime(), agente1, propiedades2 , categorias2);
+				CunaSemana.getTime(), idAgente2, propiedades2 , categorias2);
 		incidenciaService.addIncidencia(inci2);
 		
 		/* PROPIEDADES = VELOCIDAD_VIENTO
 		 * CATEGORIAS = METEOROLOGICA 
-		 * ESTADO = EN PROCESO */
+		 * ESTADO = ABIERTA - SIN OPERARIO */
 		Incidencia inci3 = new Incidencia("Inci3", "descripcion3", "Lat3", "Lon3",Choy.getTime(),
-				CunaSemana.getTime(), agente1, propiedades3 , categorias3);
-		inci3.asignarOperario(op1);
+				CunaSemana.getTime(), idAgente3, propiedades3 , categorias3);
 		incidenciaService.addIncidencia(inci3);
 		
 		/* PROPIEDADES = VELOCIDAD_VIENTO
 		 * CATEGORIAS = VALOR_NO_ASIGNADO
-		 * ESTADO = EN PROCESO*/
+		 * ESTADO = ABIERTA - SIN OPERARIO */
 		Incidencia inci4 = new Incidencia("Inci4", "descripcion4", "Lat4", "Lon4",  Choy.getTime(),
-				CunaSemana.getTime(), agente4, propiedades3 , categorias4);
-		inci3.asignarOperario(op2);
+				CunaSemana.getTime(), idAgente4, propiedades3 , categorias4);
 		incidenciaService.addIncidencia(inci4);
 		
 		/* PROPIEDADES = VALOR_NO_ASIGNADO
 		 * CATEGORIAS = METEOROLOGICA 
-		 * ESTADO = EN PROCESO*/
+		 * ESTADO = ABIERTA - SIN OPERARIO */
 		Incidencia inci5 = new Incidencia("Inci5", "descripcion5", "Lat5", "Lon5", Choy.getTime(),
-				CunaSemana.getTime(), agente4, propiedades4 , categorias3);
-		inci3.asignarOperario(op3);
+				CunaSemana.getTime(), idAgente4, propiedades4 , categorias3);
 		incidenciaService.addIncidencia(inci5);
 		
 		/* PROPIEDADES = VALOR_NO_ASIGNADO
 		 * CATEGORIAS = VALOR_NO_ASIGNADO
-		 * ESTADO = EN PROCESO*/
+		 * ESTADO = ABIERTA - SIN OPERARIO */
 		Incidencia inci6 = new Incidencia("Inci5", "descripcion", "Lat5", "Lon5", Choy.getTime(),
-				CunaSemana.getTime(), agente4, propiedades4 , categorias4);
-		inci3.asignarOperario(op3);
+				CunaSemana.getTime(), idAgente3, propiedades4 , categorias4);
 		incidenciaService.addIncidencia(inci6);
 		
 		/* PROPIEDADES = TEMPERATURA, HUMEDAD
 		 * CATEGORIAS = FUEGO, INUNDACION
-		 * ESTADO = EN PROCESO*/
+		 * ESTADO = ANULADA */
 		Incidencia inci7 = new Incidencia("Inci6", "descripcion6", "Lat6", "Lon6",  Choy.getTime(),
-				CunaSemana.getTime(), agente1, propiedades1 , categorias2);
-		inci7.asignarOperario(op1);
+				CunaSemana.getTime(), idAgente2, propiedades1 , categorias2);
 		inci7.cerrarIncidencia();
 		incidenciaService.addIncidencia(inci7);
 		
 		/* PROPIEDADES = PRESION, VELOCIDAD_CIRCULACION
 		 * CATEGORIAS = ACCIDENTE_AEREO, ACCIDENTE_CARRETERA
-		 * ESTADO = ANULADA*/
+		 * ESTADO = ANULADA */
 		Incidencia inci8 = new Incidencia("Inci7", "descripcion1", "Lat7", "Lon7", Choy.getTime(),
-				CunaSemana.getTime(), agente1, propiedades2 , categorias1);
-		inci8.asignarOperario(op2);
+				CunaSemana.getTime(), idAgente4, propiedades2 , categorias1);
 		inci8.anularIncidencia();
 		incidenciaService.addIncidencia(inci8);
 		

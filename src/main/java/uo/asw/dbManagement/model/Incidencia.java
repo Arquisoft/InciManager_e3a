@@ -42,10 +42,8 @@ public class Incidencia {
 	@Temporal(TemporalType.DATE)
 	private Date fechaCaducidad;
 
-	// @Column(name = "id_agente")
-	@ManyToOne
-	private Agente agente;
-	
+	private Long idAgente;
+
 	@ManyToOne
 	private Usuario operario;
 
@@ -72,8 +70,8 @@ public class Incidencia {
 	 * @param propiedades
 	 * @param categorias
 	 */
-	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud,
-			Date fechaEntrada, Date fechaCaducidad, Agente agente, String propiedades, String categorias) {
+	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, Date fechaEntrada,
+			Date fechaCaducidad, Long idAgente, String propiedades, String categorias) {
 		this.nombreIncidencia = nombreIncidencia;
 		this.descripcion = descripcion;
 		this.latitud = latitud;
@@ -81,14 +79,13 @@ public class Incidencia {
 		this.estado = EstadoTipos.ABIERTA;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaCaducidad = fechaCaducidad;
-		this.agente = agente;
+		this.idAgente = idAgente;
 		this.addListaPropiedades(propiedades);
 		this.addListaCategorias(categorias);
 	}
 
-	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud,
-			Date fechaEntrada, Date fechaCaducidad, Agente agente, Set<Propiedad> propiedades,
-			Set<Categoria> categorias) {
+	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, Date fechaEntrada,
+			Date fechaCaducidad, Long idAgente, Set<Propiedad> propiedades, Set<Categoria> categorias) {
 		super();
 		this.nombreIncidencia = nombreIncidencia;
 		this.descripcion = descripcion;
@@ -97,7 +94,7 @@ public class Incidencia {
 		this.estado = EstadoTipos.ABIERTA;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaCaducidad = fechaCaducidad;
-		this.agente = agente;
+		this.idAgente = idAgente;
 		this.propiedades = propiedades;
 		this.categorias = categorias;
 	}
@@ -162,22 +159,16 @@ public class Incidencia {
 		this.fechaCaducidad = fechaCaducidad;
 	}
 
-	/*
-	 * public Long getIdAgente() { return idAgente; }
-	 * 
-	 * public void setIdAgente(Long idAgente) { this.idAgente = idAgente; }
-	 */
+	public Long getIdAgente() {
+		return idAgente;
+	}
+
+	public void setIdAgente(Long idAgente) {
+		this.idAgente = idAgente;
+	}
 
 	public Set<Propiedad> getPropiedades() {
 		return propiedades;
-	}
-
-	public Agente getAgente() {
-		return agente;
-	}
-
-	public void setAgente(Agente agente) {
-		this.agente = agente;
 	}
 
 	public void setPropiedades(Set<Propiedad> propiedades) {
@@ -202,7 +193,6 @@ public class Incidencia {
 		int result = 1;
 		result = prime * result + ((fechaEntrada == null) ? 0 : fechaEntrada.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((agente == null) ? 0 : agente.hashCode());
 		result = prime * result + ((nombreIncidencia == null) ? 0 : nombreIncidencia.hashCode());
 		return result;
 	}
@@ -226,11 +216,6 @@ public class Incidencia {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (agente == null) {
-			if (other.agente != null)
-				return false;
-		} else if (!agente.equals(other.agente))
-			return false;
 		if (nombreIncidencia == null) {
 			if (other.nombreIncidencia != null)
 				return false;
@@ -243,7 +228,7 @@ public class Incidencia {
 	public String toString() {
 		return "Incidencia [id=" + id + ", nombreIncidencia=" + nombreIncidencia + ", descripcion=" + descripcion
 				+ ", latitud=" + latitud + ", longitud=" + longitud + ", estado=" + estado + ", fechaEntrada="
-				+ fechaEntrada + ", fechaCaducidad=" + fechaCaducidad + ", agente=" + agente + ", propiedades="
+				+ fechaEntrada + ", fechaCaducidad=" + fechaCaducidad + ", idAgente=" + idAgente + ", propiedades="
 				+ propiedades + ", categorias=" + categorias + "]";
 	}
 
@@ -298,41 +283,30 @@ public class Incidencia {
 	}
 
 	/**
-	 * Recibe un usuario de tipo operario y lo añade
-	 * @param operario de tipo Usuario
-	 * @return true si se ha asignado false en caso contrario
-	 */
-	public boolean asignarOperario(Usuario operario) {
-		if(estado.equals(EstadoTipos.ABIERTA) && operario.getPerfil().equals(PerfilTipos.OPERARIO)) {
-			this.operario = operario;
-			this.estado = EstadoTipos.EN_PROCESO;
-			return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Cierra la incidencia si esta se encuentra en proceso y si tiene asignada un operario
+	 * Cierra la incidencia si esta se encuentra en proceso y si tiene asignada un
+	 * operario
+	 * 
 	 * @return true si se pasa a estado cerrada false en caso contrario
 	 */
 	public boolean cerrarIncidencia() {
-		if(estado.equals(EstadoTipos.EN_PROCESO) && operario != null) {
+		if (estado.equals(EstadoTipos.EN_PROCESO) && operario != null) {
 			this.estado = EstadoTipos.CERRADA;
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Anula la incidencia siempre que esta no este en estado cerrada
+	 * 
 	 * @return true si se ha anulado y false en caso contrario
 	 */
 	public boolean anularIncidencia() {
-		if(!estado.equals(EstadoTipos.CERRADA)){
+		if (!estado.equals(EstadoTipos.CERRADA)) {
 			this.estado = EstadoTipos.ANULADA;
 			return true;
 		}
 		return false;
-			
+
 	}
 }

@@ -11,6 +11,6 @@ import uo.asw.dbManagement.model.Incidencia;
 public interface IncidenciaRepository extends CrudRepository<Incidencia, Long>{
 
 	
-	@Query("SELECT i FROM Incidencia i WHERE i.agente.id = ?1 ORDER BY i.id ASC ")
+	@Query("SELECT i FROM Incidencia i WHERE i.idAgente = ?1 ORDER BY i.id ASC ")
 	Page<Incidencia> findIncidenciasByIdAgent(Pageable pageable, Long id);
 }

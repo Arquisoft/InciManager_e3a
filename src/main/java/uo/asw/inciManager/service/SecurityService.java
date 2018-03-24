@@ -1,4 +1,4 @@
-package uo.asw.iniManager.service;
+package uo.asw.inciManager.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

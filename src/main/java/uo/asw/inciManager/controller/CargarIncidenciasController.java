@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import uo.asw.iniManager.service.IncidenciasService;
+import uo.asw.inciManager.service.IncidenciasService;
 
 /**
  * Clase que recibe una petición POST en formato
@@ -26,6 +26,5 @@ public class CargarIncidenciasController {
 	@RequestMapping(value = "/inci", method = RequestMethod.POST)
 	public ResponseEntity<String> update(@RequestBody Map<String, Object> datosInci) {
 	   return incidenciasService.cargarIncidencia(datosInci);
-	}
-	
+	}	
 }
