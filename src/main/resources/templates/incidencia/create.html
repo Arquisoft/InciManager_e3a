@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
-<head th:replace="fragments/head"/>
+<head th:replace="fragments/head" />
 <body>
+    <script src="/script/createIncidence.js"></script>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav"/>
 	<div class="container">
@@ -25,7 +26,7 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2" for=category>Categoría:</label>
 			<div class="col-xs-6 col-sm-10">
-				<select class="form-control" name="category" id="category">
+				<select class="form-control" name="category" id="category" onchange="comprobador()">
        				<option value="ACCIDENTE_CARRETERA">Accidente en Carretera</option>
        				<option value="ACCIDENTE_AEREO">Accidente Aéreo</option>
         			<option value="FUEGO">Incendio</option>
@@ -33,13 +34,6 @@
         			<option value="METEOROLOGICA">Meteorología</option>
         			<option value="VALOR_NO_ASIGNADO">Otro</option>
       			</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for=tags>Escribe Etiquetas:</label>
-			<div class="col-xs-6 col-sm-10">
-				<textarea style="resize:none;" type="text" class="form-control" rows="1" name="tags" id="tags"
-					placeholder="Introduce etiquetas separadas por comas" required="false" disabled></textarea>
 			</div>
 		</div>
 		<h3>Propiedades</h3>
@@ -52,19 +46,19 @@
 			<label class="control-label col-sm-2" for=windVelocity>Velocidad viento:</label>
 			<div class="col-xs-6 col-sm-4">
 				<input type="text" class="form-control" name="windVelocity" id="windVelocity"
-					placeholder="Ej: 120" required="false" /> 
+					placeholder="Ej: 120" required="false"/> 
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-2" for=preasure>Presión:</label>
 			<div class="col-xs-6 col-sm-4">
 				<input type="text" class="form-control" name="preasure" id="preasure"
-					placeholder="Ej: 60" required="false" /> 
+					placeholder="Ej: 60" required="false" disabled/> 
 			</div>
 			<label class="control-label col-sm-2" for=humedad>Humedad:</label>
 			<div class="col-xs-6 col-sm-4">
 				<input type="text" class="form-control" name="humedad" id="humedad"
-					placeholder="Ej: 78" required="false" /> 
+					placeholder="Ej: 78" required="false" disabled/> 
 			</div>
 		</div>
 		<div class="form-group">
