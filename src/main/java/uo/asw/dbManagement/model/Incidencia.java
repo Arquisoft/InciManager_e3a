@@ -5,26 +5,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import uo.asw.dbManagement.tipos.EstadoTipos;
 
-@Entity
-@Table(name = "TINCIDENCIAS")
+@Document(collection = "incidencias")
 public class Incidencia {
 	@Id
-	@GeneratedValue /* (strategy = GenerationType.AUTO) */
-	private Long id;
+	private ObjectId id;
 
 	@NotNull
 	@Column(name = "nombre_incidencia")
@@ -32,7 +27,7 @@ public class Incidencia {
 	private String descripcion;
 	private String latitud;
 	private String longitud;
-	@Enumerated(EnumType.STRING)
+//	@DBRef
 	private EstadoTipos estado;
 	@Column(name = "fecha_entrada")
 	@Temporal(TemporalType.DATE)
@@ -44,13 +39,13 @@ public class Incidencia {
 	@NotNull
 	private String idAgente;
 
-	@ManyToOne
+	@DBRef
 	private Usuario operario;
 
-	@OneToMany(mappedBy = "incidencia")
+	@DBRef
 	private Set<Propiedad> propiedades = new HashSet<Propiedad>();
 
-	@OneToMany(mappedBy = "incidenciaC")
+	@DBRef
 	private Set<Categoria> categorias = new HashSet<Categoria>();
 
 	public Incidencia() {
@@ -99,11 +94,11 @@ public class Incidencia {
 		this.categorias = categorias;
 	}
 
-	public Long getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 

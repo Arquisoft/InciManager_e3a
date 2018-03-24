@@ -41,10 +41,13 @@ public class AgentService {
 		if (response.getStatusCode() == HttpStatus.OK) {
 			try {
 				json = new JSONObject(response.getBody());
+				System.out.println("------------ OK -------------");
 				return json.getString("id");
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
+		} else{
+			System.out.print("------------ ERROR -------------");
 		}
 		return null;
 	}

@@ -5,8 +5,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import uo.asw.dbManagement.model.Incidencia;
@@ -34,7 +32,7 @@ public class IncidenciasService {
 	 * @return null y error si no se procesa bien el contenido, en caso contrario el
 	 *         nombre de la incidencia y la respuesta correcta
 	 */
-	public ResponseEntity<String> cargarIncidencia(Map<String, Object> datosInci) {
+	public void cargarIncidencia(Map<String, Object> datosInci) {
 		String login = (String) datosInci.get("login");
 		String password = (String) datosInci.get("password");
 		String kind = (String) datosInci.get("kind");
@@ -44,9 +42,9 @@ public class IncidenciasService {
 			incidencia = crearIncidencia(datosInci, idAgente);
 			incidenciasRepository.save(incidencia);
 			this.kafkaProducer.send("incidenciasTopic", incidencia.getDescripcion());
-			return new ResponseEntity<String>(incidencia.getNombreIncidencia(), HttpStatus.OK);
+//			return new ResponseEntity<String>(incidencia.getNombreIncidencia(), HttpStatus.OK);
 		}
-		 return new ResponseEntity<String>("No aceptada", HttpStatus.NOT_ACCEPTABLE);
+//		 return new ResponseEntity<String>("No aceptada", HttpStatus.NOT_ACCEPTABLE);
 	}
 
 	/**
@@ -85,6 +83,6 @@ public class IncidenciasService {
 	}
 
 	public Page<Incidencia> getIncidencias(Pageable pageable, String id_agente) {
-		return incidenciasRepository.findIncidenciasByIdAgent(pageable, id_agente);
+		return incidenciasRepository.findByIdAgente(id_agente, pageable);
 	}
 }

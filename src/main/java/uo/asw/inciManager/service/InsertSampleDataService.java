@@ -31,20 +31,20 @@ public class InsertSampleDataService {
 		String idAgente4 = "Id1";	
 		
 		// Creación de propiedades 
-		Propiedad p1 = new Propiedad(PropiedadTipos.TEMPERATURA, null, 100.0); /* ¿UNIDADES? */
-		Propiedad p2 = new Propiedad(PropiedadTipos.HUMEDAD, null, 90.0);
-		Propiedad p3 = new Propiedad(PropiedadTipos.PRESION, null, 1.1);
-		Propiedad p4 = new Propiedad(PropiedadTipos.VELOCIDAD_CIRCULACION, null, 110.0);
-		Propiedad p5 = new Propiedad(PropiedadTipos.VELOCIDAD_VIENTO, null, 120.0);
-		Propiedad p6 = new Propiedad(PropiedadTipos.VALOR_NO_ASIGNADO, null, 0.0);
+		Propiedad p1 = new Propiedad(PropiedadTipos.TEMPERATURA, 100.0); /* ¿UNIDADES? */
+		Propiedad p2 = new Propiedad(PropiedadTipos.HUMEDAD, 90.0);
+		Propiedad p3 = new Propiedad(PropiedadTipos.PRESION,  1.1);
+		Propiedad p4 = new Propiedad(PropiedadTipos.VELOCIDAD_CIRCULACION,  110.0);
+		Propiedad p5 = new Propiedad(PropiedadTipos.VELOCIDAD_VIENTO,  120.0);
+		Propiedad p6 = new Propiedad(PropiedadTipos.VALOR_NO_ASIGNADO,  0.0);
 		
 		// Categorias 
-		Categoria c1 = new Categoria(CategoriaTipos.ACCIDENTE_AEREO, null);
-		Categoria c2 = new Categoria(CategoriaTipos.ACCIDENTE_CARRETERA, null);
-		Categoria c3 = new Categoria(CategoriaTipos.FUEGO, null);
-		Categoria c4 = new Categoria(CategoriaTipos.INUNDACION, null);
-		Categoria c5 = new Categoria(CategoriaTipos.METEOROLOGICA, null);
-		Categoria c6 = new Categoria(CategoriaTipos.VALOR_NO_ASIGNADO, null);
+		Categoria c1 = new Categoria(CategoriaTipos.ACCIDENTE_AEREO);
+		Categoria c2 = new Categoria(CategoriaTipos.ACCIDENTE_CARRETERA);
+		Categoria c3 = new Categoria(CategoriaTipos.FUEGO);
+		Categoria c4 = new Categoria(CategoriaTipos.INUNDACION);
+		Categoria c5 = new Categoria(CategoriaTipos.METEOROLOGICA);
+		Categoria c6 = new Categoria(CategoriaTipos.VALOR_NO_ASIGNADO);
 		
 		// Creación de fechas 
 		Calendar Choy = Calendar.getInstance();
@@ -80,6 +80,8 @@ public class InsertSampleDataService {
 		 * ESTADO = ABIERTA - SIN OPERARIO */
 		Incidencia inci1 = new Incidencia("Inci1", "descripcion1", "Lat1", "Lon1", Choy.getTime(),
 				CunaSemana.getTime(), idAgente1, propiedades1 , categorias1);
+		addInciToCat(inci1,categorias1);
+		addInciToProp(inci1, propiedades1);
 		incidenciaService.addIncidencia(inci1);
 		
 		/* PROPIEDADES = PRESION, VELOCIDAD_CIRCULACION
@@ -133,5 +135,16 @@ public class InsertSampleDataService {
 		inci8.anularIncidencia();
 		incidenciaService.addIncidencia(inci8);
 		
+	}
+
+	private void addInciToProp(Incidencia inci1, Set<Propiedad> propiedades1) {
+		for(Propiedad p: propiedades1)
+			p.setIdIncidencia(inci1);
+		
+	}
+
+	private void addInciToCat(Incidencia inci1, Set<Categoria> categorias1) {
+		for(Categoria c: categorias1)
+			c.setIdIncidenciaC(inci1);
 	}
 }

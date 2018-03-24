@@ -1,6 +1,5 @@
 package uo.asw.inciManager.controller;
 
-import java.security.Principal;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -14,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import uo.asw.dbManagement.model.Incidencia;
 import uo.asw.inciManager.service.AgentService;
 import uo.asw.inciManager.service.IncidenciasService;
@@ -46,9 +46,9 @@ public class IncidenciasController {
 		return "incidencia/list";
 	}
 	
-	@RequestMapping(value = "/inidencia/send", method = RequestMethod.POST)
-	public ResponseEntity<String> update(@RequestBody Map<String, Object> datosInci) {
-	   return incidenciasService.cargarIncidencia(datosInci);
+	@RequestMapping(value = "/inci", method = RequestMethod.POST)
+	public void update(@RequestBody Map<String, Object> datosInci) {
+	   incidenciasService.cargarIncidencia(datosInci);
 	}
 
 }
