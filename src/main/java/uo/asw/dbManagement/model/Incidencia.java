@@ -18,7 +18,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import uo.asw.dbManagement.tipos.EstadoTipos;
-import uo.asw.dbManagement.tipos.PerfilTipos;
 
 @Entity
 @Table(name = "TINCIDENCIAS")
@@ -42,7 +41,8 @@ public class Incidencia {
 	@Temporal(TemporalType.DATE)
 	private Date fechaCaducidad;
 
-	private Long idAgente;
+	@NotNull
+	private String idAgente;
 
 	@ManyToOne
 	private Usuario operario;
@@ -71,7 +71,7 @@ public class Incidencia {
 	 * @param categorias
 	 */
 	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, Date fechaEntrada,
-			Date fechaCaducidad, Long idAgente, String propiedades, String categorias) {
+			Date fechaCaducidad, String idAgente, String propiedades, String categorias) {
 		this.nombreIncidencia = nombreIncidencia;
 		this.descripcion = descripcion;
 		this.latitud = latitud;
@@ -85,7 +85,7 @@ public class Incidencia {
 	}
 
 	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, Date fechaEntrada,
-			Date fechaCaducidad, Long idAgente, Set<Propiedad> propiedades, Set<Categoria> categorias) {
+			Date fechaCaducidad, String idAgente, Set<Propiedad> propiedades, Set<Categoria> categorias) {
 		super();
 		this.nombreIncidencia = nombreIncidencia;
 		this.descripcion = descripcion;
@@ -159,11 +159,11 @@ public class Incidencia {
 		this.fechaCaducidad = fechaCaducidad;
 	}
 
-	public Long getIdAgente() {
+	public String getIdAgente() {
 		return idAgente;
 	}
 
-	public void setIdAgente(Long idAgente) {
+	public void setIdAgente(String idAgente) {
 		this.idAgente = idAgente;
 	}
 

@@ -20,16 +20,13 @@ public class IncidenciasController {
 	@RequestMapping("/incidencia/list" )
 	public String getListado(Model model, Pageable pageable, Principal principal){
 		
-//		String emailAgente = principal.getName();
-//		Agente agent = agenteService.getAgentByEmail(emailAgente);
-//		
-//		Page<Incidencia> incidencias = new PageImpl<Incidencia>(new LinkedList<Incidencia>());
-//		
-//		incidencias = incidenciasService.getIncidencias(pageable, agent.getId());
-//		
-//		model.addAttribute("incidenciasList", incidencias.getContent() );
-//		model.addAttribute("nameAgent", "Incidencias de "+agent.getNombre());
-//		model.addAttribute("page", incidencias);
+		Page<Incidencia> incidencias = new PageImpl<Incidencia>(new LinkedList<Incidencia>());
+		
+		incidencias = incidenciasService.getIncidencias(pageable, agent.getId());
+		
+		model.addAttribute("incidenciasList", incidencias.getContent() );
+		model.addAttribute("nameAgent", "Incidencias de "+agent.getNombre());
+		model.addAttribute("page", incidencias);
 		
 		return "incidencia/list";
 	}

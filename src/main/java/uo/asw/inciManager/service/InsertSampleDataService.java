@@ -25,10 +25,10 @@ public class InsertSampleDataService {
 	public void init() {
 		
 		// ID's agentes
-		Long idAgente1 = 101L;
-		Long idAgente2 = 102L;
-		Long idAgente3 = 103L;
-		Long idAgente4 = 104L;	
+		String idAgente1 = "Id1";
+		String idAgente2 = "Id1";
+		String idAgente3 = "Id1";
+		String idAgente4 = "Id1";	
 		
 		// Creación de propiedades 
 		Propiedad p1 = new Propiedad(PropiedadTipos.TEMPERATURA, null, 100.0); /* ¿UNIDADES? */

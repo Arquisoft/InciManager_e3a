@@ -13,14 +13,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 import uo.asw.dbManagement.model.Incidencia;
 import uo.asw.inciManager.repository.IncidenciaRepository;
@@ -48,7 +42,7 @@ public class IncidenciasService {
 		String login = (String) datosInci.get("login");
 		String password = (String) datosInci.get("password");
 		String kind = (String) datosInci.get("kind");
-		Long idAgente = communicationAgents(login, password, kind);
+		String idAgente = communicationAgents(login, password, kind);
 		Incidencia incidencia = null;
 		if (validarIncidencia((String) datosInci.get("nombreIncidencia"), idAgente)) {
 			incidencia = crearIncidencia(datosInci, idAgente);
@@ -69,7 +63,7 @@ public class IncidenciasService {
 	 *            Agente que ha enviado la incidencia que puede ser null
 	 * @return true si la incidencia es valida y si el agente existe
 	 */
-	private boolean validarIncidencia(String nombreIncidencia, Long idAgente) {
+	private boolean validarIncidencia(String nombreIncidencia, String idAgente) {
 		return nombreIncidencia != null && !(nombreIncidencia).equals("") && idAgente != null;
 	}
 
@@ -81,7 +75,7 @@ public class IncidenciasService {
 	 * @param kind
 	 * @return
 	 */
-	public Long communicationAgents(String login, String password, String kind) {
+	public String communicationAgents(String login, String password, String kind) {
 		String urlAgents = "http://localhost:8091/user";
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
@@ -96,8 +90,8 @@ public class IncidenciasService {
 		if (response.getStatusCode() == HttpStatus.OK) {
 			try {
 				json = new JSONObject(response.getBody());
-				System.out.println(json.getLong("id"));
-				return json.getLong("id");
+				System.out.println(json.getString("id"));
+				return json.getString("id");
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -114,7 +108,7 @@ public class IncidenciasService {
 	 *            que envia la indicencia
 	 * @return el objeto incidencia creado
 	 */
-	private Incidencia crearIncidencia(Map<String, Object> datosInci, Long idAgente) {
+	private Incidencia crearIncidencia(Map<String, Object> datosInci, String idAgente) {
 		return new Incidencia((String) datosInci.get("nombreIncidencia"), (String) datosInci.get("descripcion"),
 				(String) datosInci.get("latitud"), (String) datosInci.get("longitud"),
 				DateUtil.stringToDate((String) datosInci.get("fechaEntrada")),
@@ -126,7 +120,7 @@ public class IncidenciasService {
 		incidenciasRepository.save(inci);
 	}
 
-	public Page<Incidencia> getIncidencias(Pageable pageable, Long id_agente) {
+	public Page<Incidencia> getIncidencias(Pageable pageable, String id_agente) {
 		return incidenciasRepository.findIncidenciasByIdAgent(pageable, id_agente);
 	}
 }
