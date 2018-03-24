@@ -1,5 +1,6 @@
 package uo.asw.dbManagement.model;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -145,6 +146,10 @@ public class Incidencia {
 	public EstadoTipos getEstado() {
 		return estado;
 	}
+	
+	public void setEstado(EstadoTipos estado) {
+		this.estado=estado;
+	}
 
 	public Date getFechaEntrada() {
 		return fechaEntrada;
@@ -160,6 +165,19 @@ public class Incidencia {
 
 	public void setFechaCaducidad(Date fechaCaducidad) {
 		this.fechaCaducidad = fechaCaducidad;
+	}
+	
+	public void setEnterDate() {
+		Date d = new Date();
+//		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss"); 
+//		String today = dt.format(d);
+		this.fechaEntrada=d;
+	}
+	
+	public void setCaducityDate() {
+		Calendar CunaSemana = Calendar.getInstance(); 
+		CunaSemana.add(Calendar.DAY_OF_MONTH, 7); 
+		this.fechaCaducidad = CunaSemana.getTime();
 	}
 
 	/*

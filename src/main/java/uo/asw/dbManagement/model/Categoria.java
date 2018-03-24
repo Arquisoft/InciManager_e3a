@@ -61,8 +61,6 @@ public class Categoria {
 		this.incidenciaC = idIncidenciaC;
 	}
 
-	
-
 	@Override
 	public String toString() {
 		return "Categoria [id=" + id + ", categoria=" + categoria 

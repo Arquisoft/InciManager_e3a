@@ -7,25 +7,25 @@
 	<div class="container">
 	<h2>Enviar nueva incidencia</h2>
 	<form class="form-horizontal" method="post" action="/incidencia/create"
-			th:object="${post}"  enctype="multipart/form-data">
+			th:object="${incidencia}"  enctype="multipart/form-data">
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="name">Nombre:</label>
+			<label class="control-label col-sm-2" for="nombreIncidencia">Nombre:</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" name="name"
+				<input type="text" class="form-control" name="nombreIncidencia"
 					placeholder="Nombre de la incidencia" required="true" /> 
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="description">Descripción:</label>
+			<label class="control-label col-sm-2" for="descripcion">Descripción:</label>
 			<div class="col-xs-6 col-sm-10">
-				<textarea type="text" class="form-control" rows="5" name="description"
+				<textarea style="resize:none;" type="text" class="form-control" rows="5" name="descripcion"
 					placeholder="Introduce una descripción" required="true"></textarea>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-2" for=category>Categoría:</label>
 			<div class="col-xs-6 col-sm-10">
-				<select class="form-control" name="category" id="category">
+				<select class="form-control" name="category" id="category" onchange="controlador(true, false, false, false, false)">
        				<option value="ACCIDENTE_CARRETERA">Accidente en Carretera</option>
        				<option value="ACCIDENTE_AEREO">Accidente Aéreo</option>
         			<option value="FUEGO">Incendio</option>
@@ -38,23 +38,43 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2" for=tags>Escribe Etiquetas:</label>
 			<div class="col-xs-6 col-sm-10">
-				<textarea type="text" class="form-control" rows="1" name="tags" id="tags"
+				<textarea style="resize:none;" type="text" class="form-control" rows="1" name="tags" id="tags"
 					placeholder="Introduce etiquetas separadas por comas" required="false" disabled></textarea>
 			</div>
 		</div>
-		<script th:inline="javascript">
-		/*<![CDATA[*/
-			$(document).ready(function(){
-				$("#category").change(function(){
-					if ($("#category option:selected").text()==="Otro"){
-						$("#tags").attr('disabled', false).focus();
-					} else {
-						$("#tags").attr('disabled', true);
-					}
-				})
-			});
-			/*]]>*/
-		</script>
+		<h3>Propiedades</h3>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for=drivinVelocity>Velocidad de circulación:</label>
+			<div class="col-xs-6 col-sm-4">
+				<input type="text" class="form-control" name="drivinVelocity" id="drivinVelocity"
+					placeholder="Ej: 80" required="false"/> 
+			</div>
+			<label class="control-label col-sm-2" for=windVelocity>Velocidad viento:</label>
+			<div class="col-xs-6 col-sm-4">
+				<input type="text" class="form-control" name="windVelocity" id="windVelocity"
+					placeholder="Ej: 120" required="false" disabled/> 
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for=preasure>Presión:</label>
+			<div class="col-xs-6 col-sm-4">
+				<input type="text" class="form-control" name="preasure" id="preasure"
+					placeholder="Ej: 60" required="false" disabled/> 
+			</div>
+			<label class="control-label col-sm-2" for=humedad>Humedad:</label>
+			<div class="col-xs-6 col-sm-4">
+				<input type="text" class="form-control" name="humedad" id="humedad"
+					placeholder="Ej: 78" required="false" disabled/> 
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for=temperature>Temperatura:</label>
+			<div class="col-xs-6 col-sm-4">
+				<input type="text" class="form-control" name="temperature" id="temperature"
+					placeholder="Ej: 20" required="false" disabled/> 
+			</div>
+		</div>
+		<h4>Otros</h4>
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="image">Información Adicional:</label>
 			<div class="col-sm-10">

@@ -7,5 +7,4 @@ public enum PropiedadTipos {
 	VELOCIDAD_VIENTO, 
 	VELOCIDAD_CIRCULACION,
 	VALOR_NO_ASIGNADO
-
 }
