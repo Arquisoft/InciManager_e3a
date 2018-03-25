@@ -16,6 +16,8 @@ public class AgentController {
 	
 	@Autowired
 	private AgentService agentsService;
+	
+	private String username;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGet(Model model) {
@@ -25,6 +27,7 @@ public class AgentController {
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
 		model.addAttribute("idAgente", agentsService.getIdConnected());
+		model.addAttribute("nombreUsuario", username);
 		return "home";
 	}
 
@@ -34,6 +37,7 @@ public class AgentController {
 		Map<String,Object> infoAgente = agentsService.communicationAgents(username, password, kind);
 		if(infoAgente != null) {
 			agentsService.setIdConnected((String)infoAgente.get("id"));
+			this.username = username;
 			return "redirect:/home";
 		} else {
 			agentsService.setIdConnected(null);
