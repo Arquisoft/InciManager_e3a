@@ -23,12 +23,10 @@ public class Incidencia {
 	private ObjectId id = new ObjectId();
 
 	@NotNull
-	@Column(name = "nombre_incidencia")
 	private String nombreIncidencia;
 	private String descripcion;
 	private String latitud;
 	private String longitud;
-//	@DBRef
 	private EstadoTipos estado;
 	@Column(name = "fecha_entrada")
 	@Temporal(TemporalType.DATE)
@@ -293,7 +291,7 @@ public class Incidencia {
 	public void addListaCategorias(String lista) {
 		String[] categorias = lista.split(",");
 		for (int i = 0; i < categorias.length; i++) {
-			this.addCategoria(new Categoria(categorias[i], this));
+			this.addCategoria(new Categoria(categorias[i]));
 		}
 	}
 
@@ -310,7 +308,7 @@ public class Incidencia {
 			String[] propiedad = propiedades[i].split("/");
 			// this.addPropiedad(new Propiedad(propiedad[0],
 			// this.getId(), Double.parseDouble(propiedad[1])));
-			this.addPropiedad(new Propiedad(propiedad[0], this, Double.parseDouble(propiedad[1])));
+			this.addPropiedad(new Propiedad(propiedad[0], Double.parseDouble(propiedad[1])));
 		}
 	}
 
