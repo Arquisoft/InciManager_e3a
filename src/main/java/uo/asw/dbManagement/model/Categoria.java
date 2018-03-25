@@ -31,6 +31,12 @@ public class Categoria {
 		this.categoria = this.obtenerCategoria(categoria);
 		this.incidenciaC = idIncidenciaC;
 	}
+	
+	public Categoria(CategoriaTipos categoria, Incidencia idIncidenciaC) {
+		super();
+		this.categoria = categoria;
+		this.incidenciaC = idIncidenciaC;
+	}
 
 	public ObjectId getId() {
 		return id;
