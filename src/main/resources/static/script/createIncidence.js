@@ -21,3 +21,13 @@ function controlador(vCircu, vViento, presion, humedad, temperatura) {
 	$("#humedad").attr('disabled', humedad);
 	$("#temperature").attr('disabled', temperatura);
 }
+
+
+function validar(){
+	if (isNaN($("#drivinVelocity:text")) && $("#drivinVelocity").prop('disabled')===false){
+		alert("Solo se admiten números en las propiedades.");
+		event.returnValue=false;
+	} else {
+		event.returnValue=true;
+	}
+}

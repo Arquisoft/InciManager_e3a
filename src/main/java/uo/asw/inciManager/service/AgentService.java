@@ -76,4 +76,16 @@ public class AgentService {
 	public void setDatosAgente(Map<String, Object> datosAgente) {
 		this.datosAgente = datosAgente;
 	}
+	
+	public String getLatitude() {
+		return ((String) datosAgente.get("location")).split(" - ")[0];
+	}
+	
+	public String getLongitude() {
+		return ((String) datosAgente.get("location")).split(" - ")[1];
+	}
+		
+	public String getLocation() {
+		return (String) datosAgente.get("location");
+	}
 }
