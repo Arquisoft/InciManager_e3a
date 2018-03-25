@@ -34,9 +34,8 @@ public class InsertSampleDataService {
 		
 		// ID's agentes
 		String idAgente1 = "Id1";
-		String idAgente2 = "Id1";
-		String idAgente3 = "Id1";
-		String idAgente4 = "Id1";	
+		String idAgente2 = "Id2";
+
 		
 		// Creación de propiedades 
 		Propiedad p1 = new Propiedad(PropiedadTipos.TEMPERATURA, 100.0); /* ¿UNIDADES? */
@@ -93,19 +92,19 @@ public class InsertSampleDataService {
 		 * CATEGORIAS = FUEGO, INUNDACION
 		 * ESTADO = ABIERTA - SIN OPERARIO */
 		Incidencia inci2 = new Incidencia("Inci2", "descripcion2", "Lat2", "Lon2",  Choy.getTime(),
-				CunaSemana.getTime(), idAgente2, propiedades2 , categorias2);
+				CunaSemana.getTime(), idAgente1, propiedades2 , categorias2);
 		
 		/* PROPIEDADES = VELOCIDAD_VIENTO
 		 * CATEGORIAS = METEOROLOGICA 
 		 * ESTADO = ABIERTA - SIN OPERARIO */
 		Incidencia inci3 = new Incidencia("Inci3", "descripcion3", "Lat3", "Lon3",Choy.getTime(),
-				CunaSemana.getTime(), idAgente3, propiedades3 , categorias3);
+				CunaSemana.getTime(), idAgente2, propiedades3 , categorias3);
 		
 		/* PROPIEDADES = VALOR_NO_ASIGNADO
 		 * CATEGORIAS = VALOR_NO_ASIGNADO
 		 * ESTADO = ABIERTA - SIN OPERARIO */
 		Incidencia inci4 = new Incidencia("Inci4", "descripcion4", "Lat4", "Lon4",  Choy.getTime(),
-				CunaSemana.getTime(), idAgente4, propiedades4 , categorias4);
+				CunaSemana.getTime(), idAgente2, propiedades4 , categorias4);
 		
 		p.save(p1);
 		p.save(p2);
