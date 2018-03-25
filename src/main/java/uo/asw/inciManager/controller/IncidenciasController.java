@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +26,9 @@ import uo.asw.dbManagement.model.Propiedad;
 import uo.asw.dbManagement.tipos.CategoriaTipos;
 import uo.asw.dbManagement.tipos.PropiedadTipos;
 import uo.asw.inciManager.service.AgentService;
+import uo.asw.inciManager.service.CategoriaService;
 import uo.asw.inciManager.service.IncidenciasService;
+import uo.asw.inciManager.service.PropiedadesService;
 
 @Controller
 public class IncidenciasController {
@@ -35,6 +38,12 @@ public class IncidenciasController {
 	
 	@Autowired
 	private AgentService agentService;
+	
+	@Autowired
+	private PropiedadesService propiedadService;
+	
+	@Autowired
+	private CategoriaService categoriaService;
 	
 	@RequestMapping("/incidencia/list" )
 	public String getListado(Model model, Pageable pageable){
@@ -61,6 +70,8 @@ public class IncidenciasController {
 			@RequestParam("category") String category, WebRequest webRequest) {
 		
 		Categoria categoria = new Categoria(CategoriaTipos.valueOf(category));
+		categoriaService.addCategoria(categoria);
+		
 		incidencia.setPropiedades(obtainProperties(incidencia, webRequest));
 		
 		incidenciasService.createNewIncidencia(incidencia, categoria, agentService.getIdConnected());
@@ -85,15 +96,25 @@ public class IncidenciasController {
 		String temperature = webRequest.getParameter("temperature");
 		
 		if (drivinV!=null) {
-			propiedades.add(new Propiedad(PropiedadTipos.valueOf("VELOCIDAD_CIRCULACION"), Double.valueOf(drivinV)));
+			Propiedad p = new Propiedad(PropiedadTipos.valueOf("VELOCIDAD_CIRCULACION"), Double.valueOf(drivinV));
+			propiedadService.addPropiedad(p);
+			propiedades.add(p);
 		} if (windV!=null) {
-			propiedades.add(new Propiedad(PropiedadTipos.valueOf("VELOCIDAD_VIENTO"),  Double.valueOf(windV)));
+			Propiedad p = new Propiedad(PropiedadTipos.valueOf("VELOCIDAD_VIENTO"),  Double.valueOf(windV));
+			propiedadService.addPropiedad(p);
+			propiedades.add(p);
 		} if (preasure!=null) {
-			propiedades.add(new Propiedad(PropiedadTipos.valueOf("PRESION"), Double.valueOf(preasure)));
+			Propiedad p = new Propiedad(PropiedadTipos.valueOf("PRESION"), Double.valueOf(preasure));
+			propiedadService.addPropiedad(p);
+			propiedades.add(p);
 		} if (humedad!=null) {
-			propiedades.add(new Propiedad(PropiedadTipos.valueOf("HUMEDAD"),Double.valueOf(humedad)));
+			Propiedad p = new Propiedad(PropiedadTipos.valueOf("HUMEDAD"),Double.valueOf(humedad));
+			propiedadService.addPropiedad(p);
+			propiedades.add(p);
 		} if (temperature!=null) {
-			propiedades.add(new Propiedad(PropiedadTipos.valueOf("TEMPERATURA"), Double.valueOf(temperature)));
+			Propiedad p = new Propiedad(PropiedadTipos.valueOf("TEMPERATURA"), Double.valueOf(temperature));
+			propiedadService.addPropiedad(p);
+			propiedades.add(p);
 		}
 		
 		return propiedades;
@@ -104,4 +125,11 @@ public class IncidenciasController {
 	   return incidenciasService.cargarIncidencia(datosInci);
 	}
 
+	@RequestMapping("/incidencia/details/{id}")
+	public String getDetail(Model model, @PathVariable ObjectId id) {
+		Incidencia incidencia = incidenciasService.getOneById(id);
+		model.addAttribute("inci", incidencia);
+		model.addAttribute("noValor",PropiedadTipos.VALOR_NO_ASIGNADO);
+		return "incidencia/details";
+	}
 }

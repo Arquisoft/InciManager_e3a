@@ -110,6 +110,7 @@ public class InsertSampleDataService {
 		p.addPropiedad(p4);
 		p.addPropiedad(p5);
 		p.addPropiedad(p5);
+		p.addPropiedad(p6);
 		c.addCategoria(c1);
 		c.addCategoria(c2);
 		c.addCategoria(c3);
