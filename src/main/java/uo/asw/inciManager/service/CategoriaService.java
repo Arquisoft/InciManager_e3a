@@ -16,5 +16,8 @@ public class CategoriaService {
 		c.save(c1);
 	}
 	
-	
+	public void deleteAll() {
+		c.deleteAll();
+		
+	}
 }

@@ -106,5 +106,10 @@ public class IncidenciasService {
 	public void enviarIncidenciaWeb(Incidencia incidencia) {
 		this.kafkaProducer.send("incidenciasTopic", incidencia.getDescripcion());
 	}
+
+	public void deleteAll() {
+		incidenciasRepository.deleteAll();
+		
+	}
 	
 }

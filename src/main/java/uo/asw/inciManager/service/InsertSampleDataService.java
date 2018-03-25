@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,6 @@ import uo.asw.dbManagement.model.Incidencia;
 import uo.asw.dbManagement.model.Propiedad;
 import uo.asw.dbManagement.tipos.CategoriaTipos;
 import uo.asw.dbManagement.tipos.PropiedadTipos;
-import uo.asw.inciManager.repository.CategoriaRepository;
-import uo.asw.inciManager.repository.PropiedadRepository;
 
 @Service
 public class InsertSampleDataService {
@@ -29,7 +27,7 @@ public class InsertSampleDataService {
 	@Autowired
 	private PropiedadesService p;
 
-	@PostConstruct
+//	@PostConstruct
 	public void init() {
 		
 		// ID's agentes
@@ -124,4 +122,6 @@ public class InsertSampleDataService {
 		incidenciaService.addIncidencia(inci4);
 		
 	}
+	
+
 }
