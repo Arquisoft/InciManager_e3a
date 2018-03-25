@@ -48,6 +48,9 @@ public class Incidencia {
 
 	@DBRef
 	private Set<Categoria> categorias = new HashSet<Categoria>();
+	
+	private Double minimoValor;
+	private Double maximoValor;
 
 	public Incidencia() {
 	}
@@ -235,6 +238,22 @@ public class Incidencia {
 		} else if (!nombreIncidencia.equals(other.nombreIncidencia))
 			return false;
 		return true;
+	}
+
+	public Double getMinimoValor() {
+		return minimoValor;
+	}
+
+	public void setMinimoValor(Double minimoValor) {
+		this.minimoValor = minimoValor;
+	}
+
+	public Double getMaximoValor() {
+		return maximoValor;
+	}
+
+	public void setMaximoValor(Double maximoValor) {
+		this.maximoValor = maximoValor;
 	}
 
 	@Override
