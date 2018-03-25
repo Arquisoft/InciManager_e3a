@@ -28,6 +28,7 @@ public class Incidencia {
 	private String latitud;
 	private String longitud;
 	private EstadoTipos estado;
+
 	@Column(name = "fecha_entrada")
 	@Temporal(TemporalType.DATE)
 	private Date fechaEntrada;
@@ -49,6 +50,8 @@ public class Incidencia {
 	
 	private Double minimoValor;
 	private Double maximoValor;
+
+	private String imageURL;
 
 	public Incidencia() {
 	}
@@ -338,5 +341,18 @@ public class Incidencia {
 		}
 		return false;
 
+	}
+
+	public void setLocation(String latitude, String longitude) {
+		this.latitud=latitude;
+		this.longitud=longitude;
+	}
+
+	public void setImageURL(String image) {
+		this.imageURL = image;
+	}
+
+	public String getImageURL() {
+		return imageURL;
 	}
 }

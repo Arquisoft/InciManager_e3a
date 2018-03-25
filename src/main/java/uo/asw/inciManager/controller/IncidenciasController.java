@@ -1,5 +1,10 @@
 package uo.asw.inciManager.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
@@ -13,12 +18,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import uo.asw.dbManagement.model.Categoria;
 import uo.asw.dbManagement.model.Incidencia;
@@ -66,16 +74,18 @@ public class IncidenciasController {
 	}
 	
 	@RequestMapping(value="/incidencia/create", method = RequestMethod.POST)
-	public String createNewIncidence(Incidencia incidencia, 
+	public String createNewIncidence(Incidencia incidencia, @RequestParam("image") MultipartFile image,
 			@RequestParam("category") String category, WebRequest webRequest) {
 		
 		Categoria categoria = new Categoria(CategoriaTipos.valueOf(category));
 		categoriaService.addCategoria(categoria);
 		
 		incidencia.setPropiedades(obtainProperties(incidencia, webRequest));
-		
+		incidencia.setLocation(agentService.getLatitude(), agentService.getLongitude());
+		saveImage(incidencia, image); 
+				
 		incidenciasService.createNewIncidencia(incidencia, categoria, agentService.getIdConnected());
-		incidenciasService.enviarIncidenciaWeb(incidencia);
+//		incidenciasService.enviarIncidenciaWeb(incidencia);
 		
 		return "redirect:/incidencia/list";
 	}
@@ -118,6 +128,23 @@ public class IncidenciasController {
 		}
 		
 		return propiedades;
+	}
+	
+	/**
+	 * Método para guardar una imagen asociada a una incidencia en el proyecto
+	 * @param incidencia la incidencia
+	 * @param image la imagen
+	 */
+	private void saveImage(Incidencia incidencia, MultipartFile image) {
+		
+		try {
+			String fileName = image.getOriginalFilename();
+			InputStream is = image.getInputStream();
+			Files.copy(is, Paths.get("src/main/resources/static/img/post/" + fileName),
+					StandardCopyOption.REPLACE_EXISTING);
+			incidencia.setImageURL("/img/post/" + fileName); 
+		} catch (IOException e) { 
+		}
 	}
 	
 	@RequestMapping(value = "/inci", method = RequestMethod.POST)
