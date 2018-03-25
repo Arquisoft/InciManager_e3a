@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+
+	<div class="container">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="descripcion">Chat:</label>
+			<div class="col-xs-6 col-sm-10" id="mensajes">
+				<textarea style="resize: none;" type="text" class="form-control"
+					rows="5" name="descripcion" placeholder="Introduce una descripción"
+					required="true" ></textarea>
+			</div>
+		</div>
+		<div>
+		<input type="text" class="form-control" name="pregunta"
+						placeholder="Preguntanos lo que quieras" required="true" /> 
+			<button type="button" th:id="send"
+				class="btn btn-info">Enviar</button>
+			<script th:inline="javascript">
+									/*<![CDATA[*/
+									$("#send").click(function() {
+										$.get("/chat/send", function(data){
+											
+											var urlUpdate = '/chat/messages/update';
+																					
+											$("#mensajes").load(urlUpdate);											})
+									});
+									/*]]>*/
+									</script>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

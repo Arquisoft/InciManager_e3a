@@ -1,5 +1,6 @@
 package uo.asw.inciManager.controller;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
@@ -12,12 +13,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+
 
 import uo.asw.dbManagement.model.Categoria;
 import uo.asw.dbManagement.model.Incidencia;
@@ -104,4 +105,24 @@ public class IncidenciasController {
 	   return incidenciasService.cargarIncidencia(datosInci);
 	}
 
+	
+	
+	@RequestMapping("/incidencia/chatBot")
+	public String chatIncidencias(Model model) {
+		model.addAttribute("mensajeBienvenida", "Hola, agente " + agentService.getIdConnected());
+		model.addAttribute("idAgente", agentService.getIdConnected());
+		return "incidencia/chatBot";
+	}
+	
+	@RequestMapping("/user/list/update") 
+	public String updateList(Model model, Pageable pageable, Principal principal){
+		
+		return "incidencia/chatBot :: mensajes";
+	}
+	
+	@RequestMapping(value="/chat/send", method=RequestMethod.GET) 
+	public String mandarMensajeByAgente(Model model){
+		
+		return "redirect:/incidencia/chatBot";
+	}
 }
