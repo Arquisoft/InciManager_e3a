@@ -2,6 +2,7 @@ package uo.asw.inciManager.service;
 
 import java.util.Map;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -97,5 +98,9 @@ public class IncidenciasService {
 		incidencia.setEstado(EstadoTipos.ABIERTA);
 		incidencia.setIdAgente(agente);
 		addIncidencia(incidencia);
+	}
+	
+	public Incidencia getOneById(ObjectId id) {
+		return incidenciasRepository.findOne(id);
 	}
 }

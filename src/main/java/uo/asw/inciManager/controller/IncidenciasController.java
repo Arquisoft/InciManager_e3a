@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -103,4 +104,11 @@ public class IncidenciasController {
 	   return incidenciasService.cargarIncidencia(datosInci);
 	}
 
+	@RequestMapping("/incidencia/details/{id}")
+	public String getDetail(Model model, @PathVariable ObjectId id) {
+		Incidencia incidencia = incidenciasService.getOneById(id);
+		model.addAttribute("inci", incidencia);
+		model.addAttribute("noValor",PropiedadTipos.VALOR_NO_ASIGNADO);
+		return "incidencia/details";
+	}
 }

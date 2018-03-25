@@ -13,7 +13,7 @@
 				id="tableInci">
 				<thead>
 					<tr>
-						<th >Nombre</th>
+						<th>Nombre</th>
 						<th>Descripción</th>
 						<th>Fecha de Entrada</th>
 						<th>Fecha de Caducidad</th>
@@ -23,10 +23,15 @@
 				</thead>
 				<tbody>
 					<tr th:each="inci : ${incidenciasList}">
-						<td style="width:250px; vertical-align:middle" th:text="${inci.nombreIncidencia}">Nombre</td>
-						<td  style="width:250px; vertical-align:middle" th:text="${inci.descripcion}">Descripción</td>
-						<td  style="width:250px; vertical-align:middle" th:text="${inci.fechaEntrada}">Fecha de Entrada</td>
-						<td  style="width:250px; vertical-align:middle" th:text="${inci.fechaCaducidad}">Fecha de Caducidad</td>
+						<td style="width: 250px; vertical-align: middle"><a
+							th:text="${inci.nombreIncidencia}"
+							th:href="${'/incidencia/details/' + inci.id}">Nombre</a></td>
+						<td style="width: 250px; vertical-align: middle"
+							th:text="${inci.descripcion}">Descripción</td>
+						<td style="width: 250px; vertical-align: middle"
+							th:text="${inci.fechaEntrada}">Fecha de Entrada</td>
+						<td style="width: 250px; vertical-align: middle"
+							th:text="${inci.fechaCaducidad}">Fecha de Caducidad</td>
 					</tr>
 				</tbody>
 			</table>
