@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +27,7 @@ import uo.asw.dbManagement.model.Propiedad;
 import uo.asw.dbManagement.tipos.CategoriaTipos;
 import uo.asw.dbManagement.tipos.PropiedadTipos;
 import uo.asw.inciManager.service.AgentService;
+import uo.asw.inciManager.service.ChatBotService;
 import uo.asw.inciManager.service.IncidenciasService;
 
 @Controller
@@ -36,6 +38,10 @@ public class IncidenciasController {
 	
 	@Autowired
 	private AgentService agentService;
+	
+	@Autowired
+	private ChatBotService chatBotService;
+	
 	
 	@RequestMapping("/incidencia/list" )
 	public String getListado(Model model, Pageable pageable){
@@ -109,20 +115,24 @@ public class IncidenciasController {
 	
 	@RequestMapping("/incidencia/chatBot")
 	public String chatIncidencias(Model model) {
-		model.addAttribute("mensajeBienvenida", "Hola, agente " + agentService.getIdConnected());
+		model.addAttribute("mensajeApp",chatBotService.getMensajes());
 		model.addAttribute("idAgente", agentService.getIdConnected());
 		return "incidencia/chatBot";
 	}
 	
 	@RequestMapping("/user/list/update") 
-	public String updateList(Model model, Pageable pageable, Principal principal){
-		
+	public String updateList(Model model){
+		model.addAttribute("mensajeApp",chatBotService.getMensajes());
+		model.addAttribute("idAgente", agentService.getIdConnected());
 		return "incidencia/chatBot :: mensajes";
 	}
 	
-	@RequestMapping(value="/chat/send", method=RequestMethod.GET) 
-	public String mandarMensajeByAgente(Model model){
+	@RequestMapping(value="/chat/send/", method=RequestMethod.GET) 
+	public String mandarMensajeByAgente(Model model, @RequestParam("pregunta") String pregunta){
+		if(chatBotService.comprobarCrear(pregunta)) {
+			chatBotService.setMensajes(chatBotService.getMensajes()+"\n- "+ pregunta + "\n+ ¿Cuál es el nombre su incidencia?");
+		}
 		
-		return "redirect:/incidencia/chatBot";
+		return "redirect:/user/list/update";
 	}
 }

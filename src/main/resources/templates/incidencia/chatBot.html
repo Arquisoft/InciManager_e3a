@@ -6,20 +6,20 @@
 	<nav th:replace="fragments/nav" />
 
 	<div class="container">
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="descripcion">Chat:</label>
-			<div class="col-xs-6 col-sm-10" id="mensajes">
-				<textarea style="resize: none;" type="text" class="form-control"
-					rows="5" name="descripcion" placeholder="Introduce una descripción"
-					required="true" ></textarea>
-			</div>
-		</div>
+		<div class="col-xs-6 col-sm-10" id="mensajes">
+			<textarea style="resize: none;" type="text" class="form-control"
+				rows="5" name="descripcion"
+				required="false" disabled="disabled" th:text="${mensajeApp}"></textarea>
+
 		<div>
-		<input type="text" class="form-control" name="pregunta"
-						placeholder="Preguntanos lo que quieras" required="true" /> 
-			<button type="button" th:id="send"
-				class="btn btn-info">Enviar</button>
-			<script th:inline="javascript">
+			<div class="form-group">
+			<div class="col-xs-6 col-sm-10">
+				<input type="text" class="form-control" name="pregunta"
+					placeholder="Preguntanos lo que quieras" required="true" />
+					</div>
+				<button type="button" th:id="send" class="btn btn-info">Enviar</button>
+				
+				<script th:inline="javascript">
 									/*<![CDATA[*/
 									$("#send").click(function() {
 										$.get("/chat/send", function(data){
@@ -30,6 +30,7 @@
 									});
 									/*]]>*/
 									</script>
+			</div>
 		</div>
 	</div>
 	<footer th:replace="fragments/footer" />
