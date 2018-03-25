@@ -4,16 +4,9 @@
 <body>
 	<nav th:replace="fragments/nav"/>
 	<div class="container" style="text-align: center">
-		<img src="/img/dashboard_home.png" alt="imgHome" />
-		<h2>Centro de Control de Incidencias</h2>
-		<p>
-			Agente Autenticado como: <b th:inline="text">
-				[[${#httpServletRequest.remoteUser}]] </b>
-		</p>
-
-
+		<img src="/img/obrero.png" alt="imgHome" />
+		<h2>Bienvenido al centro de control de incidencias</h2>
 	</div>
-
 	<footer th:replace="fragments/footer" />
 </body>
 </html>
