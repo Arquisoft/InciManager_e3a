@@ -10,7 +10,7 @@
 		<div class="table-responsive">
 			<h3>Descripción</h3>
 			<div class="panel-body" th:text="${inci.descripcion}"></div>
-			<h3>Categorias</h3>
+			<h3>Categorías</h3>
 			<div th:if="${inci.categorias != null}">
 				<div class="panel-body" th:each="cat : ${inci.categorias}" th:if="${cat != null}">
 					<div th:text="${cat.categoria}"></div>
@@ -29,6 +29,7 @@
 			</div>
 			<h3>Otra información</h3>
 		</div>
-		<footer th:replace="fragments/footer" />
+	</div>
+	<footer th:replace="fragments/footer" />
 </body>
 </html>

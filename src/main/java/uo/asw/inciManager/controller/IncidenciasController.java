@@ -157,6 +157,7 @@ public class IncidenciasController {
 		Incidencia incidencia = incidenciasService.getOneById(id);
 		model.addAttribute("inci", incidencia);
 		model.addAttribute("noValor",PropiedadTipos.VALOR_NO_ASIGNADO);
+		model.addAttribute("idAgente", agentService.getIdConnected());
 		return "incidencia/details";
 	}
 }
