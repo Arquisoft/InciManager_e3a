@@ -13,11 +13,7 @@ public class Propiedad {
 	@Id
 	private ObjectId id = new ObjectId();
 	
-//	@DBRef
 	private PropiedadTipos propiedad;
-	
-	@DBRef
-	private Incidencia incidencia;
 	
 	private Double valor;
 	
@@ -29,10 +25,9 @@ public class Propiedad {
 		this.valor = valor;
 	}
 	
-	public Propiedad(String propiedad, Incidencia idIncidencia, Double valor) {
+	public Propiedad(String propiedad, Double valor) {
 		super();
 		this.propiedad = obtenerPropiedad(propiedad);
-		this.incidencia = idIncidencia;
 		this.valor = valor;
 	}
 	
@@ -59,13 +54,6 @@ public class Propiedad {
 		this.propiedad = propiedad;
 	}
 
-	public Incidencia getIdIncidencia() {
-		return incidencia;
-	}
-
-	public void setIdIncidencia(Incidencia idIncidencia) {
-		this.incidencia = idIncidencia;
-	}
 
 	public Double getValor() {
 		return valor;
@@ -155,7 +143,7 @@ public class Propiedad {
 
 	@Override
 	public String toString() {
-		return "Propiedad [id=" + id + ", propiedad=" + propiedad + ", incidencia=" + incidencia + ", valor=" + valor
+		return "Propiedad [id=" + id + ", propiedad=" + propiedad + ", valor=" + valor
 				+ "]";
 	}
 
