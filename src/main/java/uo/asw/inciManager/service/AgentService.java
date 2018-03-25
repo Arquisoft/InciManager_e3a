@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 public class AgentService {
 
 	private String idConnectedAgent;
+	private Map<String, Object> datosAgente;
 
 	RestTemplate restTemplate = new RestTemplate();
 
@@ -47,6 +48,7 @@ public class AgentService {
 			/* añadimos los que sean necesarios... */
 			datosAgente.put("id", json.getString("id"));
 			datosAgente.put("location", json.getString("location"));
+			this.datosAgente = datosAgente;
 			return datosAgente;
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -55,7 +57,7 @@ public class AgentService {
 				throw ex;
 			}
 		}
-
+		this.datosAgente=null;
 		return null;
 	}
 
@@ -65,5 +67,13 @@ public class AgentService {
 
 	public String getIdConnected() {
 		return idConnectedAgent;
+	}
+
+	public Map<String, Object> getDatosAgente() {
+		return datosAgente;
+	}
+
+	public void setDatosAgente(Map<String, Object> datosAgente) {
+		this.datosAgente = datosAgente;
 	}
 }

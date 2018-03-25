@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import uo.asw.dbManagement.model.Categoria;
 import uo.asw.dbManagement.model.Incidencia;
+import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.inciManager.repository.IncidenciaRepository;
 import uo.asw.inciManager.util.DateUtil;
 import uo.asw.kafka.producers.KafkaProducer;
@@ -86,5 +88,14 @@ public class IncidenciasService {
 
 	public Page<Incidencia> getIncidencias(Pageable pageable, String id_agente) {
 		return incidenciasRepository.findByIdAgente(id_agente, pageable);
+	}
+	
+	public void createNewIncidencia(Incidencia incidencia, Categoria categoria, String agente) {
+		incidencia.addCategoria(categoria);
+		incidencia.setEnterDate();
+		incidencia.setCaducityDate();
+		incidencia.setEstado(EstadoTipos.ABIERTA);
+		incidencia.setIdAgente(agente);
+		addIncidencia(incidencia);
 	}
 }
