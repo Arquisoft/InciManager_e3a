@@ -28,7 +28,7 @@ public class AgentController {
 	public String home(Model model) {
 		model.addAttribute("idAgente", agentsService.getIdConnected());
 		model.addAttribute("nombreUsuario", username);
-		return "home";
+		return comprobarConectado("home");
 	}
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
@@ -43,5 +43,11 @@ public class AgentController {
 			agentsService.setIdConnected(null);
 		}
 		return "/login";
+	}
+	
+	private String comprobarConectado(String destino) {
+		if(agentsService.getIdConnected() == null) {
+			return "redirect:/login";
+		}else return destino;
 	}
 }

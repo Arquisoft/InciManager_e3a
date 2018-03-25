@@ -63,14 +63,14 @@ public class IncidenciasController {
 		model.addAttribute("page", incidencias);
 		model.addAttribute("idAgente", agentService.getIdConnected());
 		
-		return "incidencia/list";
+		return comprobarConectado("incidencia/list");
 	}
 	
 	@RequestMapping("/incidencia/create")
 	public String create(Model model) {
 		model.addAttribute("incidencia", new Incidencia());
 		model.addAttribute("idAgente", agentService.getIdConnected());
-		return "incidencia/create";
+		return comprobarConectado("incidencia/create");
 	}
 	
 	@RequestMapping(value="/incidencia/create", method = RequestMethod.POST)
@@ -87,7 +87,7 @@ public class IncidenciasController {
 		incidenciasService.createNewIncidencia(incidencia, categoria, agentService.getIdConnected());
 //		incidenciasService.enviarIncidenciaWeb(incidencia);
 		
-		return "redirect:/incidencia/list";
+		return comprobarConectado("redirect:/incidencia/list");
 	}
 
 	/**
@@ -158,6 +158,12 @@ public class IncidenciasController {
 		model.addAttribute("inci", incidencia);
 		model.addAttribute("noValor",PropiedadTipos.VALOR_NO_ASIGNADO);
 		model.addAttribute("idAgente", agentService.getIdConnected());
-		return "incidencia/details";
+		return comprobarConectado("incidencia/details");
+	}
+	
+	private String comprobarConectado(String destino) {
+		if(agentService.getIdConnected() == null) {
+			return "redirect:/login";
+		}else return destino;
 	}
 }
