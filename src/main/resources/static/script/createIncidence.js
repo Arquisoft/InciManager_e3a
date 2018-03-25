@@ -24,7 +24,11 @@ function controlador(vCircu, vViento, presion, humedad, temperatura) {
 
 
 function validar(){
-	if (isNaN($("#drivinVelocity:text")) && $("#drivinVelocity").prop('disabled')===false){
+	if (($("#drivinVelocity").prop('disabled')===false && isNaN($("#drivinVelocity").val())) ||
+			($("#windVelocity").prop('disabled')===false && isNaN($("#windVelocity").val())) ||
+			($("#preasure").prop('disabled')===false && isNaN($("#preasure").val())) ||
+			($("#humedad").prop('disabled')===false && isNaN($("#humedad").val())) ||
+			($("#temperature").prop('disabled')===false && isNaN($("#temperature").val()))){
 		alert("Solo se admiten números en las propiedades.");
 		event.returnValue=false;
 	} else {
