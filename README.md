@@ -6,16 +6,27 @@
 # InciManagement_e3a
 InciManagement_e3a
 
-#Instrucciones
+# Detalles
 
 Este módulo recoge incidencias enviadas por Agentes de tipo sensor (por servicio rest) y de tipo persona, entidad (vía formu
 lario web).
-La aplicación funciona con una bd MongoDB (no hay que hacer nada al respecto).
-La autenticación de estos agentes se realiza mediante el módulo Agentes_e3a, con lo que hay que descargarlo y arrancarlo
-para que este módulo funcione correctamente.
+Funciona con una base de datos MongoDB, y conecta con el modulo [Agents_e3a](https://github.com/Arquisoft/Agents_e3a.git) para autenticar a los agentes que entren sesión.
 
-Para probar hay que tener funcionando:
-módulo Agents_e3a, InciManager_e3a, y un servidor kafka
+Por tanto, para probar hay que tener funcionando:
+1. Lanzar el módulo [Agents_e3a](https://github.com/Arquisoft/Agents_e3a.git).
+2. Desplegar [Kafka](https://kafka.apache.org/quickstart). Para lo que hay que arrancar primero Apache Zookeeper y después Apache Kafka, de esta forma ejecutaremos desde el directorio apache-kafka primero:
+		
+		* Mac/Linux: ``bin/zookeeper-server-start.sh config/zookeeper.properties``
+		* Windows: ``bin\windows\zookeeper-server-start.bat config\zookeeper.properties``
+
+	y después:
+
+		* Mac/Linux: ``bin/kafka-server-start.sh config/server.properties``
+   		* Windows: ``bin\windows\kafka-server-start.bat config\server.properties``
+
+3. Lanzar este módulo.
+
+# Instrucciones
 
 1.- Enviar una incidencia desde un sensor:
   Desde el Advanced Rest Cliente de Google (por ejemplo) enviar una petición post a al url: http://localhost:8090/inci
