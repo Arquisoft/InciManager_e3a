@@ -24,10 +24,10 @@ public class InsertSampleDataService {
 	private IncidenciasService incidenciaService;
 	
 	@Autowired
-	private CategoriaRepository c;
+	private CategoriaService c;
 	
 	@Autowired
-	private PropiedadRepository p;
+	private PropiedadesService p;
 
 	@PostConstruct
 	public void init() {
@@ -107,18 +107,18 @@ public class InsertSampleDataService {
 		Incidencia inci4 = new Incidencia("Inci4", "descripcion4", "Lat4", "Lon4",  Choy.getTime(),
 				CunaSemana.getTime(), idAgente4, propiedades4 , categorias4);
 		
-		p.save(p1);
-		p.save(p2);
-		p.save(p3);
-		p.save(p4);
-		p.save(p5);
-		p.save(p5);
-		c.save(c1);
-		c.save(c2);
-		c.save(c3);
-		c.save(c4);
-		c.save(c5);
-		c.save(c6);
+		p.addPropiedad(p1);
+		p.addPropiedad(p2);
+		p.addPropiedad(p3);
+		p.addPropiedad(p4);
+		p.addPropiedad(p5);
+		p.addPropiedad(p5);
+		c.addCategoria(c1);
+		c.addCategoria(c2);
+		c.addCategoria(c3);
+		c.addCategoria(c4);
+		c.addCategoria(c5);
+		c.addCategoria(c6);
 		incidenciaService.addIncidencia(inci1);
 		incidenciaService.addIncidencia(inci2);
 		incidenciaService.addIncidencia(inci3);
