@@ -10,6 +10,6 @@ public class HomeController {
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("idAgente", null);
-		return "login";
+		return "index";
 	}
 }
