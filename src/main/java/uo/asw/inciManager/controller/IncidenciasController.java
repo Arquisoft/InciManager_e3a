@@ -60,7 +60,7 @@ public class IncidenciasController {
 	public String createNewIncidence(Incidencia incidencia, 
 			@RequestParam("category") String category, WebRequest webRequest) {
 		
-		Categoria categoria = new Categoria(CategoriaTipos.valueOf(category), incidencia);
+		Categoria categoria = new Categoria(CategoriaTipos.valueOf(category));
 		incidencia.setPropiedades(obtainProperties(incidencia, webRequest));
 		
 		incidenciasService.createNewIncidencia(incidencia, categoria, agentService.getIdConnected());
@@ -84,15 +84,15 @@ public class IncidenciasController {
 		String temperature = webRequest.getParameter("temperature");
 		
 		if (drivinV!=null) {
-			propiedades.add(new Propiedad(PropiedadTipos.valueOf("VELOCIDAD_CIRCULACION"), incidencia, Double.valueOf(drivinV)));
+			propiedades.add(new Propiedad(PropiedadTipos.valueOf("VELOCIDAD_CIRCULACION"), Double.valueOf(drivinV)));
 		} if (windV!=null) {
-			propiedades.add(new Propiedad(PropiedadTipos.valueOf("VELOCIDAD_VIENTO"), incidencia, Double.valueOf(windV)));
+			propiedades.add(new Propiedad(PropiedadTipos.valueOf("VELOCIDAD_VIENTO"),  Double.valueOf(windV)));
 		} if (preasure!=null) {
-			propiedades.add(new Propiedad(PropiedadTipos.valueOf("PRESION"), incidencia, Double.valueOf(preasure)));
+			propiedades.add(new Propiedad(PropiedadTipos.valueOf("PRESION"), Double.valueOf(preasure)));
 		} if (humedad!=null) {
-			propiedades.add(new Propiedad(PropiedadTipos.valueOf("HUMEDAD"), incidencia, Double.valueOf(humedad)));
+			propiedades.add(new Propiedad(PropiedadTipos.valueOf("HUMEDAD"),Double.valueOf(humedad)));
 		} if (temperature!=null) {
-			propiedades.add(new Propiedad(PropiedadTipos.valueOf("TEMPERATURA"), incidencia, Double.valueOf(temperature)));
+			propiedades.add(new Propiedad(PropiedadTipos.valueOf("TEMPERATURA"), Double.valueOf(temperature)));
 		}
 		
 		return propiedades;

@@ -30,13 +30,6 @@ public class Propiedad {
 		this.propiedad = obtenerPropiedad(propiedad);
 		this.valor = valor;
 	}
-	
-	public Propiedad(PropiedadTipos propiedad, Incidencia idIncidencia, Double valor) {
-		super();
-		this.propiedad = propiedad;
-		this.incidencia = idIncidencia;
-		this.valor = valor;
-	}
 
 	public ObjectId getId() {
 		return id;
