@@ -10,7 +10,7 @@ InciManagement_e3a
 
 Este módulo recoge incidencias enviadas por Agentes de tipo sensor (por servicio rest) y de tipo persona, entidad (vía formu
 lario web).
-Funciona con una base de datos MongoDB, y conecta con el modulo [Agents_e3a](https://github.com/Arquisoft/Agents_e3a.git) para autenticar a los agentes que entren sesión.
+Funciona con una base de datos MongoDB, y conecta con el módulo [Agents_e3a](https://github.com/Arquisoft/Agents_e3a.git) para autenticar a los agentes que entren sesión.
 
 Por tanto, para probar hay que tener funcionando:
 1. Lanzar el módulo [Agents_e3a](https://github.com/Arquisoft/Agents_e3a.git).
