@@ -12,19 +12,19 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li class="active">
-				<a href="/incidencia/list" sec:authorize="isAuthenticated()">
+				<a href="/incidencia/list" th:if="${idAgente!=null}">
 					Ver Incidencias</a>
 				</li>
 				<li class="active">
-				<a href="/incidencia/create" sec:authorize="isAuthenticated()">
+				<a href="/incidencia/create" th:if="${idAgente!=null}">
 					Enviar Incidencias</a>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/login" sec:authorize="!isAuthenticated()"> <span
+				<li th:if="${idAgente==null}"><a href="/login" sec:authorize="!isAuthenticated()"> <span
 						class="glyphicon glyphicon-log-in"></span> Identifícate
 				</a></li>
-				<li sec:authorize="isAuthenticated()"><a href="/logout"> <span
+				<li th:if="${idAgente!=null}"><a href="/logout"> <span
 						class="glyphicon glyphicon-log-out"></span> Desconectar
 				</a></li>
 			</ul>

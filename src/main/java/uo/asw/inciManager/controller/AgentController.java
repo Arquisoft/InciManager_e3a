@@ -24,6 +24,7 @@ public class AgentController {
 
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
+		model.addAttribute("idAgente", agentsService.getIdConnected());
 		return "home";
 	}
 
@@ -34,6 +35,8 @@ public class AgentController {
 		if(infoAgente != null) {
 			agentsService.setIdConnected((String)infoAgente.get("id"));
 			return "redirect:/home";
+		} else {
+			agentsService.setIdConnected(null);
 		}
 		return "/login";
 	}

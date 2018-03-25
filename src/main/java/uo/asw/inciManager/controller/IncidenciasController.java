@@ -35,12 +35,14 @@ public class IncidenciasController {
 		incidencias = incidenciasService.getIncidencias(pageable, agentService.getIdConnected());
 		model.addAttribute("incidenciasList", incidencias.getContent() );
 		model.addAttribute("page", incidencias);
+		model.addAttribute("idAgente", agentService.getIdConnected());
 		return "incidencia/list";
 	}
 	
 	@RequestMapping("/incidencia/create")
 	public String create(Model model) {
 		model.addAttribute("incidencia", new Incidencia());
+		model.addAttribute("idAgente", agentService.getIdConnected());
 		return "incidencia/create";
 	}
 	
