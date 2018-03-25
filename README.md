@@ -13,19 +13,20 @@ Por tanto, para probar hay que tener funcionando:
 1. Lanzar el módulo [Agents_e3a](https://github.com/Arquisoft/Agents_e3a.git).
 2. Desplegar [Kafka](https://kafka.apache.org/quickstart). Para lo que hay que arrancar primero Apache Zookeeper y después Apache Kafka, de esta forma ejecutaremos desde el directorio apache-kafka primero:
 		
-		* Mac/Linux: ``bin/zookeeper-server-start.sh config/zookeeper.properties``
-		* Windows: ``bin\windows\zookeeper-server-start.bat config\zookeeper.properties``
+		* Linux/Mac: bin/zookeeper-server-start.sh config/zookeeper.properties
+		* Windows: bin\windows\zookeeper-server-start.bat config\zookeeper.properties
 
 	y después:
 
-		* Mac/Linux: ``bin/kafka-server-start.sh config/server.properties``
-   		* Windows: ``bin\windows\kafka-server-start.bat config\server.properties``
+		* Linux/Mac: bin/kafka-server-start.sh config/server.properties
+   		* Windows: bin\windows\kafka-server-start.bat config\server.properties
 
 3. Lanzar este módulo.
 
 # Instrucciones
 
-1.- Enviar una incidencia desde un sensor:
+- Enviar una incidencia desde un sensor:
+
   Desde el Advanced Rest Cliente de Google (por ejemplo) enviar una petición post a al url: http://localhost:8090/inci
 En el cuerpo escribir la incidencia en formato JSON:
 
@@ -46,9 +47,10 @@ Las categorías están predefinidas, actualmente, para probar hay: accidente_car
 meteorologica
 Y las propiedades también: temperatura, presion, humedad, velocidad_viento, velocidad_circulacion
 	
-2.- Enviar una incidencia vía web o consultar las enviadas:
-conectarse a: localhost:8990
-usuario: Agente1, password: 123456, tipo: person
+
+- Enviar una incidencia vía web o consultar las enviadas:
+
+Conectarse a: "localhost:8990" con el usuario: Agente1, password: 123456, tipo: person
 
 
 # Autores
