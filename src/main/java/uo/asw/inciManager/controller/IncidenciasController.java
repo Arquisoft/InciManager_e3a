@@ -64,6 +64,7 @@ public class IncidenciasController {
 		incidencia.setPropiedades(obtainProperties(incidencia, webRequest));
 		
 		incidenciasService.createNewIncidencia(incidencia, categoria, agentService.getIdConnected());
+		incidenciasService.enviarIncidenciaWeb(incidencia);
 		
 		return "redirect:/incidencia/list";
 	}

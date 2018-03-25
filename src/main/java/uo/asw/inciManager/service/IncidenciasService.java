@@ -98,4 +98,13 @@ public class IncidenciasService {
 		incidencia.setIdAgente(agente);
 		addIncidencia(incidencia);
 	}
+	
+	/**
+	 * Envia una incidencia introducida via web a kafka
+	 * @param incidencia
+	 */
+	public void enviarIncidenciaWeb(Incidencia incidencia) {
+		this.kafkaProducer.send("incidenciasTopic", incidencia.getDescripcion());
+	}
+	
 }
