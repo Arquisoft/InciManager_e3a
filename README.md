@@ -3,7 +3,18 @@
 [![Build Status](https://travis-ci.org/Arquisoft/InciManager_e3a.svg?branch=master)](https://travis-ci.org/Arquisoft/InciManager_e3a)
 [![codecov](https://codecov.io/gh/Arquisoft/InciManager_e3a/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/InciManager_e3a)
 
-# Detalles
+## Índice
+
+- [Introducción al proyecto](#incimanager_e3a)
+- [Cómo ejecutar el proyecto](#como-instalar-el-proyecto)
+    - [Detalles](#detalles)	     
+    - [Instrucciones](#instrucciones)	  
+ - [Autores](#autores)	
+
+
+## Cómo ejecutar el proyecto
+
+### Detalles
 
 Este módulo recoge incidencias enviadas por Agentes de tipo sensor (por servicio rest) y de tipo persona, entidad (vía formu
 lario web).
@@ -23,24 +34,25 @@ Por tanto, para probar hay que tener funcionando:
 
 3. Lanzar este módulo.
 
-# Instrucciones
+### Instrucciones
 
 - Enviar una incidencia desde un sensor:
 
   Desde el Advanced Rest Cliente de Google (por ejemplo) enviar una petición post a al url: http://localhost:8090/inci
 En el cuerpo escribir la incidencia en formato JSON:
-
+~~~
 {
   "login": "Agente1",
   "password": "123456",
-  "nombreIncidencia": "fuego en bosque con cabañas",
-  "descripcion": "Fuego en bosque en zona anexa a carretera N634 en pk513",
-  "kind": "person",
-  "fechaEntrada": "25/03/2018",
+  "nombreIncidencia": "fuego en bosque con cabañas",  
+  "descripcion": "Fuego en bosque en zona anexa a carretera N634 en pk513",  
+  "kind": "person",  
+  "fechaEntrada": "25/03/2018", 
   "fechaCaducidad": "19/03/2018",
   "categorias": "fuego,meteorologica,accidente_carretera",
-  "propiedades": "temperatura/80,presion/50,humedad/30,velocidad_circulacion/120"
+  "propiedades": "temperatura/80,presion/50,humedad/30,velocidad_circulacion/120"  
 }
+~~~
 
 Si la autenticación del agente es correcta se guardará la incidencia en la BD y se enviará a kafka.
 Las categorías están predefinidas, actualmente, para probar hay: accidente_carretera, fuego, inundacion, accidente_aereo, 
@@ -53,7 +65,7 @@ Y las propiedades también: temperatura, presion, humedad, velocidad_viento, vel
 Conectarse a: http://localhost:8090 con el usuario: Agente1, password: 123456, tipo: person
 
 
-# Autores
+## Autores
 - Saúl Castillo Valdés (@saulcasti)
 - Pelayo Díaz Soto (@PelayoDiaz)
 - Amelia Fernández Braña (@ameliafb)
