@@ -50,7 +50,7 @@ Y las propiedades también: temperatura, presion, humedad, velocidad_viento, vel
 
 - Enviar una incidencia vía web o consultar las enviadas:
 
-Conectarse a: "localhost:8990" con el usuario: Agente1, password: 123456, tipo: person
+Conectarse a: http://localhost:8090 con el usuario: Agente1, password: 123456, tipo: person
 
 
 # Autores
