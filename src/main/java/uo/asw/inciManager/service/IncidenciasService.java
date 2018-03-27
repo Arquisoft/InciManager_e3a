@@ -17,6 +17,7 @@ import uo.asw.inciManager.repository.IncidenciaRepository;
 import uo.asw.inciManager.util.DateUtil;
 import uo.asw.kafka.producers.KafkaProducer;
 
+
 @Service
 public class IncidenciasService {
 
@@ -46,7 +47,7 @@ public class IncidenciasService {
 		if (validarIncidencia((String) datosInci.get("nombreIncidencia"), mapAgente)) {
 			incidencia = crearIncidencia(datosInci, (String)mapAgente.get("id"));
 			incidenciasRepository.save(incidencia);
-			this.kafkaProducer.send("incidenciasTopic", incidencia.getDescripcion());
+			this.kafkaProducer.send(incidencia);
 			return new ResponseEntity<String>(incidencia.getNombreIncidencia(), HttpStatus.OK);
 		}
 		 return new ResponseEntity<String>("No aceptada", HttpStatus.NOT_ACCEPTABLE);
@@ -105,9 +106,9 @@ public class IncidenciasService {
 	 * Envia una incidencia introducida via web a kafka
 	 * @param incidencia
 	 */
-	public void enviarIncidenciaWeb(Incidencia incidencia) {
+	/*public void enviarIncidenciaWeb(Incidencia incidencia) {
 		this.kafkaProducer.send("incidenciasTopic", incidencia.getDescripcion());
-	}
+	}*/
 
 	public void deleteAll() {
 		incidenciasRepository.deleteAll();

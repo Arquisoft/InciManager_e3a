@@ -85,7 +85,7 @@ public class IncidenciasController {
 		saveImage(incidencia, image); 
 				
 		incidenciasService.createNewIncidencia(incidencia, categoria, agentService.getIdConnected());
-		incidenciasService.enviarIncidenciaWeb(incidencia);
+		//incidenciasService.enviarIncidenciaWeb(incidencia);
 		
 		return comprobarConectado("redirect:/incidencia/list");
 	}
