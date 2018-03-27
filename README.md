@@ -6,7 +6,7 @@
 ## Índice
 
 - [Introducción al proyecto](#incimanager_e3a)
-- [Cómo ejecutar el proyecto](#como-instalar-el-proyecto)
+- [Cómo ejecutar el proyecto](#cómo-ejecutar-el-proyecto)
     - [Detalles](#detalles)	     
     - [Instrucciones](#instrucciones)	  
  - [Autores](#autores)	
