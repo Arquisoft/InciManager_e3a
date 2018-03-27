@@ -7,4 +7,4 @@ window.setInterval(
     console.log(Date());
   }
   // Intervalo de tiempo
-,2000);
+,5000);
