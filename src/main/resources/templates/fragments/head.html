@@ -11,36 +11,6 @@
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> 
 	<link rel="stylesheet" href="/css/custom.css" />
 	
-	 <script type="text/javascript">
-$(document).ready(function() {    
-    function load(){
-    	var http = new XMLHttpRequest();
-    	var url = "/inci";
-    	//aquí hay que meter los valores aleatorios
-    	
-    	http.open("POST", url, true);
-    	http.setRequestHeader("Content-Type", "application/json");
-
-    	http.onreadystatechange = function() {
-    	    if(http.readyState == 4 && http.status == 200) { 
-    	       //aqui obtienes la respuesta de tu peticion
-    	       alert(http.responseText);
-    	    }
-    	}
-    	http.send(JSON.stringify({
-    		  login: "Agente1",
-    		  password: "123456",
-    		  nombreIncidencia: "fuego en bosque con cabañas",  
-    		  descripcion: "Fuego en bosque en zona anexa a carretera N634 en pk513",  
-    		  kind: "person",  
-    		  fechaEntrada: "25/03/2018", 
-    		  fechaCaducidad: "19/03/2018",
-    		  categorias: "fuego,meteorologica,accidente_carretera",
-    		  propiedades: "temperatura/80,presion/50,humedad/30,velocidad_circulacion/120"  
-    		}));
-    }
-	
-    setInterval(load, 3000);
-});
-</script>
+	<script src="/script/autocreateIncidence.js"></script>
+	 
 </head>
