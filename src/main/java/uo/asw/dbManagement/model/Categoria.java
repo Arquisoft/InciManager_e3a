@@ -93,6 +93,13 @@ public class Categoria {
 			return CategoriaTipos.ACCIDENTE_AEREO;
 		if (categoria.toUpperCase().equals("METEOROLOGICA"))
 			return CategoriaTipos.METEOROLOGICA;
+		if (categoria.toUpperCase().equals("AMBIENTE"))
+			return CategoriaTipos.AMBIENTE;
+		if (categoria.toUpperCase().equals("AUTOMATICO"))
+			return CategoriaTipos.AUTOMATICO;
+		if (categoria.toUpperCase().equals("CONTAMINACION"))
+			return CategoriaTipos.CONTAMINACION;
+		
 		return CategoriaTipos.VALOR_NO_ASIGNADO;
 	}
 

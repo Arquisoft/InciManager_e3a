@@ -1,6 +1,9 @@
 package uo.asw.inciManager.service;
 
+
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import uo.asw.dbManagement.model.Categoria;
 import uo.asw.dbManagement.model.Incidencia;
+import uo.asw.dbManagement.model.Propiedad;
 import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.inciManager.repository.IncidenciaRepository;
 import uo.asw.inciManager.util.DateUtil;
@@ -28,6 +32,12 @@ public class IncidenciasService {
 	
 	@Autowired
 	private AgentService agenteService;
+	
+	@Autowired 
+	private CategoriaService categoriaService;
+	
+	@Autowired 
+	private PropiedadesService propiedadesService;
 
 	/**
 	 * Carga la indicencia que se recibe en formato JSON
@@ -80,9 +90,54 @@ public class IncidenciasService {
 				(String) datosInci.get("latitud"), (String) datosInci.get("longitud"),
 				DateUtil.stringToDate((String) datosInci.get("fechaEntrada")),
 				DateUtil.stringToDate((String) datosInci.get("fechaCaducidad")), idAgente,
-				(String) datosInci.get("propiedades"), (String) datosInci.get("categorias"));
+				getListaPropiedades((String) datosInci.get("propiedades")), // Se llamará a un método que creará una lista de propiedades a partir de esto.
+				getListaCategorias((String) datosInci.get("categorias"))); // Se llamará a un método que creará una lista de propiedades a partir de esto.
 	}
 
+	
+	
+	/**
+	 * Recibe un string de categorias separadas por comas y las añade al conjunto de
+	 * categorias de la incidencia
+	 * 
+	 * @param String
+	 *            lista
+	 * @return 
+	 */
+	public Set<Categoria> getListaCategorias(String lista) {
+		Set<Categoria> categoriasList = new HashSet<Categoria>();
+		String[] categorias = lista.split(",");
+		for (int i = 0; i < categorias.length; i++) {
+			Categoria c = new Categoria(categorias[i]);
+			categoriaService.addCategoria(c);
+			categoriasList.add(c);
+		}
+		return categoriasList;
+	}
+
+	/**
+	 * REcibe un string de propiedades separadas por comas y las añade al conjunto
+	 * de propiedades de la incidencia
+	 * 
+	 * @param String
+	 *            lista
+	 * @return 
+	 */
+	public Set<Propiedad> getListaPropiedades(String lista) {
+		Set<Propiedad> propiedadesList = new HashSet<Propiedad>();
+		String[] propiedades = lista.split(",");
+		for (int i = 0; i < propiedades.length; i++) {
+			String[] propiedad = propiedades[i].split("/");
+			Propiedad p = new Propiedad(propiedad[0], Double.parseDouble(propiedad[1]));
+			propiedadesService.addPropiedad(p);
+			propiedadesList.add(p);
+		}
+		return propiedadesList;
+	}
+	
+	
+	
+	
 	public void addIncidencia(Incidencia inci) {
 		incidenciasRepository.save(inci);
 	}
