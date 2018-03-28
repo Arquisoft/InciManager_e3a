@@ -1,6 +1,8 @@
 package uo.asw.inciManager.service;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -14,9 +16,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import uo.asw.chatbot.Chat;
+import uo.asw.chatbot.Mensaje;
+
 @Service
 public class AgentService {
 
+	private Chat chatbot = new Chat();
+	
 	private String idConnectedAgent;
 	private Map<String, Object> datosAgente;
 
@@ -87,5 +94,15 @@ public class AgentService {
 		
 	public String getLocation() {
 		return (String) datosAgente.get("location");
+	}
+	
+	//----- chatbot
+	public void addNewMensajeChat(String mensaje) {
+		Mensaje m = new Mensaje(new Date(), mensaje, idConnectedAgent);
+		chatbot.addMensaje(m);
+		chatbot.calcularRespuesta(mensaje);
+	}
+	public List<Mensaje> getMensajesChatBot(){
+		return chatbot.getMensajes();
 	}
 }

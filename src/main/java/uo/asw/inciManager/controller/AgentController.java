@@ -1,13 +1,17 @@
 package uo.asw.inciManager.controller;
 
+import java.security.Principal;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import uo.asw.inciManager.service.AgentService;
 
@@ -50,4 +54,28 @@ public class AgentController {
 			return "redirect:/login";
 		}else return destino;
 	}
+	
+	
+	
+	//----- Chat-bot
+	@RequestMapping("/user/chatbot" )
+	public String getListado(Model model){
+		model.addAttribute("mensajesList", agentsService.getMensajesChatBot());
+		return "user/chatbot";
+	}
+	
+	@RequestMapping("/user/chatbot/update") 
+	public String updateList(Model model){
+		model.addAttribute("mensajesList", agentsService.getMensajesChatBot());
+		return "user/chatbot :: tableUsers";
+	}
+	
+	//boton enviar
+	@RequestMapping(value="/user/chatbot/send/", method=RequestMethod.GET) 
+	public String sendResquest(Model model, @RequestParam String mensaje){
+		agentsService.addNewMensajeChat(mensaje);
+		return "redirect:/user/chatbot";
+	}
+	
+	
 }
