@@ -1,49 +1,57 @@
-$(document).ready(function() {    
-    function load(){
-    	var http = new XMLHttpRequest();
+$(document).ready(function() { 
+	function generateRequest(){
+		var http = new XMLHttpRequest();
     	var url = "/inci";
-    	//aquí hay que meter los valores aleatorios
     	
     	http.open("POST", url, true);
     	http.setRequestHeader("Content-Type", "application/json");
-
-    	
-    	//http.onreadystatechange = function() {
-    	  //  if(http.readyState == 4 && http.status == 200) { 
-    	       //aqui obtienes la respuesta de tu peticion
-    	    //   alert(http.responseText);
-    	    //}
-    	//}
+    	return http;
+	}
+	function simularSensorDeZoo(){
     	var myDate = new Date();
-    	var fechaEntrada = myDate.getUTCDate() + "/" + (myDate.getMonth()+1) + "/" + myDate.getFullYear();
+    	var fechaActual = myDate.getUTCDate() + "/" + (myDate.getMonth()+1) + "/" + myDate.getFullYear();
+    	
+    	myDate.setDate(4);
+    	var fechaCaducidad = myDate.getUTCDate() + "/" + (myDate.getMonth()+1) + "/" + myDate.getFullYear();
+    	
+    	generateRequest().send(JSON.stringify({
+  		  login: "S2",
+  		  password: "123456",
+  		  nombreIncidencia: "Sensor de zoológico",  
+  		  descripcion: "Sensor automático que se encuentra en el zoológico",  
+  		  kind: "sensor",  
+  		  fechaEntrada: fechaActual, 
+  		  fechaCaducidad: fechaCaducidad,
+  		  categorias: "automatico,ambiente",
+  		  propiedades: "temperatura/"+ getRandomArbitrary(-50, 100) +",presion/"+ getRandomArbitrary(0, 2) +",humedad/" + getRandomArbitrary(0, 101)  
+  		}));   
+    } 
+	
+    function simularSensorDeServidores(){
+    	var myDate = new Date();
+    	var fechaActual = myDate.getUTCDate() + "/" + (myDate.getMonth()+1) + "/" + myDate.getFullYear();
     	
     	myDate.setDate(15);
     	var fechaCaducidad = myDate.getUTCDate() + "/" + (myDate.getMonth()+1) + "/" + myDate.getFullYear();
     	
-    	crearST(fechaEntrada, fechaCaducidad, http);
-    	crearSH(fechaEntrada, fechaCaducidad, http);
-    	
-    }
-	
-    function crearST(fechaActual, fechaCaducidad, http){
-    	
-    	
-    	http.send(JSON.stringify({
-  		  login: "Agente1",
+    	generateRequest().send(JSON.stringify({
+  		  login: "S1",
   		  password: "123456",
-  		  nombreIncidencia: "Temperatura de sala de ordenadores",  
-  		  descripcion: "Sensor automático ",  
-  		  kind: "person",  
+  		  nombreIncidencia: "Sensor de la sala de servidores del edifio central",  
+  		  descripcion: "Sensor automático que se encuentra en la sala de servidores del edificio central",  
+  		  kind: "sensor",  
   		  fechaEntrada: fechaActual, 
   		  fechaCaducidad: fechaCaducidad,
-  		  categorias: "fuego,meteorologica,accidente_carretera",
-  		  propiedades: "temperatura/80,presion/50,humedad/30,velocidad_circulacion/120"  
-  		}));
+  		  categorias: "automatico,ambiente",
+  		  propiedades: "temperatura/"+ getRandomArbitrary(-50, 100) +",presion/"+ getRandomArbitrary(0, 2) +",humedad/" + getRandomArbitrary(0, 101)  
+  		}));   
     } 
     
-    function crearSH(fechaActual, fechaCaducidad, http){
-    	
-    }
+    function getRandomArbitrary(min, max) {
+    	  return Math.random() * (max - min) + min;
+    	}
     
-    setInterval(load, 5000);
+    
+    setInterval(simularSensorDeServidores, 4995);
+    setInterval(simularSensorDeZoo, 4997);
 });
