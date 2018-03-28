@@ -54,13 +54,49 @@ public class IncidenciasService {
 		Map<String,Object> mapAgente = agenteService.communicationAgents(login, password, kind);
 		Incidencia incidencia = null;
 		if (validarIncidencia((String) datosInci.get("nombreIncidencia"), mapAgente)) {
-			incidencia = crearIncidencia(datosInci, (String)mapAgente.get("id"));
-			incidenciasRepository.save(incidencia);
-			this.kafkaProducer.send("incidenciasTopic", incidencia.getDescripcion());
+			incidencia = filtrarIncidenciaYMandarKafka(datosInci, (String)mapAgente.get("id"));
+			
 			return new ResponseEntity<String>(incidencia.getNombreIncidencia(), HttpStatus.OK);
 		}
 		 return new ResponseEntity<String>("No aceptada", HttpStatus.NOT_ACCEPTABLE);
 	}
+
+	
+	/**
+	 * Mira si la incidencia está entre los valores "normales", es decir, 
+	 * entre el valor maximo y mínimo de la propiedad. En consecuencia, lo guarda en la base de datos 
+	 * y lo envía por kafka o no hace nada con ella. 
+	 * @param string 
+	 * @param datosInci 
+	 * @param incidencia
+	 */
+	private Incidencia filtrarIncidenciaYMandarKafka(Map<String, Object> datosInci, String string) {
+		Incidencia incidencia = crearIncidencia(datosInci, string);
+		
+		boolean todoNormal = true;
+		for(Propiedad prop:incidencia.getPropiedades()) {
+			if(prop.getValor() > prop.getMaximo() || prop.getValor() < prop.getMinimo()) {
+				todoNormal = false;
+				break;
+			}
+		}
+		
+		if(!todoNormal) {
+			guardarPropiedadesYcategoria(incidencia);
+			incidenciasRepository.save(incidencia);
+			this.kafkaProducer.send("incidenciasTopic", incidencia.getDescripcion());
+		}
+		
+		return incidencia;
+	}
+
+	private void guardarPropiedadesYcategoria(Incidencia incidencia) {
+		for(Propiedad p:incidencia.getPropiedades())
+			propiedadesService.addPropiedad(p);
+		for(Categoria c:incidencia.getCategorias())
+			categoriaService.addCategoria(c);
+	}
+
 
 	/**
 	 * Valida el que el nombre de la incidencia no es nullo, no es un blanco y que
@@ -109,7 +145,7 @@ public class IncidenciasService {
 		String[] categorias = lista.split(",");
 		for (int i = 0; i < categorias.length; i++) {
 			Categoria c = new Categoria(categorias[i]);
-			categoriaService.addCategoria(c);
+//			categoriaService.addCategoria(c);
 			categoriasList.add(c);
 		}
 		return categoriasList;
@@ -129,7 +165,7 @@ public class IncidenciasService {
 		for (int i = 0; i < propiedades.length; i++) {
 			String[] propiedad = propiedades[i].split("/");
 			Propiedad p = new Propiedad(propiedad[0], Double.parseDouble(propiedad[1]));
-			propiedadesService.addPropiedad(p);
+//			propiedadesService.addPropiedad(p);
 			propiedadesList.add(p);
 		}
 		return propiedadesList;

@@ -16,6 +16,10 @@ public class Propiedad {
 	
 	private Double valor;
 	
+	private Double maximo = 30. ;
+	
+	private Double minimo=2.;
+	
 	public Propiedad() {}
 
 	public Propiedad(PropiedadTipos propiedad, Double valor) {
@@ -164,5 +168,23 @@ public class Propiedad {
 		
 		return PropiedadTipos.VALOR_NO_ASIGNADO;
 	}
+
+	public Double getMaximo() {
+		return maximo;
+	}
+
+	public void setMaximo(Double maximo) {
+		this.maximo = maximo;
+	}
+
+	public Double getMinimo() {
+		return minimo;
+	}
+
+	public void setMinimo(Double minimo) {
+		this.minimo = minimo;
+	}
+	
+	
 
 }
