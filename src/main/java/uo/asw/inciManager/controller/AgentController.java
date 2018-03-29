@@ -59,11 +59,7 @@ public class AgentController {
 	
 	
 	//----- Chat-bot
-	@RequestMapping("/user/chatbot" )
-	public String getListado(Model model){
-		model.addAttribute("mensajesList", agentsService.getMensajesChatBot());
-		return "user/chatbot";
-	}
+
 	
 	@RequestMapping("/user/chatbot/update") 
 	public String updateList(Model model){
