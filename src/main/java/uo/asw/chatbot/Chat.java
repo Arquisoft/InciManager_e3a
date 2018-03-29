@@ -33,7 +33,7 @@ public class Chat {
 
 	private void cargarMensajesInciales() {
 		Mensaje m = new Mensaje(new Date(), "Hola, ¿en qué le podemos ayudar?", "bot");
-		Mensaje m2 = new Mensaje(new Date(), "Puede usted escoger crear una incidencia o consultar las que ya has mandando", "bot");
+		Mensaje m2 = new Mensaje(new Date(), "Puede usted escoger crear una incidencia o consultar las que ya ha mandando", "bot");
 
 		addMensaje(m);
 		addMensaje(m2);

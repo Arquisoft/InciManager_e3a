@@ -47,15 +47,44 @@ li {
 
 #titulo {
 	position:absolute;
-	top:38%; 
+	top:42%; 
 	left:7%;
 	text-align: center;
 	font-size: 300%;
 }
 #iconWorker {
 	position:absolute;
-	top:10%; 
-	left:18%;
+	top:12%; 
+	left:18.5%;
 	height: 30%;
 	
+}
+
+#crearInci {
+	position:absolute;
+	top:66%; 
+	left:5%;
+	text-align: center;
+	width: 20%;
+	height: 17%;
+	
+	background-color: #82f97a;
+	border-radius: 10px;
+	
+	font-size: 200%;
+	
+}
+
+#listInci {
+	position:absolute;
+	top:66%; 
+	left:28%;
+	text-align: center;
+	width: 20%;
+	height: 17%;
+	
+	background-color: #87c9ed;
+	border-radius: 10px;
+
+font-size: 200%;
 }
