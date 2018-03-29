@@ -43,7 +43,7 @@ public class Chat {
 		else {
 			// Si quiere crear
 			String mensajeMayusculas = mensaje.toUpperCase();	
-			String creacion = "crear creación creo";	
+			String creacion = "CREAR CREACIÓN CREACION CREO";	
 			String[] palabras = creacion.split("\\s+");
 			for (String palabra : palabras) {
 				if (mensajeMayusculas.contains(palabra) && !creacionEnProceso) {
@@ -56,7 +56,7 @@ public class Chat {
 				}
 			}
 			if(!creacionEnProceso) {
-				creacion = "lista listar listado";
+				creacion = "LISTA LISTAR LISTADO";
 				palabras = creacion.split("\\s+");
 				for (String palabra : palabras) {
 					if (mensajeMayusculas.contains(palabra)) {

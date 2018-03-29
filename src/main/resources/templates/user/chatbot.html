@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+
+	<div
+		style="width: 60%; position: relative; rigth: 5%; left: 20%;"
+		class="chat-panel panel panel-default">
+		<div class="panel-heading">
+			<i class="fa fa-comments fa-fw"></i> Chat
+
+		</div>
+		<div style="height: 400px; overflow-y: scroll;" class="panel-body"
+			id="chatList">
+
+			<ul class="chat" th:each="mensaje : ${mensajesList}">
+				<li th:if="${mensaje.autor == 'bot'}" class="left clearfix"><span
+					class="chat-img pull-left"> <img src="/img/obrero.png"
+						height="70" alt="User Avatar" class="img-circle" />
+				</span>
+					<div class="chat-body clearfix">
+						<div class="header">
+							<strong class="primary-font">Nosotros</strong> <small
+								th:text="${mensaje.fechaHora}" class="pull-right text-muted">
+								<i class="fa fa-clock-o fa-fw"></i> fecha y hora
+							</small>
+						</div>
+						<p th:text="${mensaje.contenido}">Mensaje admin</p>
+					</div></li>
+
+				<li th:if="${mensaje.autor != 'bot'}" class="right clearfix"><span
+					class="chat-img pull-right"> <img
+						src="http://placehold.it/50/FA6F57/fff" height="70"
+						alt="User Avatar" class="img-circle" />
+				</span>
+					<div class="chat-body clearfix">
+						<div class="header">
+							<small th:text="${mensaje.fechaHora}" class=" text-muted">
+								<i class="fa fa-clock-o fa-fw"></i> fecha y hora
+							</small> <strong class="pull-right primary-font">Tú</strong>
+						</div>
+						<p th:text="${mensaje.contenido}">Mensaje</p>
+					</div></li>
+			</ul>
+		</div>
+		<!-- /.panel-body -->
+		<form class="form-horizontal" method="post"
+			action="/user/chatbot/send" enctype="multipart/form-data">
+			<div class="panel-footer">
+				<div class="input-group">
+					<input id="btn-input" type="text" class="form-control input-sm"
+						placeholder="Introduce tu mensaje..." name="contenido" /> <span
+						class="input-group-btn">
+						<button class="btn btn-warning btn-sm" id="btn-chat">Enviar</button>
+						<script th:inline="javascript">
+									/*<![CDATA[*/
+									$("#btn-chat").click(function() {
+											var urlUpdate = '/user/chatbot/update';								
+											$("#chatList").load(urlUpdate);	
+											
+									});
+									/*]]>*/
+									</script>
+					</span>
+				</div>
+			</div>
+		</form>
+		<!-- /.panel-footer -->
+		<script type="text/javascript">
+		window.onload= function(){
+			var chatBox;
+			chatBox = document.querySelector('#chatList');
+			chatBox.scrollTop = chatBox.scrollHeight;
+		}
+		</script>
+	</div>
+</body>
+<footer th:replace="fragments/footer" />
+</html>

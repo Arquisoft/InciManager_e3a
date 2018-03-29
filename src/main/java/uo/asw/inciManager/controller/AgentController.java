@@ -67,13 +67,13 @@ public class AgentController {
 	@RequestMapping("/user/chatbot/update") 
 	public String updateList(Model model){
 		model.addAttribute("mensajesList", agentsService.getMensajesChatBot());
-		return "user/chatbot :: tableUsers";
+		return "user/chatbot :: chatList";
 	}
 	
 	//boton enviar
-	@RequestMapping(value="/user/chatbot/send/", method=RequestMethod.GET) 
-	public String sendResquest(Model model, @RequestParam String mensaje){
-		agentsService.addNewMensajeChat(mensaje);
+	@RequestMapping(value="/user/chatbot/send", method=RequestMethod.POST) 
+	public String sendResquest(Model model, @RequestParam String contenido){
+		agentsService.addNewMensajeChat(contenido);
 		return "redirect:/user/chatbot";
 	}
 	
