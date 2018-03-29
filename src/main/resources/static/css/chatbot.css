@@ -1,0 +1,44 @@
+li {
+	list-style:none;
+	margin-left:0%;
+	margin-right: 0%;
+	}
+#mensajesasistente{
+	margin-top:4%;
+	background-color: #fdf8da;
+	margin-right: 20%;
+	border-radius: 15px;
+	padding-top: 2%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    margin-bottom: 0%;
+}
+#bloqueChat {
+	width: 60%; 
+	position: relative; 
+	rigth: 5%; 
+	left: 20%;
+}
+#mensajescliente{
+	margin-top:4%;
+	background-color: #ddfdf6;
+	margin-left: 20%;
+	border-radius: 15px;
+	 padding-top: 2%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    margin-bottom: 0%;
+}
+
+#chatAvatar {
+	height: 35px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#chatList {
+	height: 400px; 
+	overflow-y: scroll;
+}
