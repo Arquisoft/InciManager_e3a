@@ -75,7 +75,7 @@ public class AgentController {
 	@RequestMapping(value="/user/chatbot/send", method=RequestMethod.POST) 
 	public String sendResquest(Model model, @RequestParam String contenido){
 		agentsService.addNewMensajeChat(contenido);
-		return "redirect:/user/chatbot";
+		return "redirect:/home";
 	}
 	
 	

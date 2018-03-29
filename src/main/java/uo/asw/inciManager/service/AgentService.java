@@ -74,6 +74,8 @@ public class AgentService {
 
 	public void setIdConnected(String idAgent) {
 		idConnectedAgent = idAgent;
+		
+		chatbot = new Chat();
 	}
 
 	public String getIdConnected() {
