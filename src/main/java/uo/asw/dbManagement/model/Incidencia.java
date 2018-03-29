@@ -56,33 +56,33 @@ public class Incidencia {
 	public Incidencia() {
 	}
 
-//	/**
-//	 * Constructor que crea una incidencia desde parámetros String
-//	 * 
-//	 * @param nombreIncidencia
-//	 * @param descripcion
-//	 * @param latitud
-//	 * @param longitud
-//	 * @param estado
-//	 * @param fechaEntrada
-//	 * @param fechaCaducidad
-//	 * @param agente
-//	 * @param propiedades
-//	 * @param categorias
-//	 */
-//	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, Date fechaEntrada,
-//			Date fechaCaducidad, String idAgente, String propiedades, String categorias) {
-//		this.nombreIncidencia = nombreIncidencia;
-//		this.descripcion = descripcion;
-//		this.latitud = latitud;
-//		this.longitud = longitud;
-//		this.estado = EstadoTipos.ABIERTA;
-//		this.fechaEntrada = fechaEntrada;
-//		this.fechaCaducidad = fechaCaducidad;
-//		this.idAgente = idAgente;
-//		this.addListaPropiedades(propiedades);
-//		this.addListaCategorias(categorias);
-//	}
+	/**
+	 * Constructor que crea una incidencia desde parámetros String
+	 * 
+	 * @param nombreIncidencia
+	 * @param descripcion
+	 * @param latitud
+	 * @param longitud
+	 * @param estado
+	 * @param fechaEntrada
+	 * @param fechaCaducidad
+	 * @param agente
+	 * @param propiedades
+	 * @param categorias
+	 */
+	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, Date fechaEntrada,
+			Date fechaCaducidad, String idAgente, String propiedades, String categorias) {
+		this.nombreIncidencia = nombreIncidencia;
+		this.descripcion = descripcion;
+		this.latitud = latitud;
+		this.longitud = longitud;
+		this.estado = EstadoTipos.ABIERTA;
+		this.fechaEntrada = fechaEntrada;
+		this.fechaCaducidad = fechaCaducidad;
+		this.idAgente = idAgente;
+		this.addListaPropiedades(propiedades);
+		this.addListaCategorias(categorias);
+	}
 
 	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, Date fechaEntrada,
 			Date fechaCaducidad, String idAgente, Set<Propiedad> propiedades, Set<Categoria> categorias) {
@@ -284,36 +284,36 @@ public class Incidencia {
 
 	}
 
-//	/**
-//	 * Recibe un string de categorias separadas por comas y las añade al conjunto de
-//	 * categorias de la incidencia
-//	 * 
-//	 * @param String
-//	 *            lista
-//	 */
-//	public void addListaCategorias(String lista) {
-//		String[] categorias = lista.split(",");
-//		for (int i = 0; i < categorias.length; i++) {
-//			this.addCategoria(new Categoria(categorias[i]));
-//		}
-//	}
-//
-//	/**
-//	 * REcibe un string de propiedades separadas por comas y las añade al conjunto
-//	 * de propiedades de la incidencia
-//	 * 
-//	 * @param String
-//	 *            lista
-//	 */
-//	public void addListaPropiedades(String lista) {
-//		String[] propiedades = lista.split(",");
-//		for (int i = 0; i < propiedades.length; i++) {
-//			String[] propiedad = propiedades[i].split("/");
-//			// this.addPropiedad(new Propiedad(propiedad[0],
-//			// this.getId(), Double.parseDouble(propiedad[1])));
-//			this.addPropiedad(new Propiedad(propiedad[0], Double.parseDouble(propiedad[1])));
-//		}
-//	}
+	/**
+	 * Recibe un string de categorias separadas por comas y las añade al conjunto de
+	 * categorias de la incidencia
+	 * 
+	 * @param String
+	 *            lista
+	 */
+	public void addListaCategorias(String lista) {
+		String[] categorias = lista.split(",");
+		for (int i = 0; i < categorias.length; i++) {
+			this.addCategoria(new Categoria(categorias[i]));
+		}
+	}
+
+	/**
+	 * REcibe un string de propiedades separadas por comas y las añade al conjunto
+	 * de propiedades de la incidencia
+	 * 
+	 * @param String
+	 *            lista
+	 */
+	public void addListaPropiedades(String lista) {
+		String[] propiedades = lista.split(",");
+		for (int i = 0; i < propiedades.length; i++) {
+			String[] propiedad = propiedades[i].split("/");
+			// this.addPropiedad(new Propiedad(propiedad[0],
+			// this.getId(), Double.parseDouble(propiedad[1])));
+			this.addPropiedad(new Propiedad(propiedad[0], Double.parseDouble(propiedad[1])));
+		}
+	}
 
 	/**
 	 * Cierra la incidencia si esta se encuentra en proceso y si tiene asignada un

@@ -16,6 +16,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("idAgente", null);
+		model.addAttribute("mensajesList", agentService.getMensajesChatBot());
 		return comprobarConectado("home");
 	}
 	private String comprobarConectado(String destino) {

@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head th:replace="fragments/head" />
-
-<body>
-	<!-- Barra de Navegación superior -->
-	<nav th:replace="fragments/nav" />
 
 <!-- style="width: 60%; position: relative; rigth: 5%; left: 20%;"-->
 	<div
@@ -78,6 +71,7 @@
 			var chatBox;
 			chatBox = document.querySelector('#chatList');
 			chatBox.scrollTop = chatBox.scrollHeight;
+			document.querySelector('#btn-input').focus()
 		}
 		function validar() {
 			var text1 = document.getElementById("btn-input");
@@ -90,5 +84,3 @@
 		</script>
 	</div>
 </body>
-<footer th:replace="fragments/footer" />
-</html>

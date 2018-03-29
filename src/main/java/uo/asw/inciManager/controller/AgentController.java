@@ -32,6 +32,7 @@ public class AgentController {
 	public String home(Model model) {
 		model.addAttribute("idAgente", agentsService.getIdConnected());
 		model.addAttribute("nombreUsuario", username);
+		model.addAttribute("mensajesList", agentsService.getMensajesChatBot());
 		return comprobarConectado("home");
 	}
 

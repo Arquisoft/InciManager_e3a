@@ -90,7 +90,7 @@ public class IncidenciasService {
 		return incidencia;
 	}
 
-	private void guardarPropiedadesYcategoria(Incidencia incidencia) {
+	public void guardarPropiedadesYcategoria(Incidencia incidencia) {
 		for(Propiedad p:incidencia.getPropiedades())
 			propiedadesService.addPropiedad(p);
 		for(Categoria c:incidencia.getCategorias())
@@ -126,50 +126,13 @@ public class IncidenciasService {
 				(String) datosInci.get("latitud"), (String) datosInci.get("longitud"),
 				DateUtil.stringToDate((String) datosInci.get("fechaEntrada")),
 				DateUtil.stringToDate((String) datosInci.get("fechaCaducidad")), idAgente,
-				getListaPropiedades((String) datosInci.get("propiedades")), // Se llamará a un método que creará una lista de propiedades a partir de esto.
-				getListaCategorias((String) datosInci.get("categorias"))); // Se llamará a un método que creará una lista de propiedades a partir de esto.
-	}
+				(String) datosInci.get("propiedades"), 
+				(String) datosInci.get("categorias")); 
+		}
 
 	
 	
-	/**
-	 * Recibe un string de categorias separadas por comas y las añade al conjunto de
-	 * categorias de la incidencia
-	 * 
-	 * @param String
-	 *            lista
-	 * @return 
-	 */
-	public Set<Categoria> getListaCategorias(String lista) {
-		Set<Categoria> categoriasList = new HashSet<Categoria>();
-		String[] categorias = lista.split(",");
-		for (int i = 0; i < categorias.length; i++) {
-			Categoria c = new Categoria(categorias[i]);
-//			categoriaService.addCategoria(c);
-			categoriasList.add(c);
-		}
-		return categoriasList;
-	}
 
-	/**
-	 * REcibe un string de propiedades separadas por comas y las añade al conjunto
-	 * de propiedades de la incidencia
-	 * 
-	 * @param String
-	 *            lista
-	 * @return 
-	 */
-	public Set<Propiedad> getListaPropiedades(String lista) {
-		Set<Propiedad> propiedadesList = new HashSet<Propiedad>();
-		String[] propiedades = lista.split(",");
-		for (int i = 0; i < propiedades.length; i++) {
-			String[] propiedad = propiedades[i].split("/");
-			Propiedad p = new Propiedad(propiedad[0], Double.parseDouble(propiedad[1]));
-//			propiedadesService.addPropiedad(p);
-			propiedadesList.add(p);
-		}
-		return propiedadesList;
-	}
 	
 	
 	

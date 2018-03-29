@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,9 @@ import uo.asw.chatbot.Mensaje;
 
 @Service
 public class AgentService {
+	
+	@Autowired
+	private IncidenciasService incidenciasService;
 
 	private Chat chatbot = new Chat();
 	
@@ -101,6 +105,11 @@ public class AgentService {
 		Mensaje m = new Mensaje(new Date(), mensaje, idConnectedAgent);
 		chatbot.addMensaje(m);
 		chatbot.calcularRespuesta(mensaje);
+		if(chatbot.getMensajes().get(chatbot.getMensajes().size() -1).getContenido() 
+				== "Su incidencia ha sido creada con éxito") {
+			incidenciasService.addIncidencia(chatbot.getInci());
+			incidenciasService.guardarPropiedadesYcategoria(chatbot.getInci());
+		}
 	}
 	public List<Mensaje> getMensajesChatBot(){
 		return chatbot.getMensajes();
