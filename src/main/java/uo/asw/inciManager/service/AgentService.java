@@ -109,6 +109,7 @@ public class AgentService {
 		chatbot.calcularRespuesta(mensaje);
 		if(chatbot.getMensajes().get(chatbot.getMensajes().size() -1).getContenido() 
 				== "Su incidencia ha sido creada con éxito") {
+			chatbot.getInci().setIdAgente(idConnectedAgent);
 			incidenciasService.addIncidencia(chatbot.getInci());
 			incidenciasService.guardarPropiedadesYcategoria(chatbot.getInci());
 		}
