@@ -84,7 +84,7 @@ public class IncidenciasService {
 		if(!todoNormal) {
 			guardarPropiedadesYcategoria(incidencia);
 			incidenciasRepository.save(incidencia);
-			this.kafkaProducer.send("incidenciasTopic", incidencia.getDescripcion());
+			this.kafkaProducer.send(incidencia);
 		}
 		
 		return incidencia;
@@ -160,7 +160,7 @@ public class IncidenciasService {
 	 * @param incidencia
 	 */
 	public void enviarIncidenciaWeb(Incidencia incidencia) {
-		this.kafkaProducer.send("incidenciasTopic", incidencia.getDescripcion());
+		this.kafkaProducer.send(incidencia);
 	}
 
 	public void deleteAll() {
