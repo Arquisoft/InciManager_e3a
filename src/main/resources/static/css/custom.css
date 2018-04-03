@@ -29,6 +29,8 @@ footer {
  -moz-background-size: cover;
  -o-background-size: cover;
  background-size: cover;
+ margin-top: 17%;
+ margin-left: 20%;
 }
 
 .panel-default {

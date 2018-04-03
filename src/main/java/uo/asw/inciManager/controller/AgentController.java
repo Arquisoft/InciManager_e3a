@@ -1,13 +1,10 @@
 package uo.asw.inciManager.controller;
 
-import java.security.Principal;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,6 +45,12 @@ public class AgentController {
 			agentsService.setIdConnected(null);
 		}
 		return "/login";
+	}
+	
+	@RequestMapping("/signout")
+	public String logout() {
+		agentsService.setIdConnected(null);
+		return "redirect:/login";
 	}
 	
 	private String comprobarConectado(String destino) {
