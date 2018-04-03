@@ -27,7 +27,7 @@
 				<li th:if="${idAgente==null}"><a href="/login" sec:authorize="!isAuthenticated()"> <span
 						class="glyphicon glyphicon-log-in"></span> Identifícate
 				</a></li>
-				<li th:if="${idAgente!=null}"><a href="/logout"> <span
+				<li th:if="${idAgente!=null}"><a href="/signout"> <span
 						class="glyphicon glyphicon-log-out"></span> Desconectar
 				</a></li>
 			</ul>

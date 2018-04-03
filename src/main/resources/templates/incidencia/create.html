@@ -3,10 +3,10 @@
 <head th:replace="fragments/head" />
 <body>
     <script src="/script/createIncidence.js"></script>
-	<!-- Barra de Navegación superior -->
+	<!-- Barra de NavegacioÌ�n superior -->
 	<nav th:replace="fragments/nav"/>
 	<div class="container">
-	<h2>Enviar nueva incidencia</h2>
+	<h2 id="sendIncidence">Enviar nueva incidencia</h2>
 	<form class="form-horizontal" method="post" action="/incidencia/create"
 			th:object="${incidencia}"  enctype="multipart/form-data" onSubmit="validar()">
 		<div class="form-group">
