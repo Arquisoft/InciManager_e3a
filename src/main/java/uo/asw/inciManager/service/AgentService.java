@@ -112,6 +112,7 @@ public class AgentService {
 			chatbot.getInci().setIdAgente(idConnectedAgent);
 			incidenciasService.addIncidencia(chatbot.getInci());
 			incidenciasService.guardarPropiedadesYcategoria(chatbot.getInci());
+			incidenciasService.enviarIncidenciaWeb(chatbot.getInci());
 		}
 	}
 	public List<Mensaje> getMensajesChatBot(){
