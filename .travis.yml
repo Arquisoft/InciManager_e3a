@@ -1,4 +1,6 @@
 language: java 
+script: "mvn cobertura:cobertura"
+sudo: required
 jdk:
 - oraclejdk8
 after_success:
