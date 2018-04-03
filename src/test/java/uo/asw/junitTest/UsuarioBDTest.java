@@ -24,7 +24,7 @@ import uo.asw.inciManager.util.DateUtil;
 
 /**
  * Prueba la creación de un usuario, guardado y posterior borrado en la BD
- * Comprueba las propiedades
+ * Comprueba las propiedades y las incidencias del usuario
  * 
  * @version abril 2018
  *
