@@ -24,7 +24,7 @@ import uo.asw.selenium.util.SeleniumUtils;
 //Ordenamos las pruebas por el nombre del método
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InciManagerTests {
-
+/*
 	// En Windows (Debe ser la versión 46.0 y desactivar las actualizacioens
 		// automáticas)):
 		static String PathFirefox = "E:\\USER\\Desktop\\Firefox46.win\\FirefoxPortable.exe";
@@ -67,12 +67,12 @@ public class InciManagerTests {
 		static public void end() {
 			// Cerramos el navegador al finalizar las pruebas
 			driver.quit();
-		}
+		} 
 		
 		/**
 		 * Comprobamos que al iniciar la aplicación entramos al login
 		 */
-		@Test
+	/*	@Test
 		public void P01_Inicio() {
 			PO_LoginView.checkElement(driver, "id", "login");
 		}
@@ -80,7 +80,7 @@ public class InciManagerTests {
 		/**
 		 * Comprobamos que al introducir datos incorrectos no se realiza el login
 		 */
-		@Test
+	/*	@Test
 		public void P02_IncorrectLogin() {
 			//Comprobamos que estamos en el Login
 			PO_LoginView.checkElement(driver, "id", "login");
@@ -102,7 +102,7 @@ public class InciManagerTests {
 		 * Comprobamos que al introducir datos correctos se realiza el login 
 		 * y se redirige a la página adecuada.
 		 */
-		@Test
+	/*	@Test
 		public void P03_CorrectLogin() {
 			//Comprobamos que estamos en el Login
 			PO_LoginView.checkElement(driver, "id", "login");
@@ -116,7 +116,7 @@ public class InciManagerTests {
 		 * Accedemos a la página de listar las incidencias y comprobamos que
 		 * hay.
 		 */
-		@Test
+	/*	@Test
 		public void P04_ViewIncidents() {
 			//Comprobamos que estamos en el Login
 			PO_LoginView.checkElement(driver, "id", "login");
@@ -138,7 +138,7 @@ public class InciManagerTests {
 		/**
 		 * Creamos de forma válida una nueva incidencia
 		 */
-		@Test
+	/*	@Test
 		public void P05_SendNewIncidence() {
 			//Comprobamos que estamos en el Login
 			PO_LoginView.checkElement(driver, "id", "login");
@@ -171,6 +171,6 @@ public class InciManagerTests {
 			int tamaño2 = incidencias.size();
 			//Comprobamos que ha aumentado en uno
 			assertTrue(tamaño+1==tamaño2);
-		}
+		} */
 
 }
