@@ -8,8 +8,11 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	
 	CategoriaTest.class,
+	ChatTest.class,
 	IncidenciaBDTest.class,
+	MensajeTest.class,
 	PropiedadTest.class,
-	UsuarioBDTest.class
+	UsuarioBDTest.class,
+	ValorLimiteTest.class
 })
 public class AllTests { }

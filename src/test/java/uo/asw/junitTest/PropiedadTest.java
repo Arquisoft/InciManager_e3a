@@ -1,6 +1,7 @@
 package uo.asw.junitTest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,12 +35,12 @@ public class PropiedadTest {
 	@Before
 	public void setUp() {
 		pro1 = new Propiedad("temperatura", 20.0);
-		/*pro2 = new Propiedad("presion", 50.0);
+		pro2 = new Propiedad("presion", 50.0);
 		pro3 = new Propiedad("humedad", 70.0);
 		pro4 = new Propiedad("velocidad_viento", 100.0);
 		pro5 = new Propiedad("velocidad_circulacion", 120.0);
 		pro6 = new Propiedad("nivel_polucion", 200.0);
-		pro7 = new Propiedad("calidad_aire", 70.0);*/
+		pro7 = new Propiedad("calidad_aire", 70.0);
 	}
 
 	@Test
@@ -48,8 +49,13 @@ public class PropiedadTest {
 		assertEquals(PropiedadTipos.TEMPERATURA, pro1.getPropiedad());
 		assertEquals(20.0, pro1.getValor(), 0.01);
 		
-		/*assertEquals(PropiedadTipos.PRESION, pro2.getPropiedad());
+		assertEquals(PropiedadTipos.PRESION, pro2.getPropiedad());
 		assertEquals(50.0, pro2.getValor(), 0.01);
+		
+		pro2.setPropiedad(PropiedadTipos.TEMPERATURA);
+		pro2.setValor(20.0);
+		
+		assertTrue(pro1.toString().equals(pro2.toString()));
 		
 		assertEquals(PropiedadTipos.HUMEDAD, pro3.getPropiedad());
 		assertEquals(70.0, pro3.getValor(), 0.01);
@@ -65,7 +71,6 @@ public class PropiedadTest {
 		
 		assertEquals(PropiedadTipos.CALIDAD_AIRE, pro7.getPropiedad());
 		assertEquals(70.0, pro7.getValor(), 0.01);
-		*/
 		
 		propiedadRepository.delete(pro1);
 	}
