@@ -27,7 +27,7 @@ $(document).ready(function() {
   		  fechaEntrada: fechaActual, 
   		  fechaCaducidad: fechaCaducidad,
   		  categorias: "automatico,ambiente",
-  		  propiedades: "temperatura/"+ getRandomArbitrary(-50, 100) +",presion/"+ getRandomArbitrary(0, 2) +",humedad/" + getRandomArbitrary(0, 101)  
+  		  propiedades: "temperatura/"+ getRandomArbitrary(getValores("TEMPERATURA")) +",presion/"+ getRandomArbitrary(getValores("PRESION")) +",humedad/" + getRandomArbitrary(getValores("HUMEDAD"))  
   		}));   
     } 
 	
@@ -47,7 +47,7 @@ $(document).ready(function() {
   		  fechaEntrada: fechaActual, 
   		  fechaCaducidad: fechaCaducidad,
   		  categorias: "automatico,ambiente",
-  		  propiedades: "temperatura/"+ getRandomArbitrary(-50, 100) +",presion/"+ getRandomArbitrary(0, 2) +",humedad/" + getRandomArbitrary(0, 101)  
+  		  propiedades: "temperatura/"+ getRandomArbitrary(getValores("TEMPERATURA")) +",presion/"+ getRandomArbitrary(getValores("PRESION")) +",humedad/" + getRandomArbitrary(getValores("HUMEDAD"))  
   		}));   
     } 
     
@@ -67,23 +67,42 @@ $(document).ready(function() {
   		  fechaEntrada: fechaActual, 
   		  fechaCaducidad: fechaCaducidad,
   		  categorias: "automatico,ambiente,contaminacion",
-  		  propiedades: "nivel_polucion/"+ getRandomArbitrary(0, 11) +",calidad_aire/"+ getRandomArbitrary(0, 501)  
+  		  propiedades: "nivel_polucion/"+ getRandomArbitrary(getValores("NIVEL_POLUCION")) +",calidad_aire/"+ getRandomArbitrary( getValores("CALIDAD_AIRE"))  
   		}));   
     } 
     
-    function getRandomArbitrary(min, max) {
+    
+    
+    //---------- funciones auxiliares --------------
+    
+    function getRandomArbitrary(valores) {
+    	var min=valores[0];
+    	var max=valores[1] + 11;
     	if((Math.random() * (9 - 1) + 1)%2 == 0)
 			return Math.random() * ((((max+min)/2)+4) - (((max+min)/2)-4)) + (((max+min)/2)-4);
 		else
     	  return Math.random() * (max - min) + min;
     	}
     
-    
+    function getValores(propiedad) {
+    	var valores = [0.0 , 0.0];
+    	
+    	[[${valoresList}]].forEach(function(valor) {
+			if(valor.propiedad == propiedad){
+				valores[0] = valor.valorMin;
+				valores[1] = valor.valorMax;			
+			}
+		});
+    	
+    	return valores;
+    	}
+  
     
     // ------------------------  Cada x segundos +- se envian datos de ambos sensores -------------
     setInterval(simularSensorDeServidores, 4995);
     setInterval(simularSensorDeZoo, 4997);
-    setInterval(simularSensorDeContaminación, 10000);
+   setInterval(simularSensorDeContaminación, 10000);
+   
 });
 /*]]>*/
 </script>

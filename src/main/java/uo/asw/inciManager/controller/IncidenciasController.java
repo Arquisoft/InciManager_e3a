@@ -37,9 +37,13 @@ import uo.asw.inciManager.service.AgentService;
 import uo.asw.inciManager.service.CategoriaService;
 import uo.asw.inciManager.service.IncidenciasService;
 import uo.asw.inciManager.service.PropiedadesService;
+import uo.asw.inciManager.service.ValorLimiteService;
 
 @Controller
 public class IncidenciasController {
+	
+	@Autowired
+	private ValorLimiteService valorLimiteService;
 	
 	@Autowired
 	private IncidenciasService incidenciasService;
@@ -63,6 +67,8 @@ public class IncidenciasController {
 		model.addAttribute("page", incidencias);
 		model.addAttribute("idAgente", agentService.getIdConnected());
 		
+		model.addAttribute("valoresList", valorLimiteService.findAll());
+		
 		return comprobarConectado("incidencia/list");
 	}
 	
@@ -70,6 +76,9 @@ public class IncidenciasController {
 	public String create(Model model) {
 		model.addAttribute("incidencia", new Incidencia());
 		model.addAttribute("idAgente", agentService.getIdConnected());
+		
+		model.addAttribute("valoresList", valorLimiteService.findAll());
+		
 		return comprobarConectado("incidencia/create");
 	}
 	
@@ -158,6 +167,9 @@ public class IncidenciasController {
 		model.addAttribute("inci", incidencia);
 		model.addAttribute("noValor",PropiedadTipos.VALOR_NO_ASIGNADO);
 		model.addAttribute("idAgente", agentService.getIdConnected());
+		
+		model.addAttribute("valoresList", valorLimiteService.findAll());
+		
 		return comprobarConectado("incidencia/details");
 	}
 	

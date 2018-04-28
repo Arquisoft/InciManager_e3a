@@ -1,9 +1,7 @@
 package uo.asw.inciManager.service;
 
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +14,7 @@ import org.springframework.stereotype.Service;
 import uo.asw.dbManagement.model.Categoria;
 import uo.asw.dbManagement.model.Incidencia;
 import uo.asw.dbManagement.model.Propiedad;
+import uo.asw.dbManagement.model.ValorLimite;
 import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.inciManager.repository.IncidenciaRepository;
 import uo.asw.inciManager.util.DateUtil;
@@ -38,6 +37,9 @@ public class IncidenciasService {
 	
 	@Autowired 
 	private PropiedadesService propiedadesService;
+	
+	@Autowired
+	private ValorLimiteService valorLimiteService;
 
 	/**
 	 * Carga la indicencia que se recibe en formato JSON
@@ -72,10 +74,11 @@ public class IncidenciasService {
 	 */
 	private Incidencia filtrarIncidenciaYMandarKafka(Map<String, Object> datosInci, String string) {
 		Incidencia incidencia = crearIncidencia(datosInci, string);
-		
+		System.out.println("Llega ---> "+ incidencia.toString());
 		boolean todoNormal = true;
 		for(Propiedad prop:incidencia.getPropiedades()) {
-			if(prop.getValor() > prop.getMaximo() || prop.getValor() < prop.getMinimo()) {
+			ValorLimite vL= valorLimiteService.findByPropiedad(prop.getPropiedad().name()); 
+			if(prop.getValor() > vL.getValorMax() || prop.getValor() < vL.getValorMin()) {
 				todoNormal = false;
 				break;
 			}
@@ -84,7 +87,9 @@ public class IncidenciasService {
 		if(!todoNormal) {
 			guardarPropiedadesYcategoria(incidencia);
 			incidenciasRepository.save(incidencia);
+			System.out.println("Enviada ---> "+ incidencia.toString());
 			this.kafkaProducer.send(incidencia);
+			
 		}
 		
 		return incidencia;

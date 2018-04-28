@@ -6,10 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import uo.asw.inciManager.service.AgentService;
+import uo.asw.inciManager.service.ValorLimiteService;
 
 @Controller
 public class HomeController {
 
+	@Autowired
+	private ValorLimiteService valorLimiteService;
+	
 	@Autowired
 	private AgentService agentService;
 	
@@ -17,6 +21,9 @@ public class HomeController {
 	public String index(Model model) {
 		model.addAttribute("idAgente", null);
 		model.addAttribute("mensajesList", agentService.getMensajesChatBot());
+		
+		model.addAttribute("valoresList", valorLimiteService.findAll());
+		
 		return comprobarConectado("home");
 	}
 	private String comprobarConectado(String destino) {
