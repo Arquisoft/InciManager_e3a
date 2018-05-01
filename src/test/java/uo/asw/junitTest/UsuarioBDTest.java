@@ -47,7 +47,7 @@ public class UsuarioBDTest {
 	@Before
 	public void setUp() {
 		user1 = new Usuario("nombre1", "apellidos1", "usuario1@dominio.es",
-				"Id001", "123456", PerfilTipos.OPERARIO);
+				"Id001", "123456", PerfilTipos.ANALISIS_DATOS);
 		
 		inci1 = new Incidencia("incidencia 1", "descripcion incidencia 1",
 				"lat1", "long1", DateUtil.stringToDate("01/04/2018"), 
@@ -70,6 +70,19 @@ public class UsuarioBDTest {
 		assertEquals("apellidos1", user1.getApellidos());
 		assertEquals("usuario1@dominio.es", user1.getEmail());
 		assertEquals("Id001", user1.getIdentificador());
+		assertEquals(PerfilTipos.ANALISIS_DATOS, user1.getPerfil());
+		
+		user1.setNombre("nombre2");
+		assertEquals("nombre2", user1.getNombre());
+		user1.setApellidos("apellidos2");
+		assertEquals("apellidos2", user1.getApellidos());
+		user1.setEmail("usuario2@dominio.es");
+		assertEquals("usuario2@dominio.es", user1.getEmail());
+		user1.setContrasena("654321");
+		assertEquals("654321", user1.getContrasena());
+		user1.setIdentificador("Ident2");
+		assertEquals("Ident2", user1.getIdentificador());
+		user1.setPerfil(PerfilTipos.OPERARIO);
 		assertEquals(PerfilTipos.OPERARIO, user1.getPerfil());
 		
 		assertEquals (0, user1.getIncidencias().size());
