@@ -125,22 +125,12 @@ public class IncidenciasService {
 	 * @return el objeto incidencia creado
 	 */
 	private Incidencia crearIncidencia(Map<String, Object> datosInci, String idAgente) {
-		Map<String, Object> mapAgente = getIncidenceAgent(datosInci);
-		Map<String, String> localizacion = getLocation((String)mapAgente.get("location"));
 		return new Incidencia((String) datosInci.get("nombreIncidencia"), (String) datosInci.get("descripcion"),
-				localizacion.get("latitud"), localizacion.get("longitud"),
+				agenteService.getLatitude(), agenteService.getLongitude(),
 				DateUtil.stringToDate((String) datosInci.get("fechaEntrada")),
 				DateUtil.stringToDate((String) datosInci.get("fechaCaducidad")), idAgente,
 				(String) datosInci.get("propiedades"), 
 				(String) datosInci.get("categorias")); 
-	}
-	
-	private Map<String, String> getLocation(String location){
-		Map<String, String> localizacion = new HashMap<String, String>();
-		String[] splited = location.split("\"");
-		localizacion.put("latitud", splited[1]);
-		localizacion.put("longitud", splited[3]);
-		return localizacion;
 	}
 	
 	public void addIncidencia(Incidencia inci) {

@@ -91,15 +91,19 @@ public class AgentService {
 	}
 	
 	public String getLatitude() {
-		return ((String) datosAgente.get("location")).split(" - ")[0];
+		return getLocation().get("latitud");
 	}
 	
 	public String getLongitude() {
-		return ((String) datosAgente.get("location")).split(" - ")[1];
+		return getLocation().get("longitud");
 	}
-		
-	public String getLocation() {
-		return (String) datosAgente.get("location");
+	
+	private Map<String, String> getLocation(){
+		Map<String, String> localizacion = new HashMap<String, String>();
+		String[] splited = ((String)datosAgente.get("location")).split("\"");
+		localizacion.put("latitud", splited[1]);
+		localizacion.put("longitud", splited[3]);
+		return localizacion;
 	}
 	
 	//----- chatbot
