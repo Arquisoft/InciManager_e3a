@@ -1,8 +1,10 @@
 package uo.asw.inciManager.service;
 
 
+import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,10 +52,7 @@ public class IncidenciasService {
 	 *         nombre de la incidencia y la respuesta correcta
 	 */
 	public ResponseEntity<String> cargarIncidencia(Map<String, Object> datosInci) {
-		String login = (String) datosInci.get("login");
-		String password = (String) datosInci.get("password");
-		String kind = (String) datosInci.get("kind");
-		Map<String,Object> mapAgente = agenteService.communicationAgents(login, password, kind);
+		Map<String, Object> mapAgente = getIncidenceAgent(datosInci);
 		Incidencia incidencia = null;
 		if (validarIncidencia((String) datosInci.get("nombreIncidencia"), mapAgente)) {
 			incidencia = filtrarIncidenciaYMandarKafka(datosInci, (String)mapAgente.get("id"));
@@ -63,7 +62,6 @@ public class IncidenciasService {
 		 return new ResponseEntity<String>("No aceptada", HttpStatus.NOT_ACCEPTABLE);
 	}
 
-	
 	/**
 	 * Mira si la incidencia está entre los valores "normales", es decir, 
 	 * entre el valor maximo y mínimo de la propiedad. En consecuencia, lo guarda en la base de datos 
@@ -127,20 +125,23 @@ public class IncidenciasService {
 	 * @return el objeto incidencia creado
 	 */
 	private Incidencia crearIncidencia(Map<String, Object> datosInci, String idAgente) {
+		Map<String, Object> mapAgente = getIncidenceAgent(datosInci);
+		Map<String, String> localizacion = getLocation((String)mapAgente.get("location"));
 		return new Incidencia((String) datosInci.get("nombreIncidencia"), (String) datosInci.get("descripcion"),
-				(String) datosInci.get("latitud"), (String) datosInci.get("longitud"),
+				localizacion.get("latitud"), localizacion.get("longitud"),
 				DateUtil.stringToDate((String) datosInci.get("fechaEntrada")),
 				DateUtil.stringToDate((String) datosInci.get("fechaCaducidad")), idAgente,
 				(String) datosInci.get("propiedades"), 
 				(String) datosInci.get("categorias")); 
-		}
-
+	}
 	
-	
-
-	
-	
-	
+	private Map<String, String> getLocation(String location){
+		Map<String, String> localizacion = new HashMap<String, String>();
+		String[] splited = location.split("\"");
+		localizacion.put("latitud", splited[1]);
+		localizacion.put("longitud", splited[3]);
+		return localizacion;
+	}
 	
 	public void addIncidencia(Incidencia inci) {
 		incidenciasRepository.save(inci);
@@ -159,6 +160,19 @@ public class IncidenciasService {
 		addIncidencia(incidencia);
 	}
 	
+
+	/**
+	 * Devuelve los datos del agente en sesion
+	 * @param datosInci
+	 * @return
+	 */
+	private Map<String, Object> getIncidenceAgent(Map<String, Object> datosInci) {
+		String login = (String) datosInci.get("login");
+		String password = (String) datosInci.get("password");
+		String kind = (String) datosInci.get("kind");
+		Map<String,Object> mapAgente = agenteService.communicationAgents(login, password, kind);
+		return mapAgente;
+	}
 
 	/**
 	 * Envia una incidencia introducida via web a kafka
