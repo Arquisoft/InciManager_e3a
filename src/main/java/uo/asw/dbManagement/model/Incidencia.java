@@ -19,11 +19,12 @@ import uo.asw.dbManagement.tipos.EstadoTipos;
 
 @Document(collection = "incidencias")
 public class Incidencia {
+	
 	@Id
 	private ObjectId id = new ObjectId();
-
 	@NotNull
 	private String nombreIncidencia;
+	
 	private String descripcion;
 	private String latitud;
 	private String longitud;
@@ -35,26 +36,18 @@ public class Incidencia {
 	@Column(name = "fecha_caducidad")
 	@Temporal(TemporalType.DATE)
 	private Date fechaCaducidad;
-
 	@NotNull
 	private String idAgente;
-
 	@DBRef
 	private Usuario operario;
-
 	@DBRef
 	private Set<Propiedad> propiedades = new HashSet<Propiedad>();
-
 	@DBRef
 	private Set<Categoria> categorias = new HashSet<Categoria>();
-	
-	private Double minimoValor;
-	private Double maximoValor;
 
 	private String imageURL;
 
-	public Incidencia() {
-	}
+	public Incidencia() {}
 
 	/**
 	 * Constructor que crea una incidencia desde parámetros String
@@ -165,9 +158,7 @@ public class Incidencia {
 	
 	public void setEnterDate() {
 		Date d = new Date();
-//		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss"); 
-//		String today = dt.format(d);
-		this.fechaEntrada=d;
+		this.fechaEntrada = d;
 	}
 	
 	public void setCaducityDate() {
@@ -239,22 +230,6 @@ public class Incidencia {
 		} else if (!nombreIncidencia.equals(other.nombreIncidencia))
 			return false;
 		return true;
-	}
-
-	public Double getMinimoValor() {
-		return minimoValor;
-	}
-
-	public void setMinimoValor(Double minimoValor) {
-		this.minimoValor = minimoValor;
-	}
-
-	public Double getMaximoValor() {
-		return maximoValor;
-	}
-
-	public void setMaximoValor(Double maximoValor) {
-		this.maximoValor = maximoValor;
 	}
 
 	@Override
