@@ -14,12 +14,7 @@ li {
     padding-right: 2%;
     margin-bottom: 0%;
 }
-#bloqueChat {
-	width: 45%; 
-	position:absolute; 
-	top:10%; 
-	right:3%;
-}
+
 
 #mensajescliente{
 	margin-top:4%;
@@ -46,27 +41,20 @@ li {
 
 
 #titulo {
-	position:absolute;
-	top:42%; 
-	left:7%;
+	
 	text-align: center;
 	font-size: 300%;
 }
 #iconWorker {
-	position:absolute;
-	top:12%; 
-	left:18.5%;
+	
 	height: 30%;
+	width: 30%;
 	
 }
 
 #crearInci {
-	position:absolute;
-	top:66%; 
-	left:5%;
+	
 	text-align: center;
-	width: 20%;
-	height: 17%;
 	
 	background-color: #82f97a;
 	border-radius: 10px;
@@ -76,12 +64,8 @@ li {
 }
 
 #listInci {
-	position:absolute;
-	top:66%; 
-	left:28%;
+	
 	text-align: center;
-	width: 20%;
-	height: 17%;
 	
 	background-color: #87c9ed;
 	border-radius: 10px;
