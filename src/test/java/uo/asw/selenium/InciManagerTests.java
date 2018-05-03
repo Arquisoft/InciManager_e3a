@@ -13,10 +13,8 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import uo.asw.selenium.pageobjects.PO_CreateIncidence;
 import uo.asw.selenium.pageobjects.PO_LoginView;
 import uo.asw.selenium.pageobjects.PO_NavView;
 import uo.asw.selenium.pageobjects.PO_View;
