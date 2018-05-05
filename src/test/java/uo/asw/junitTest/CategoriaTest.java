@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import uo.asw.InciManagerE3aApplication;
 import uo.asw.dbManagement.model.Categoria;
+import uo.asw.dbManagement.model.Usuario;
 import uo.asw.dbManagement.tipos.CategoriaTipos;
 import uo.asw.inciManager.repository.CategoriaRepository;
 
@@ -70,6 +72,28 @@ public class CategoriaTest {
 		assertEquals(CategoriaTipos.CONTAMINACION, cat8.getCategoria());
 		
 		categoriaRepository.delete(cat1);
+	}
+	
+	@Test
+	public void testEquals() {
+		Usuario usuario = new Usuario();
+		ObjectId id2 = cat1.getId();
+		
+		assertTrue(cat1.equals(cat1));
+		assertFalse(cat1.equals(null));
+		assertFalse(cat1.equals(usuario));
+		
+		assertFalse(cat1.equals(cat2));
+		
+		cat2.setCategoria(cat1.getCategoria());
+		cat1.setId(null);
+		assertFalse(cat1.equals(cat2));
+		
+		cat1.setId(id2);
+		assertFalse(cat1.equals(cat2));
+		
+		cat2.setId(id2);
+		assertTrue(cat1.equals(cat2));
 	}
 	
 }

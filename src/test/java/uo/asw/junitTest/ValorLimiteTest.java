@@ -2,6 +2,7 @@ package uo.asw.junitTest;
 
 import static org.junit.Assert.*;
 
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +11,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import uo.asw.InciManagerE3aApplication;
+import uo.asw.dbManagement.model.Usuario;
 import uo.asw.dbManagement.model.ValorLimite;
+import uo.asw.dbManagement.tipos.PerfilTipos;
 
 /**
  * Prueba la clase ValorLimite de los umbrales permitidos en las
@@ -25,13 +28,14 @@ import uo.asw.dbManagement.model.ValorLimite;
 @WebAppConfiguration
 public class ValorLimiteTest {
 	private ValorLimite vlTemp;
-	private ValorLimite vl2;
+	private ValorLimite vl2, vl3;
 	
 	@Before
 	public void setUp() {
 		vlTemp = new ValorLimite(100, 0, "temperatura", true,
 				true);
 		vl2 = new ValorLimite("presion", 100, 40);
+		vl3 = new ValorLimite("temperatura", 200, 30);
 		
 	}
 
@@ -49,9 +53,41 @@ public class ValorLimiteTest {
 		assertEquals(100.0, vl2.getValorMax(), 0.01);
 		vl2.setValorMin(0);
 		assertEquals(0.0, vl2.getValorMin(), 0.01);
+		vl2.setMinCritico(true);
+		vl2.setMaxCritico(false);
+		assertTrue(vl2.isMaxCritico());
+		assertFalse(vl2.isMinCritico());
 		
 		assertFalse(vlTemp.equals(vl2));
 		
+	}
+	
+	@Test
+	public void testEquals() {
+		Usuario usuario = new Usuario();
+		ObjectId id2 = vl2.getId();
+		
+		assertTrue(vl2.equals(vl2));
+		assertFalse(vl2.equals(null));
+		assertFalse(vl2.equals(usuario));
+		
+		vl2.setId(null);
+		assertFalse(vl2.equals(vl3));
+		
+		vl2.setId(id2);
+		assertFalse(vl2.equals(vl3));
+		
+		vl3.setId(id2);
+		assertFalse(vl2.equals(vl3));
+		
+		vl3.setPropiedad(vl2.getPropiedad());
+		assertFalse(vl2.equals(vl3));
+		
+		vl3.setValorMax(vl2.getValorMax());
+		assertFalse(vl2.equals(vl3));
+		
+		vl3.setValorMin(vl2.getValorMin());
+		assertTrue(vl2.equals(vl3));
 	}
 
 }
