@@ -34,7 +34,7 @@ public class CategoriaTest {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
-	public Categoria cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8;
+	public Categoria cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, cat9, cat10, cat11;
 	
 	@Before
 	public void setUp() {
@@ -46,7 +46,10 @@ public class CategoriaTest {
 		cat6 = new Categoria(CategoriaTipos.AMBIENTE);
 		cat7 = new Categoria(CategoriaTipos.AUTOMATICO);
 		cat8 = new Categoria(CategoriaTipos.CONTAMINACION);
-		
+		cat9 = new Categoria("ambiente");
+		cat10 = new Categoria("automatico");
+		cat11 = new Categoria("contaminacion");
+		cat11 = new Categoria("no asignada");
 	}
 
 	@Test

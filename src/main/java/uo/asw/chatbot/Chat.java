@@ -23,9 +23,6 @@ public class Chat {
 		return mensajes;
 	}
 
-	public void setMensajes(List<Mensaje> mensajes) {
-		this.mensajes = mensajes;
-	}
 
 	public void addMensaje(Mensaje m) {
 		mensajes.add(m);
@@ -239,9 +236,6 @@ public class Chat {
 	}
 	public Incidencia getInci() {
 		return inci;
-	}
-	public void setInci(Incidencia inci) {
-		this.inci = inci;
 	}
 	
 	
