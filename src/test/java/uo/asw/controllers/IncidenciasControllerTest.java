@@ -56,6 +56,7 @@ public class IncidenciasControllerTest {
 		agentService.setIdConnected("Id1");
 		MockHttpServletRequestBuilder request = get("/incidencia/list").session(session);
 		mockMvc.perform(request).andExpect(view().name("incidencia/list"));
+		agentService.setIdConnected(null);
 	}
 	
 	@Test
@@ -69,6 +70,7 @@ public class IncidenciasControllerTest {
 		agentService.setIdConnected("Id1");
 		MockHttpServletRequestBuilder request = get("/incidencia/create").session(session);
 		mockMvc.perform(request).andExpect(view().name("incidencia/create"));
+		agentService.setIdConnected(null);
 	}
 	
 //	@Test
