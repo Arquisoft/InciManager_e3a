@@ -1,6 +1,7 @@
 package uo.asw.junitTest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -61,6 +62,7 @@ public class CategoriaTest {
 		String s1 = cat1.toString();
 		String s2 = cat4.toString();
 		assertTrue(s1.equals(s2));
+		assertFalse(cat1.equals(cat2));
 		
 		assertEquals(CategoriaTipos.METEOROLOGICA, cat5.getCategoria());
 		assertEquals(CategoriaTipos.AMBIENTE, cat6.getCategoria());

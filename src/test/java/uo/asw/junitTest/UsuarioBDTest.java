@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -102,6 +103,32 @@ public class UsuarioBDTest {
 		incidenciaRepository.delete(inci3);
 		
 		usuarioRepository.delete(user1);
+	}
+	
+	@Test
+	public void testEquals() {
+		Usuario user2 = new Usuario("nombre1", "apellidos1", "usuario1@dominio.es",
+				"Id002", "123456", PerfilTipos.ANALISIS_DATOS);
+		ObjectId id1 = user1.getId();
+		
+		assertTrue(user1.equals(user1));
+		assertFalse(user1.equals(null));
+		assertFalse(user1.equals(inci2));
+		
+		user1.setId(null);
+		assertFalse(user1.equals(user2));
+		
+		user1.setId(id1);
+		assertFalse(user1.equals(user2));
+		
+		user2.setId(id1);
+		assertFalse(user1.equals(user2));
+		
+		user1.setIdentificador(null);
+		assertFalse(user1.equals(user2));
+		
+		user1.setIdentificador(user2.getIdentificador());
+		assertTrue(user1.equals(user2));
 	}
 
 }

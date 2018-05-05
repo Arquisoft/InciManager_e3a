@@ -77,21 +77,6 @@ public class Incidencia {
 		this.addListaCategorias(categorias);
 	}
 
-	public Incidencia(String nombreIncidencia, String descripcion, String latitud, String longitud, Date fechaEntrada,
-			Date fechaCaducidad, String idAgente, Set<Propiedad> propiedades, Set<Categoria> categorias) {
-		super();
-		this.nombreIncidencia = nombreIncidencia;
-		this.descripcion = descripcion;
-		this.latitud = latitud;
-		this.longitud = longitud;
-		this.estado = EstadoTipos.ABIERTA;
-		this.fechaEntrada = fechaEntrada;
-		this.fechaCaducidad = fechaCaducidad;
-		this.idAgente = idAgente;
-		this.propiedades = propiedades;
-		this.categorias = categorias;
-	}
-
 	public ObjectId getId() {
 		return id;
 	}
@@ -316,6 +301,10 @@ public class Incidencia {
 		return false;
 	}
 
+	public void setOperario(Usuario operario) {
+		this.operario = operario;
+	}
+
 	/**
 	 * Anula la incidencia siempre que esta no este en estado cerrada
 	 * 
@@ -331,8 +320,8 @@ public class Incidencia {
 	}
 
 	public void setLocation(String latitude, String longitude) {
-		this.latitud=latitude;
-		this.longitud=longitude;
+		setLatitud(latitude);
+		setLongitud(longitude);
 	}
 
 	public void setImageURL(String image) {

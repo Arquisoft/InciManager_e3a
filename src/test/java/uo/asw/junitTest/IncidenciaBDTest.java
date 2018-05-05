@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import uo.asw.InciManagerE3aApplication;
+import uo.asw.dbManagement.model.Categoria;
 import uo.asw.dbManagement.model.Incidencia;
+import uo.asw.dbManagement.model.Propiedad;
+import uo.asw.dbManagement.model.Usuario;
 import uo.asw.dbManagement.tipos.EstadoTipos;
 import uo.asw.inciManager.repository.IncidenciaRepository;
 import uo.asw.inciManager.util.DateUtil;
@@ -69,6 +76,102 @@ public class IncidenciaBDTest {
 		assertTrue(inci1.anularIncidencia());
 		
 		incidenciaRepository.delete(inci1);
+	}
+	
+	@Test
+	public void testModificacionesIncidencia() {
+		inci1.setDescripcion("descripcion prueba");
+		inci1.setLatitud("25");
+		inci1.setLongitud("34");
+		inci1.setEnterDate();
+		inci1.setCaducityDate();
+		
+		Set<Propiedad> propiedades = new HashSet<Propiedad>();
+		propiedades.add(new Propiedad("TEMPERATURA", 100.0));
+		inci1.setPropiedades(propiedades);
+		
+		Set<Categoria> categorias = new HashSet<Categoria>();
+		categorias.add(new Categoria("accidente_carretera"));
+		inci1.setCategorias(categorias);
+		
+		assertEquals(inci1.getDescripcion(), "descripcion prueba");
+		assertEquals(inci1.getLatitud()	, "25");
+		assertEquals(inci1.getLongitud(), "34");
+		assertEquals(propiedades, inci1.getPropiedades());
+		assertEquals(categorias, inci1.getCategorias());
+	}
+	
+	@Test
+	public void testCerrarIncidencia() {
+		Incidencia inci2 = new Incidencia("incidencia 1", "descripcion incidencia 1",
+				"lat1", "long1", DateUtil.stringToDate("01/04/2018"), 
+				DateUtil.stringToDate("31/12/9999"), "Id1", 
+				"temperatura/20,presion/50,humedad/75", "fuego,meteorologica");
+		
+		assertFalse(inci2.cerrarIncidencia());
+		
+		inci2.setOperario(new Usuario());
+		assertFalse(inci2.cerrarIncidencia());
+		
+		inci2.setEstado(EstadoTipos.EN_PROCESO);
+		assertTrue(inci2.cerrarIncidencia());
+	}
+	
+	@Test
+	public void testAnularIncidencia() {
+		Incidencia inci2 = new Incidencia("incidencia 1", "descripcion incidencia 1",
+				"lat1", "long1", DateUtil.stringToDate("01/04/2018"), 
+				DateUtil.stringToDate("31/12/9999"), "Id1", 
+				"temperatura/20,presion/50,humedad/75", "fuego,meteorologica");
+		
+		assertTrue(inci2.anularIncidencia());
+		
+		inci2.setEstado(EstadoTipos.CERRADA);
+		assertFalse(inci2.anularIncidencia());
+	}
+	
+	@Test
+	public void testSetImageURL() {
+		inci1.setImageURL("ruta");
+		assertEquals(inci1.getImageURL(), "ruta");
+	}
+	
+	@Test
+	public void testEquals() {
+		Usuario usuario = new Usuario();
+		Incidencia inci2 = new Incidencia("incidencia 2", "descripcion incidencia 2",
+				"lat1", "long1", DateUtil.stringToDate("01/04/2018"), 
+				DateUtil.stringToDate("31/12/9999"), "Id1", 
+				"temperatura/20,presion/50,humedad/75", "fuego,meteorologica");
+		ObjectId id1= inci1.getId();
+		
+		assertTrue(inci1.equals(inci1));
+		assertFalse(inci1.equals(null));
+		assertFalse(inci1.equals(usuario));
+		
+		inci1.setFechaEntrada(null);
+		assertFalse(inci1.equals(inci2));
+		
+		inci1.setFechaEntrada(DateUtil.stringToDate("02/04/2018"));
+		assertFalse(inci1.equals(inci2));
+		
+
+		inci2.setFechaEntrada(inci1.getFechaEntrada());
+		inci1.setId(null);
+		assertFalse(inci1.equals(inci2));
+		
+		inci1.setId(id1);
+		assertFalse(inci1.equals(inci2));
+		
+		inci2.setId(inci1.getId());
+		inci1.setNombreIncidencia(null);
+		assertFalse(inci1.equals(inci2));
+		
+		inci1.setNombreIncidencia("incidencia 1");
+		assertFalse(inci1.equals(inci2));
+		
+		inci2.setNombreIncidencia(inci1.getNombreIncidencia());
+		assertTrue(inci1.equals(inci2));
 	}
 
 }
