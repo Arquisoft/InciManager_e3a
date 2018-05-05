@@ -40,9 +40,9 @@ public class CategoriaTest {
 		cat3 = new Categoria("fuego");
 		cat4 = new Categoria("accidente_aereo");
 		cat5 = new Categoria("meteorologica");
-		cat6 = new Categoria("ambiente");
-		cat7 = new Categoria("automatico");
-		cat8 = new Categoria("contaminacion");
+		cat6 = new Categoria(CategoriaTipos.AMBIENTE);
+		cat7 = new Categoria(CategoriaTipos.AUTOMATICO);
+		cat8 = new Categoria(CategoriaTipos.CONTAMINACION);
 		
 	}
 
