@@ -55,8 +55,8 @@ public class ValorLimiteTest {
 		assertEquals(0.0, vl2.getValorMin(), 0.01);
 		vl2.setMinCritico(true);
 		vl2.setMaxCritico(false);
-		assertTrue(vl2.isMaxCritico());
-		assertFalse(vl2.isMinCritico());
+		assertFalse(vl2.isMaxCritico());
+		assertTrue(vl2.isMinCritico());
 		
 		assertFalse(vlTemp.equals(vl2));
 		

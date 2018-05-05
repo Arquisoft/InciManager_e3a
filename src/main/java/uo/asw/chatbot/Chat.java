@@ -227,7 +227,7 @@ public class Chat {
 		}else {
 			Mensaje m5 = null;
 			if(palabrasMal=="") {
-				m5 = new Mensaje(new Date(), "Ups... no se han podido reconocer todas las propiedades. El valor de la propiedad debe ser un valor numético", "bot");
+				m5 = new Mensaje(new Date(), "Ups... no se han podido reconocer todas las propiedades. El valor de la propiedad debe ser un valor numérico", "bot");
 				addMensaje(m5);
 			}else {
 				m5 = new Mensaje(new Date(), "Ups... no se han podido reconocer todas las propiedades. Las propiedades"+palabrasMal+ " no están permitidas", "bot");
