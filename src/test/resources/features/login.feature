@@ -1,10 +1,11 @@
 # language: es
 
-Característica: Poder hacer login con un agente
+Característica: Ser capaz de iniciar sesion como Agente
+	
+	Como agente registrado en el sitema quiero poder acceder al mismo para crear incidencias
 
-	Escenario: Hacer petición post de login con un agente
-
-		Dado un agente registrado en la base de datos
-		Cuando el agente intenta hacer login con el usuario "Agente1", la clave "123456" y kind "person"
-		Entonces consigue hacer login 
-		Y el agente es redireccionado a la página "Home"
+	Escenario: Login
+		Dado un agente de nombre "Agente1" contraseña "123456" y kind "person" registrado en el sistema
+		Y situado en la página "/login"
+		Cuando hago login con usuario "Agente1" y password "123456" y kind "person" introduciendo los datos en los campos
+		Entonces soy redireccionada a la página "/home"
