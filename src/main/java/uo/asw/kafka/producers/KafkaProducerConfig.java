@@ -19,7 +19,7 @@ import uo.asw.dbManagement.model.Incidencia;
 @Configuration
 public class KafkaProducerConfig {
 	
-	@Value("${spring.kafka.producer.bootstrap-servers}")
+	@Value("${spring.kafka.bootstrap-servers}")
 	private String bootstrapServer;
 	
 	@Bean
