@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -20,9 +21,9 @@ import cucumber.api.java.es.*;
 import uo.asw.InciManagerE3aApplication;
 import uo.asw.selenium.pageobjects.PO_LoginView;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = { InciManagerE3aApplication.class }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ContextConfiguration
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = { InciManagerE3aApplication.class }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@ContextConfiguration
 public class LoginSteps {
 	
 	private static final Logger LOGGER = Logger.getLogger(LoginSteps.class);
@@ -44,7 +45,6 @@ public class LoginSteps {
 		LOGGER.debug("BaseURL: '" + url + "'");
 		driver.manage().timeouts().implicitlyWait(timout, TimeUnit.SECONDS);
 	}
-	
 	@Dado("^un agente de nombre \"([^\"]*)\" contraseña \"([^\"]*)\" y kind \"([^\"]*)\" registrado en el sistema$")
 	public void un_agente_de_nombre_contraseña_y_kind_registrado_en_el_sistema(String username, 
 			String password, String kind) throws Throwable {
