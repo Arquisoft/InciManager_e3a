@@ -12,7 +12,7 @@ public class KafkaProducer {
 	@Autowired
 	private KafkaTemplate<String, Incidencia> kafkaTemplate;
 	
-	@Value("${cloudkarafka.topic}")
+	@Value("${kafka.topic}")
 	String kafkaTopic = "asw-test";
 	
 	public void send(Incidencia incidencia) {
