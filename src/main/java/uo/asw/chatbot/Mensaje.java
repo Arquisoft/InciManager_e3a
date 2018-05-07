@@ -5,6 +5,7 @@ import java.util.Date;
 public class Mensaje {
 
 	private Date fechaHora;
+	private String hora;
 	private String contenido;
 	private String autor;
 
@@ -12,6 +13,12 @@ public class Mensaje {
 	public Mensaje(Date fechaHora, String contenido, String autor) {
 		super();
 		this.fechaHora = fechaHora;
+		int min = fechaHora.getMinutes();
+	    if(min<=9)
+	    	this.hora = ("  "+ fechaHora.getHours() +":0"+min);
+	    else
+	    	this.hora = ("  "+ fechaHora.getHours() +":"+min);
+	
 		this.contenido = contenido;
 		this.autor = autor;
 	}
@@ -32,6 +39,12 @@ public class Mensaje {
 	}
 	public void setAutor(String autor) {
 		this.autor = autor;
+	}
+	public String getHora() {
+		return hora;
+	}
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 	
 	
