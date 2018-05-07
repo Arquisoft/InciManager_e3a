@@ -40,5 +40,13 @@ footer {
 .form-group.last {
  margin-bottom:0px;
 }
+.well{
+background-color: rgb(102, 204, 255);
+}
+#inciTitle{
+	 text-align: center;
+	 font-size: 45px;
+	 font-family: Georgia, serif;
+}
 
 /* Sticky footer styles-------------------------------------------------- */
