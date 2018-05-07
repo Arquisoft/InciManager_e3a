@@ -1,6 +1,9 @@
 package uo.asw.inciManager.controller;
 
 import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,9 @@ import uo.asw.inciManager.service.ValorLimiteService;
 
 @Controller
 public class AgentController {
+	
+	@Autowired
+	private HttpSession httpSession;
 	
 	@Autowired
 	private AgentService agentsService;
@@ -61,7 +67,8 @@ public class AgentController {
 	}
 	
 	private String comprobarConectado(String destino) {
-		if(agentsService.getIdConnected() == null) {
+		if(agentsService.getIdConnected() == null ||
+				((String)httpSession.getAttribute("sesion"))==null) {
 			return "redirect:/login";
 		}else return destino;
 	}
