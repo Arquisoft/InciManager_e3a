@@ -45,7 +45,7 @@ public class AgentService {
 	public Map<String, Object> communicationAgents(String login, String password, String kind) {
 		Map<String, Object> datosAgente = new HashMap<String, Object>();
 		Map<String, Object> datosJson = new HashMap<String, Object>();
-		String urlAgents = "http://localhost:8091/user";
+		String urlAgents = "http://18.237.112.43:8091/user";
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		datosJson.put("login", login);
