@@ -13,7 +13,7 @@ public class KafkaProducer {
 	private KafkaTemplate<String, Incidencia> kafkaTemplate;
 	
 	@Value("${kafka.topic}")
-	String kafkaTopic = "asw-test";
+	String kafkaTopic;
 	
 	public void send(Incidencia incidencia) {
 	    System.out.println("Enviando a kafka = " + incidencia.toStringJson()); //quitar o eviar a logger
