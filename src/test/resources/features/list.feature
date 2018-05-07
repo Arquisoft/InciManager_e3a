@@ -1,10 +1,10 @@
 # language: es
 
-Característica: Poder ver incidencias con un agente iniciado en sesión
-
-	Escenario: Seleccionar la opcion de "Ver Incidencias" de la barra de navegación
-
-		Dado un agente iniciado en sesión
-		Cuando el agente intenta acceder a las incidencias que envia
-		Entonces es redireccionado a la página "list"
-		Y consigue ver sus incidencias
+Característica: Poder ver la lista de incidencias con un agente iniciado en sesión
+Escenario: ver la lista de incidencias
+	Acceder a la lista de incidencias de un agente en sesión
+	
+		Dado un agente de usuario "Agente1" contraseña "123456" y kind "person" registrado en el sistema
+		Cuando el agente realiza correctamente el login con usuario "Agente1" contraseña "123456" y kind "person"
+		Y intenta acceder a la página "/incidencia/list"
+		Entonces es redireccionado a la página "/incidencia/list"

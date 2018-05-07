@@ -2,10 +2,9 @@
 
 Característica: Poder enviar incidencias con un agente iniciado en sesión
 
-	Escenario: Seleccionar la opcion de "Enviar Incidencias" de la barra de navegación y rellenar el formulario
+	Escenario: ver la vista de enviar incidencias
 
-		Dado un agente iniciado en sesión
-		When el agente intenta acceder a enviar incidencias 
-		Entonces es redireccionado a la página "create"
-		Y el puede rellanar el formulario
-		Y ser redirigido a la página "Ver incidencias" donde ver la incidencia creada
+		Dado un agente de usuario "Agente1" contraseña "123456" y kind "person" registrado en el sistema
+		Cuando el agente realiza correctamente el login con usuario "Agente1" contraseña "123456" y kind "person"
+		Y intenta acceder a la página "/incidencia/create"
+		Entonces es redireccionado a la página "/incidencia/create"
