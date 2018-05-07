@@ -63,6 +63,7 @@ public class AgentController {
 	@RequestMapping("/signout")
 	public String logout() {
 		agentsService.setIdConnected(null);
+		agentsService.borrarDatosAgente();
 		return "redirect:/login";
 	}
 	

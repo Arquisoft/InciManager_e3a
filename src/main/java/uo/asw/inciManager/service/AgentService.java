@@ -94,6 +94,10 @@ public class AgentService {
 	public String getIdConnected() {
 		return (String) httpSession.getAttribute("idAgente");
 	}
+	
+	public void borrarDatosAgente() {
+		httpSession.setAttribute("datosAgente", null);
+	}
 
 	public Map<String, Object> getDatosAgente() {
 		return (Map<String, Object>) httpSession.getAttribute("datosAgente");
