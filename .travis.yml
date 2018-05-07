@@ -8,6 +8,8 @@ after_success:
 - sleep 10
 - nohup bash -c "cd kafka && bin/zookeeper-server-stop.sh config/zookeeper.properties &"
 before_install:
+- wget https://github.com/Arquisoft/Agents_e3a.git
+- cd Agents_e3a/; mvn spring-boot:run;
 - mysql -e 'CREATE DATABASE app;'
 - wget http://apache.rediris.es/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O kafka.tgz
 - mkdir -p kafka && tar xzf kafka.tgz -C kafka --strip-components 1
