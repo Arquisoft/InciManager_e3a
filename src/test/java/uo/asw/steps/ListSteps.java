@@ -24,7 +24,7 @@ import uo.asw.selenium.pageobjects.PO_LoginView;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { InciManagerE3aApplication.class }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration
-public class LoginSteps {
+public class ListSteps {
 	
 	private static final Logger LOGGER = Logger.getLogger(LoginSteps.class);
 	private static final int TIMEOUT = 15;
@@ -37,7 +37,7 @@ public class LoginSteps {
 	@Value("${local.server.port:8090}")
 	private int port;
 	private String url;
-
+	
 	@Before
 	public void setUp() {
 		driver = new HtmlUnitDriver();
@@ -45,37 +45,30 @@ public class LoginSteps {
 		LOGGER.debug("BaseURL: '" + url + "'");
 		driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
 	}
-	@Dado("^un agente de nombre \"([^\"]*)\" contraseña \"([^\"]*)\" y kind \"([^\"]*)\" no registrado en el sistema$")
-	public void un_agente_de_nombre_contraseña_y_kind_no_registrado_en_el_sistema(String username, 
+	
+	@Dado("^un agente de usuario \"([^\"]*)\" contraseña \"([^\"]*)\" y kind \"([^\"]*)\" registrado en el sistema$")
+	public void un_agente_de_usuario_contraseña_y_kind_registrado_en_el_sistema(String username, 
 			String password, String kind) throws Throwable {
 		LOGGER.info("un agente de nombre "+username+" contraseña "+password+" y "
-	    		+ "kind "+kind+" no registrado en el sistema");
-	}
-	@Dado("^un agente de nombre \"([^\"]*)\" contraseña \"([^\"]*)\" y kind \"([^\"]*)\" registrado en el sistema$")
-	public void un_agente_de_nombre_contraseña_y_kind_registrado_en_el_sistema(String username, 
-			String password, String kind) throws Throwable {
-	    LOGGER.info("un agente de nombre "+username+" contraseña "+password+" y "
 	    		+ "kind "+kind+" registrado en el sistema");
+		driver.navigate().to(url+"/login");
+	    assertEquals(url+"/login", driver.getCurrentUrl());
+		
 	}
 
-	@Dado("^situado en la página \"([^\"]*)\"$")
-	public void situado_en_la_página(String login) throws Throwable {
-	    LOGGER.info("situado en la pagina "+login);
-	    driver.navigate().to(url+login);
-	    assertEquals(url+login, driver.getCurrentUrl());
-	}
-
-	@Cuando("^hago login con usuario \"([^\"]*)\" y password \"([^\"]*)\" y kind \"([^\"]*)\" introduciendo los datos en los campos$")
-	public void hago_login_con_usuario_y_password_y_kind_introduciendo_los_datos_en_los_campos(String username, 
+	@Cuando("^el agente realiza correctamente el login con usuario \"([^\"]*)\" contraseña \"([^\"]*)\" y kind \"([^\"]*)\"$")
+	public void el_agente_realiza_correctamente_el_login_con_usuario_contraseña_y_kind(String username, 
 			String password, String kind) throws Throwable {
 		LOGGER.info("Hago login con el usuario " +username+" contraseña "+ password + " y kind " + kind);
 	    PO_LoginView.fillForm(driver, username, password, kind);
+	    LOGGER.info("Soy redireccionado a la página: /home");
+		assertEquals(url+"/home", driver.getCurrentUrl());
 	}
 
-	@Entonces("^soy redireccionada a la página \"([^\"]*)\"$")
-	public void soy_redireccionada_a_la_página(String home) throws Throwable {
-		LOGGER.info("Soy redireccionado a la página: " + home);
-		assertEquals(url+home, driver.getCurrentUrl());
+	@Cuando("^intenta acceder a la página \"([^\"]*)\"$")
+	public void intenta_acceder_a_la_página(String ruta) throws Throwable {
+		driver.navigate().to(url+ruta);
+	    assertEquals(url+ruta, driver.getCurrentUrl());
 	}
 	
 	@After
