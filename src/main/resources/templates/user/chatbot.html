@@ -18,7 +18,7 @@
 					<div id="mensajesasistente" class="chat-body clearfix">
 						<div class="header">
 							<strong class="primary-font">Nosotros</strong> <small
-								th:text="${mensaje.fechaHora}" class="pull-right text-muted">
+								th:text="${mensaje.hora}" class="pull-right text-muted">
 								<i class="fa fa-clock-o fa-fw"></i> fecha y hora
 							</small>
 						</div>
@@ -32,7 +32,7 @@
 				</span>
 					<div id="mensajescliente" class="chat-body clearfix">
 						<div class="header">
-							<small th:text="${mensaje.fechaHora}" class=" text-muted">
+							<small th:text="${mensaje.hora}" class=" text-muted">
 								<i class="fa fa-clock-o fa-fw"></i> fecha y hora
 							</small> <strong class="pull-right primary-font">Usted</strong>
 						</div>
