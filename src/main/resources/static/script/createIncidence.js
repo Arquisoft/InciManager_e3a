@@ -1,3 +1,5 @@
+var categories = ["#drivinVelocity", "#windVelocity", "#preasure", "#humedad", "#temperature"];
+
 function comprobador() {
 	if ($("#category option:selected").text() === "Accidente en Carretera") {
 		controlador(false, false, true, true, false);
@@ -6,7 +8,7 @@ function comprobador() {
 	} else if ($("#category option:selected").text() === "Accidente Aéreo") {
 		controlador(false, false, false, false, false);
 	} else if ($("#category option:selected").text() === "Incendio") {
-		controlador(true, true, true, true, false);
+		controlador(true, false, true, true, false);
 	} else if ($("#category option:selected").text() === "Meteorología") {
 		controlador(true, false, false, false, false);
 	} else if ($("#category option:selected").text() === "Otro") {
@@ -20,18 +22,31 @@ function controlador(vCircu, vViento, presion, humedad, temperatura) {
 	$("#preasure").attr('disabled', presion);
 	$("#humedad").attr('disabled', humedad);
 	$("#temperature").attr('disabled', temperatura);
+	vaciar();
 }
 
+function vaciar(){
+	var i;
+	for (i = 0; i < categories.length; i++){
+		if ($(categories[i]).prop('disabled')==true){
+			$(categories[i]).val("");
+		}
+	}
+}
 
 function validar(){
-	if (($("#drivinVelocity").prop('disabled')===false && isNaN($("#drivinVelocity").val())) ||
-			($("#windVelocity").prop('disabled')===false && isNaN($("#windVelocity").val())) ||
-			($("#preasure").prop('disabled')===false && isNaN($("#preasure").val())) ||
-			($("#humedad").prop('disabled')===false && isNaN($("#humedad").val())) ||
-			($("#temperature").prop('disabled')===false && isNaN($("#temperature").val()))){
+	var i;
+	var isCorrect = true;
+	for (i = 0; i < categories.length; i++){
+		if ($(categories[i]).prop('disabled')===false && isNaN($(categories[i]).val()) && isCorrect){
+			isCorrect = false;
+		}
+	}
+	if (isCorrect){
+		event.returnValue=true;
+	} else {
 		alert("Solo se admiten números en las propiedades.");
 		event.returnValue=false;
-	} else {
-		event.returnValue=true;
 	}
+	
 }

@@ -138,7 +138,8 @@ public class IncidenciasService {
 	}
 
 	public Page<Incidencia> getIncidencias(Pageable pageable, String id_agente) {
-		return incidenciasRepository.findByIdAgente(id_agente, pageable);
+		Page<Incidencia> incidencias = incidenciasRepository.findByIdAgente(id_agente, pageable);
+		return incidencias;
 	}
 	
 	public void createNewIncidencia(Incidencia incidencia, Categoria categoria, String agente) {
