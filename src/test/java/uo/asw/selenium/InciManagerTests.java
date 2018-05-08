@@ -20,7 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import uo.asw.InciManagerE3aApplication;
+import inciManager.uo.asw.InciManagerE3aApplication;
 import uo.asw.selenium.pageobjects.PO_CreateIncidence;
 import uo.asw.selenium.pageobjects.PO_LoginView;
 import uo.asw.selenium.pageobjects.PO_NavView;
@@ -32,6 +32,7 @@ import uo.asw.selenium.util.SeleniumUtils;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {
 		InciManagerE3aApplication.class }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+
 @ContextConfiguration
 public class InciManagerTests {
 
