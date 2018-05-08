@@ -17,8 +17,7 @@
 						<th>Descripción</th>
 						<th>Fecha de Entrada</th>
 						<th>Fecha de Caducidad</th>
-						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
+						<th>Estado</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,6 +31,8 @@
 							th:text="${inci.fechaEntrada}">Fecha de Entrada</td>
 						<td style="width: 250px; vertical-align: middle"
 							th:text="${inci.fechaCaducidad}">Fecha de Caducidad</td>
+							<td style="width: 250px; vertical-align: middle"
+                            th:text="${inci.estado}">Fecha de Caducidad</td>
 					</tr>
 				</tbody>
 			</table>

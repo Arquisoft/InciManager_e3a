@@ -1,6 +1,9 @@
 package uo.asw.junitTest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,8 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import uo.asw.InciManagerE3aApplication;
-import uo.asw.chatbot.Chat;
+import inciManager.uo.asw.InciManagerE3aApplication;
+import inciManager.uo.asw.chatbot.Chat;
 
 /**
  * Prueba la clase Chat

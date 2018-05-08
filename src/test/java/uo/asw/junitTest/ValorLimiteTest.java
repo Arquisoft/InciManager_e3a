@@ -1,6 +1,8 @@
 package uo.asw.junitTest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.bson.types.ObjectId;
 import org.junit.Before;
@@ -10,10 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import uo.asw.InciManagerE3aApplication;
-import uo.asw.dbManagement.model.Usuario;
-import uo.asw.dbManagement.model.ValorLimite;
-import uo.asw.dbManagement.tipos.PerfilTipos;
+import inciManager.uo.asw.InciManagerE3aApplication;
+import inciManager.uo.asw.dbManagement.model.Usuario;
+import inciManager.uo.asw.dbManagement.model.ValorLimite;
 
 /**
  * Prueba la clase ValorLimite de los umbrales permitidos en las

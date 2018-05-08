@@ -13,11 +13,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import uo.asw.InciManagerE3aApplication;
-import uo.asw.dbManagement.model.Categoria;
-import uo.asw.dbManagement.model.Usuario;
-import uo.asw.dbManagement.tipos.CategoriaTipos;
-import uo.asw.inciManager.repository.CategoriaRepository;
+import inciManager.uo.asw.InciManagerE3aApplication;
+import inciManager.uo.asw.dbManagement.model.Categoria;
+import inciManager.uo.asw.dbManagement.model.Usuario;
+import inciManager.uo.asw.dbManagement.tipos.CategoriaTipos;
+import inciManager.uo.asw.mvc.repository.CategoriaRepository;
 
 
 /**

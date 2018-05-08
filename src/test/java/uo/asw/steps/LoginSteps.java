@@ -18,7 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.es.*;
-import uo.asw.InciManagerE3aApplication;
+import inciManager.uo.asw.InciManagerE3aApplication;
 import uo.asw.selenium.pageobjects.PO_LoginView;
 
 @RunWith(SpringRunner.class)

@@ -13,13 +13,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import uo.asw.InciManagerE3aApplication;
-import uo.asw.dbManagement.model.Incidencia;
-import uo.asw.dbManagement.model.Propiedad;
-import uo.asw.dbManagement.model.Usuario;
-import uo.asw.dbManagement.tipos.PropiedadTipos;
-import uo.asw.inciManager.repository.PropiedadRepository;
-import uo.asw.inciManager.util.DateUtil;
+import inciManager.uo.asw.InciManagerE3aApplication;
+import inciManager.uo.asw.dbManagement.model.Propiedad;
+import inciManager.uo.asw.dbManagement.model.Usuario;
+import inciManager.uo.asw.dbManagement.tipos.PropiedadTipos;
+import inciManager.uo.asw.mvc.repository.PropiedadRepository;
 
 /**
  * Prueba la creación de una propiedad, guardado y posterior borrado en la BD
