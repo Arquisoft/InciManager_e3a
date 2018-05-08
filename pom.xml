@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>inciManager_e3a</name>
+	<name>inciManager</name>
 	<description>Gestion de incidencias - ASW</description>
 
 	<parent>
