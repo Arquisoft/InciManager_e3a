@@ -21,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 
 import inciManager.uo.asw.chatbot.Chat;
 import inciManager.uo.asw.chatbot.Mensaje;
+import inciManager.uo.asw.dbManagement.tipos.EstadoTipos;
 
 @Service
 public class AgentService {
@@ -128,6 +129,7 @@ public class AgentService {
 		if(chatbot.getMensajes().get(chatbot.getMensajes().size() -1).getContenido() 
 				== "Su incidencia ha sido creada con éxito") {
 			chatbot.getInci().setIdAgente(getIdConnected());
+			chatbot.getInci().setEstado(EstadoTipos.ABIERTA);
 			incidenciasService.addIncidencia(chatbot.getInci());
 			incidenciasService.guardarPropiedadesYcategoria(chatbot.getInci());
 			incidenciasService.enviarIncidenciaWeb(chatbot.getInci());
