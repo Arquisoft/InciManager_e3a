@@ -9,23 +9,23 @@ public class PO_CreateIncidence extends PO_NavView {
 	
 	static public void fillForm(WebDriver driver, String nombreIncidenciap, String descripcionp, String value,
 			String vc, String wv, String preasure, String humedad, String temperatura) {
-		WebElement username = driver.findElement(By.name("nombreIncidencia"));
-		username.click();
-		username.clear();
-		username.sendKeys(nombreIncidenciap);
+		WebElement name = driver.findElement(By.name("nombreIncidencia"));
+		name.click();
+		name.clear();
+		name.sendKeys(nombreIncidenciap);
 		
-		WebElement password = driver.findElement(By.name("descripcion"));
-		password.click();
-		password.clear();
-		password.sendKeys(descripcionp);
+		WebElement description = driver.findElement(By.name("descripcion"));
+		description.click();
+		description.clear();
+		description.sendKeys(descripcionp);
 		
 		Select dropdown = new Select(driver.findElement(By.id("category")));
 		dropdown.selectByValue(value);
 		
 		insertProperty(driver, vc, "drivinVelocity");
 		insertProperty(driver, wv, "windVelocity");
-		insertProperty(driver, preasure, "preasure");
-		insertProperty(driver, humedad, "humedad");
+//		insertProperty(driver, preasure, "preasure");
+//		insertProperty(driver, humedad, "humedad");
 		insertProperty(driver, temperatura, "temperature");
 		
 		//Pulsar el boton de Alta.
