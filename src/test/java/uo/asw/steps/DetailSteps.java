@@ -41,6 +41,7 @@ public class DetailSteps {
 	@Value("${local.server.port:8090}")
 	private int port;
 	private String url;
+	
 
 	@Before
 	public void setUp() {
